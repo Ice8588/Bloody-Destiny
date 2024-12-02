@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class PlayerCtrl : MonoBehaviour
 {
-    public float playerSpeed = 0.05f;
+    public GameObject Bullet;
+    public float PlayerSpeed = 0.05f;
     // Start is called before the first frame update
     void Start()
     {
@@ -16,19 +17,19 @@ public class PlayerCtrl : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
         {
-            transform.Translate(new Vector2(0, playerSpeed));
+            transform.Translate(new Vector2(0, PlayerSpeed));
         }
         else if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))
         {
-            transform.Translate(new Vector2(0, -playerSpeed));
+            transform.Translate(new Vector2(0, -PlayerSpeed));
         }
         else if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
         {
-            transform.Translate(new Vector2(-playerSpeed, 0));
+            transform.Translate(new Vector2(-PlayerSpeed, 0));
         }
         else if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
         {
-            transform.Translate(new Vector2(playerSpeed, 0));
+            transform.Translate(new Vector2(PlayerSpeed, 0));
         }
     }
 }
