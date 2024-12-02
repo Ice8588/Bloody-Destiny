@@ -2,13 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NewBehaviourScript : MonoBehaviour
+public class BulletCtrl : MonoBehaviour
 {
     public float BulletSpeed = 0.1f;
+    public Quaternion InitAngle;
     // Start is called before the first frame update
     void Start()
     {
-
+        transform.rotation = InitAngle;
     }
 
     // Update is called once per frame
