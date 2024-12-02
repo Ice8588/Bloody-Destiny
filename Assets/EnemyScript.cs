@@ -16,12 +16,18 @@ public class EnemyScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Vector3 shotAngle = new Vector3(0, 0, UnityEngine.Random.Range(0, 360));
+        //Vector3 shotAngle = new Vector3(0, 0, UnityEngine.Random.Range(0, 360));
+        Vector3 shotPos = transform.position;
 
-        if (Ctrl.TimeCounter % 300 == 0)
+        if (Ctrl.TimeCounter % 120 == 0)
         {
-            GameObject bullet = Instantiate(Bullet, transform.position + new Vector3(0, -0.5f, 0), new Quaternion(0, 0, 0, 0));
-            bullet.GetComponent<EnemyBulletCtrl>().InitAngle = Quaternion.Euler(shotAngle);
+            GameObject bullet = Instantiate(Bullet, transform.position, new Quaternion(0, 0, 0, 0));
+            // bullet.GetComponent<EnemyBulletCtrl>().SC.InitAngle = Quaternion.Euler(shotAngle);
+            bullet.GetComponent<EnemyBulletCtrl>().SC.InitPosition = shotPos;
+            bullet.GetComponent<EnemyBulletCtrl>().SC.Speed = new Vector2(0, 0.1f);
+            bullet.GetComponent<EnemyBulletCtrl>().SC.IsTrace = true;
+            bullet.GetComponent<EnemyBulletCtrl>().SC.TraceTime = 5;
+            bullet.GetComponent<EnemyBulletCtrl>().SC.TraceNum = 10;
         }
     }
 

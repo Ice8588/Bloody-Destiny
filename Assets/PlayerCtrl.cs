@@ -6,7 +6,7 @@ using UnityEngine.UIElements;
 public class PlayerCtrl : MonoBehaviour
 {
     public GameObject Bullet;
-    public float PlayerSpeed = 0.05f;
+    public float PlayerSpeed = 0.1f;
     public int Health = 10;
     // Start is called before the first frame update
     void Start()

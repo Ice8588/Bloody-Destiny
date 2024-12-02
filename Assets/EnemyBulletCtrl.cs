@@ -1,35 +1,61 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.SceneManagement;
 using UnityEngine;
 
 public class EnemyBulletCtrl : MonoBehaviour
 {
-    public float BulletSpeed = 0.1f;
+
     public int ATK = 2;
-    public Quaternion InitAngle;
+    public ShotConfig SC = new ShotConfig();
+    int traceCounter = 0;
     // Start is called before the first frame update
     void Start()
     {
-        transform.rotation = InitAngle;
+        float AngleZ = Mathf.Atan2(Ctrl.PlayerPos.y - transform.position.y, Ctrl.PlayerPos.x - transform.position.x);
+        transform.rotation = Quaternion.Euler(0, 0, AngleZ * Mathf.Rad2Deg - 90);
+        transform.position = SC.InitPosition;
     }
 
     // Update is called once per frame
     void Update()
     {
-        transform.Translate(new Vector2(0, BulletSpeed));
+        transform.Translate(SC.Speed);
 
         if (transform.position.y >= 10f || transform.position.y <= -10f || transform.position.x >= 10f || transform.position.x <= -10f)
         {
             Destroy(this.gameObject);
         }
+
+        if (SC.IsTrace)
+        {
+            traceCounter++;
+
+            if (traceCounter >= SC.TraceTime && SC.TraceNum > 0)
+            {
+                float AngleZ = Mathf.Atan2(Ctrl.PlayerPos.y - transform.position.y, Ctrl.PlayerPos.x - transform.position.x);
+                transform.rotation = Quaternion.Euler(0, 0, AngleZ * Mathf.Rad2Deg - 90);
+                traceCounter = 0;
+                SC.TraceNum--;
+            }
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.gameObject.tag == "Player")
+        if (collision.gameObject.tag == "Player")
         {
             collision.gameObject.GetComponent<PlayerCtrl>().Health -= ATK;
             Destroy(this.gameObject);
         }
+    }
+
+    public class ShotConfig
+    {
+        public Quaternion InitAngle;
+        public Vector3 InitPosition;
+        public Vector2 Speed = new Vector2(0, 0.1f);
+        public bool IsTrace = true;
+        public int TraceTime = 5, TraceNum = 10;
     }
 }
