@@ -7,6 +7,7 @@ public class PlayerCtrl : MonoBehaviour
 {
     public GameObject Bullet;
     public float PlayerSpeed = 0.05f;
+    public int Health = 10;
     // Start is called before the first frame update
     void Start()
     {
@@ -36,6 +37,14 @@ public class PlayerCtrl : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             Instantiate(Bullet, transform.position + new Vector3(0, 0.1f, 0), Quaternion.identity);
+        }
+    }
+
+    private void LateUpdate()
+    {
+        if (Health <= 0)
+        {
+            Destroy(this.gameObject);
         }
     }
 }
