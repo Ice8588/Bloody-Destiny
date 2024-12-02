@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class PlayerCtrl : MonoBehaviour
 {
@@ -15,21 +16,26 @@ public class PlayerCtrl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
+        if (transform.position.y <= 4.8 && (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow)))
         {
             transform.Translate(new Vector2(0, PlayerSpeed));
         }
-        else if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))
+        else if (transform.position.y >= -4.8 && (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow)))
         {
             transform.Translate(new Vector2(0, -PlayerSpeed));
         }
-        else if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
+        else if (transform.position.x >= -8.8 && (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow)))
         {
             transform.Translate(new Vector2(-PlayerSpeed, 0));
         }
-        else if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
+        else if (transform.position.x <= 8.8 && (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow)))
         {
             transform.Translate(new Vector2(PlayerSpeed, 0));
+        }
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            Instantiate(Bullet, transform.position + new Vector3(0, 0.1f, 0), Quaternion.identity);
         }
     }
 }
