@@ -19,7 +19,7 @@ public class EnemyScript : MonoBehaviour
         //Vector3 shotAngle = new Vector3(0, 0, UnityEngine.Random.Range(0, 360));
         Vector3 shotPos = transform.position;
 
-        if (Ctrl.TimeCounter % 120 == 0)
+        if (GameCtrl.TimeCounter % 120 == 0)
         {
             GameObject bullet = Instantiate(Bullet, transform.position, new Quaternion(0, 0, 0, 0));
             // bullet.GetComponent<EnemyBulletCtrl>().SC.InitAngle = Quaternion.Euler(shotAngle);
@@ -35,6 +35,7 @@ public class EnemyScript : MonoBehaviour
     {
         if (Health <= 0)
         {
+            GameCtrl.KillCount++;
             Destroy(this.gameObject);
         }
     }

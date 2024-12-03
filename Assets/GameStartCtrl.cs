@@ -5,16 +5,17 @@ using UnityEngine.SceneManagement;
 
 public class GameStartCtrl : MonoBehaviour
 {
+
     // Start is called before the first frame update
     void Start()
     {
-        DontDestroyOnLoad(this.gameObject);
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     public void GameStartButtonClick()

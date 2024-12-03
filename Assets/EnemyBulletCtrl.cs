@@ -12,7 +12,7 @@ public class EnemyBulletCtrl : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        float AngleZ = Mathf.Atan2(Ctrl.PlayerPos.y - transform.position.y, Ctrl.PlayerPos.x - transform.position.x);
+        float AngleZ = Mathf.Atan2(GameCtrl.PlayerPos.y - transform.position.y, GameCtrl.PlayerPos.x - transform.position.x);
         transform.rotation = Quaternion.Euler(0, 0, AngleZ * Mathf.Rad2Deg - 90);
         transform.position = SC.InitPosition;
     }
@@ -33,7 +33,7 @@ public class EnemyBulletCtrl : MonoBehaviour
 
             if (traceCounter >= SC.TraceTime && SC.TraceNum > 0)
             {
-                float AngleZ = Mathf.Atan2(Ctrl.PlayerPos.y - transform.position.y, Ctrl.PlayerPos.x - transform.position.x);
+                float AngleZ = Mathf.Atan2(GameCtrl.PlayerPos.y - transform.position.y, GameCtrl.PlayerPos.x - transform.position.x);
                 transform.rotation = Quaternion.Euler(0, 0, AngleZ * Mathf.Rad2Deg - 90);
                 traceCounter = 0;
                 SC.TraceNum--;

@@ -29,6 +29,7 @@ public class PlayerBulletCtrl : MonoBehaviour
         if (collision.gameObject.tag == "Enemy")
         {
             collision.gameObject.GetComponent<EnemyScript>().Health -= ATK;
+            GameCtrl.TotalDamege += ATK;
             Destroy(this.gameObject);
         }
     }
