@@ -8,12 +8,25 @@ public class Stage1EnemyCtrl : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (GameCtrl.TimeCounter == 60)
+        {
+            Instantiate(enemy[0]);
+        }
+
+        if (GameCtrl.TimeCounter == 120)
+        {
+            Instantiate(enemy[1]);
+        }
+
+        if (GameCtrl.TimeCounter == 180)
+        {
+            Instantiate(enemy[2]);
+        }
     }
 }
