@@ -13,8 +13,8 @@ GameObject:
   - component: {fileID: 790953294997540523}
   - component: {fileID: -1924048408264793996}
   m_Layer: 0
-  m_Name: PlayerBullet
-  m_TagString: Bullet
+  m_Name: PlayerBloodMagic
+  m_TagString: BloodMagic
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

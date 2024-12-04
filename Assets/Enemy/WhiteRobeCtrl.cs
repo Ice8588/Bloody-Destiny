@@ -18,7 +18,7 @@ public class WhiteRobeCtrl : EnemyScript
 
         if(GameCtrl.TimeCounter % 60 == 0)
         {
-            BloodMagic();
+            UseBloodMagic();
         }
     }
 }

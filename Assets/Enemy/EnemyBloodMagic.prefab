@@ -13,8 +13,8 @@ GameObject:
   - component: {fileID: 4811855720380669857}
   - component: {fileID: 790953294997540523}
   m_Layer: 0
-  m_Name: EnemyBullet
-  m_TagString: Bullet
+  m_Name: EnemyBloodMagic
+  m_TagString: BloodMagic
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -98,9 +98,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 156eec65cd144324592c31e67ef7f318, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BulletSpeed: 0.1
   ATK: 2
-  InitAngle: {x: 0, y: 0, z: 0, w: 0}
 --- !u!70 &790953294997540523
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

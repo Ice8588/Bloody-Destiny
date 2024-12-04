@@ -18,7 +18,7 @@ public class GrayRobeCtrl : EnemyScript
 
         if(GameCtrl.TimeCounter % 140 == 0)
         {
-            BloodMagic();
+            UseBloodMagic();
         }
     }
 }

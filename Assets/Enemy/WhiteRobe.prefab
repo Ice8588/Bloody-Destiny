@@ -104,7 +104,7 @@ MonoBehaviour:
   Health: 5
   SwordATK: 2
   BloodMagicATK: 3
-  Bullet: {fileID: 230279984119097172, guid: f71556a98527cf04b99b6857c4d59c51, type: 3}
+  BloodMagic: {fileID: 230279984119097172, guid: f71556a98527cf04b99b6857c4d59c51, type: 3}
   HealthBar: {fileID: 5946684973296655068}
 --- !u!61 &5492903537433154207
 BoxCollider2D:

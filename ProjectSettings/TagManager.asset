@@ -7,6 +7,7 @@ TagManager:
   - Undefined
   - Bullet
   - Enemy
+  - BloodMagic
   layers:
   - Default
   - TransparentFX

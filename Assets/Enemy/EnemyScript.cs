@@ -8,7 +8,7 @@ public class EnemyScript : MonoBehaviour
     public int MaxHealth = 5, Health;
     public int SwordATK = 2;
     public int BloodMagicATK = 3;
-    public GameObject Bullet;
+    public GameObject BloodMagic;
     public GameObject HealthBar;
     protected Vector3 InitialPosition = new Vector3(-13, 2, 0);  //test
     // Start is called before the first frame update
@@ -44,17 +44,17 @@ public class EnemyScript : MonoBehaviour
         }
     }
 
-    protected void BloodMagic()
+    protected void UseBloodMagic()
     {
         Vector3 shotAngle = new Vector3(0, 0, 0);
         Vector3 shotPos = transform.position;
 
-        GameObject bullet = Instantiate(Bullet, transform.position, new Quaternion(0, 0, 0, 0));
-        bullet.GetComponent<EnemyBulletCtrl>().SC.InitAngle = Quaternion.Euler(shotAngle);
-        bullet.GetComponent<EnemyBulletCtrl>().SC.InitPosition = shotPos;
-        bullet.GetComponent<EnemyBulletCtrl>().SC.Speed = new Vector2(0, 0.1f);
-        bullet.GetComponent<EnemyBulletCtrl>().SC.IsTrace = true;
-        bullet.GetComponent<EnemyBulletCtrl>().SC.TraceTime = 5;
-        bullet.GetComponent<EnemyBulletCtrl>().SC.TraceNum = 10;
+        GameObject newBloodMagic = Instantiate(BloodMagic, transform.position, new Quaternion(0, 0, 0, 0));
+        newBloodMagic.GetComponent<EnemyBloodMagicCtrl>().SC.InitAngle = Quaternion.Euler(shotAngle);
+        newBloodMagic.GetComponent<EnemyBloodMagicCtrl>().SC.InitPosition = shotPos;
+        newBloodMagic.GetComponent<EnemyBloodMagicCtrl>().SC.Speed = new Vector2(0, 0.1f);
+        newBloodMagic.GetComponent<EnemyBloodMagicCtrl>().SC.IsTrace = true;
+        newBloodMagic.GetComponent<EnemyBloodMagicCtrl>().SC.TraceTime = 5;
+        newBloodMagic.GetComponent<EnemyBloodMagicCtrl>().SC.TraceNum = 10;
     }
 }

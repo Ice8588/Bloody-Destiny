@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class PlayerCtrl : MonoBehaviour
 {
-    public GameObject Bullet;
+    public GameObject BloodMagic;
     public float PlayerSpeed = 0.1f;
     public static int Health = 10;
 
@@ -38,7 +38,7 @@ public class PlayerCtrl : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0))
         {
-            Instantiate(Bullet, transform.position + new Vector3(0, 0.1f, 0), Quaternion.identity);
+            Instantiate(BloodMagic, transform.position + new Vector3(0, 0.1f, 0), Quaternion.identity);
         }
     }
 

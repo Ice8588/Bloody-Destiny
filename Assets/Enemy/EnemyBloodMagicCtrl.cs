@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEditor.SceneManagement;
 using UnityEngine;
 
-public class EnemyBulletCtrl : MonoBehaviour
+public class EnemyBloodMagicCtrl : MonoBehaviour
 {
 
     public int ATK = 2;

@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerBulletCtrl : MonoBehaviour
+public class PlayerBloodMagicCtrl : MonoBehaviour
 {
-    public float BulletSpeed = 0.1f;
+    public float Speed = 0.1f;
     public int ATK = 2;
     public Quaternion InitAngle;
     // Start is called before the first frame update
@@ -16,7 +16,7 @@ public class PlayerBulletCtrl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.Translate(new Vector2(0, BulletSpeed));
+        transform.Translate(new Vector2(0, Speed));
 
         if (transform.position.y <= (GameCtrl.SCREEN_HEIGHT * -1) - 5 || transform.position.y >= GameCtrl.SCREEN_HEIGHT + 5 ||
             transform.position.x <= (GameCtrl.CREEN_WIDTH * -1) - 5 || transform.position.x >= GameCtrl.CREEN_WIDTH + 5)

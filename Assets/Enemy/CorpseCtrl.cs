@@ -18,7 +18,7 @@ public class CorpseCtrl : EnemyScript
 
         if (GameCtrl.TimeCounter % 180 == 0)
         {
-            BloodMagic();
+            UseBloodMagic();
         }
     }
 }

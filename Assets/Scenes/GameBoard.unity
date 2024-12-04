@@ -457,7 +457,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 12888048f0296e14c94663926e9b1439, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Bullet: {fileID: 230279984119097172, guid: 2773c6b3c3b988549abd56f0f802ca00, type: 3}
+  BloodMagic: {fileID: 230279984119097172, guid: 2773c6b3c3b988549abd56f0f802ca00, type: 3}
   PlayerSpeed: 0.1
 --- !u!212 &860605471
 SpriteRenderer:
@@ -870,8 +870,8 @@ MonoBehaviour:
   Health: 5
   SwordATK: 2
   BloodMagicATK: 3
-  Bullet: {fileID: 230279984119097172, guid: f71556a98527cf04b99b6857c4d59c51, type: 3}
-  HealthBar: {fileID: 0}
+  BloodMagic: {fileID: 230279984119097172, guid: f71556a98527cf04b99b6857c4d59c51, type: 3}
+  HealthBar: {fileID: 693086856}
 --- !u!4 &7472579630477842479
 Transform:
   m_ObjectHideFlags: 0
