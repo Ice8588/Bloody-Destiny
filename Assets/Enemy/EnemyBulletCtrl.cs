@@ -46,7 +46,7 @@ public class EnemyBulletCtrl : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
-            collision.gameObject.GetComponent<PlayerCtrl>().Health -= ATK;
+            PlayerCtrl.Health -= ATK;
             Destroy(this.gameObject);
         }
     }

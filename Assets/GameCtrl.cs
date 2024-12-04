@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameCtrl : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class GameCtrl : MonoBehaviour
     public static int KillCount = 0, BestKillCount = 0;
     public static int TotalDamege = 0, BestTotalDamege = 0;
     public const int CREEN_WIDTH = 9, SCREEN_HEIGHT = 5;
+    public static bool IsGameClear = false;
     private bool firstStart = true;
     private static GameCtrl instance;
 
@@ -63,5 +65,28 @@ public class GameCtrl : MonoBehaviour
         {
             PlayerPos = PlayerGameObject.transform.position;
         }
+    }
+
+    void LateUpdate()
+    {
+        if (PlayerCtrl.Health <= 0)
+        {
+            SceneManager.LoadScene("GameOverMenu");
+        }
+    }
+
+    public static void ResetGame()
+    {
+        TimeCounter = 0;
+        KillCount = 0;
+        TotalDamege = 0;
+        PlayerCtrl.Health = 10;
+        SceneManager.LoadScene("GameScene");
+    }
+
+    public static void GameClear()
+    {
+        IsGameClear = true;
+        SceneManager.LoadScene("GameOverMenu");
     }
 }

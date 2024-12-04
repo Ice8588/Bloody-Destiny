@@ -7,11 +7,22 @@ using TMPro;
 
 public class GameOverCtrl : MonoBehaviour
 {
-    public TMP_Text KillCountText, TotalDamageText;
+    public TMP_Text LogoText, KillCountText, TotalDamageText, HintText;
 
     // Start is called before the first frame update
     void Start()
     {
+        if (GameCtrl.IsGameClear)
+        {
+            LogoText.text = "Game Clear!";
+            LogoText.color = Color.yellow;
+        }
+        else
+        {
+            LogoText.text = "YOU DIED!";
+            LogoText.color = Color.red;
+        }
+
         if (GameCtrl.KillCount > GameCtrl.BestKillCount)
         {
             GameCtrl.BestKillCount = GameCtrl.KillCount;
@@ -31,16 +42,21 @@ public class GameOverCtrl : MonoBehaviour
         {
             TotalDamageText.text = "Total Damage: " + GameCtrl.TotalDamege;
         }
+
+        HintText.text = "- Press ESC to Quit -";
+        //HintText.text = "- Press Space to Replay, Press ESC to Quit -";
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        /*if (Input.GetKeyDown(KeyCode.Space))
         {
+            GameCtrl.ResetGame();
             SceneManager.LoadScene("StartMenu");
-        }
-        else if (Input.GetKeyDown(KeyCode.Escape))
+        }*/
+
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
             Application.Quit();
         }

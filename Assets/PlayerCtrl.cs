@@ -8,7 +8,7 @@ public class PlayerCtrl : MonoBehaviour
 {
     public GameObject Bullet;
     public float PlayerSpeed = 0.1f;
-    public int Health = 10;
+    public static int Health = 10;
 
     // Start is called before the first frame update
     void Start()
@@ -44,10 +44,6 @@ public class PlayerCtrl : MonoBehaviour
 
     private void LateUpdate()
     {
-        if (Health <= 0)
-        {
-             SceneManager.LoadScene("GameOverMenu");
-            Destroy(this.gameObject);
-        }
+
     }
 }

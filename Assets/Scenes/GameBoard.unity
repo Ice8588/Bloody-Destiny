@@ -375,7 +375,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Bullet: {fileID: 230279984119097172, guid: 2773c6b3c3b988549abd56f0f802ca00, type: 3}
   PlayerSpeed: 0.1
-  Health: 10
 --- !u!212 &860605471
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -438,7 +437,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: -4, z: 0}
-  m_LocalScale: {x: 0.3, y: 0.3, z: 1}
+  m_LocalScale: {x: 0.6, y: 0.6, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -796,7 +795,7 @@ Transform:
   m_GameObject: {fileID: 8525747246837572312}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 3, z: 0}
+  m_LocalPosition: {x: -12.95, y: 1.82, z: 0}
   m_LocalScale: {x: 0.3, y: 0.3, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -816,7 +815,7 @@ GameObject:
   - component: {fileID: 4999905974383519712}
   - component: {fileID: 4791429743735377785}
   m_Layer: 0
-  m_Name: Enemy
+  m_Name: Enemy(test)
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -27,12 +27,14 @@ public class EnemyScript : MonoBehaviour
         if (Health <= 0)
         {
             GameCtrl.KillCount++;
+            Stage1.EnemyNum--;
             Destroy(this.gameObject);
         }
 
         if (transform.position.y <= (GameCtrl.SCREEN_HEIGHT * -1) - 5 || transform.position.y >= GameCtrl.SCREEN_HEIGHT + 5 ||
             transform.position.x <= (GameCtrl.CREEN_WIDTH * -1) - 5 || transform.position.x >= GameCtrl.CREEN_WIDTH + 5)
         {
+            Stage1.EnemyNum--;
             Destroy(this.gameObject);
         }
     }
