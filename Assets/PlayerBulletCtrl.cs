@@ -18,7 +18,8 @@ public class PlayerBulletCtrl : MonoBehaviour
     {
         transform.Translate(new Vector2(0, BulletSpeed));
 
-        if (transform.position.y >= 10f || transform.position.y <= -10f || transform.position.x >= 10f || transform.position.x <= -10f)
+        if (transform.position.y <= (GameCtrl.SCREEN_HEIGHT * -1) - 5 || transform.position.y >= GameCtrl.SCREEN_HEIGHT + 5 ||
+            transform.position.x <= (GameCtrl.CREEN_WIDTH * -1) - 5 || transform.position.x >= GameCtrl.CREEN_WIDTH + 5)
         {
             Destroy(this.gameObject);
         }

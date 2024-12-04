@@ -9,6 +9,7 @@ public class EnemyScript : MonoBehaviour
     public int SwordATK = 2;
     public int BloodMagicATK = 3;
     public GameObject Bullet;
+    protected Vector3 InitialPosition = new Vector3(-13, 2, 0);  //test
     // Start is called before the first frame update
     void Start()
     {
@@ -28,15 +29,21 @@ public class EnemyScript : MonoBehaviour
             GameCtrl.KillCount++;
             Destroy(this.gameObject);
         }
+
+        if (transform.position.y <= (GameCtrl.SCREEN_HEIGHT * -1) - 5 || transform.position.y >= GameCtrl.SCREEN_HEIGHT + 5 ||
+            transform.position.x <= (GameCtrl.CREEN_WIDTH * -1) - 5 || transform.position.x >= GameCtrl.CREEN_WIDTH + 5)
+        {
+            Destroy(this.gameObject);
+        }
     }
 
-    public void BloodMagic()
+    protected void BloodMagic()
     {
-        //Vector3 shotAngle = new Vector3(0, 0, UnityEngine.Random.Range(0, 360));
+        Vector3 shotAngle = new Vector3(0, 0, 0);
         Vector3 shotPos = transform.position;
 
         GameObject bullet = Instantiate(Bullet, transform.position, new Quaternion(0, 0, 0, 0));
-        // bullet.GetComponent<EnemyBulletCtrl>().SC.InitAngle = Quaternion.Euler(shotAngle);
+        bullet.GetComponent<EnemyBulletCtrl>().SC.InitAngle = Quaternion.Euler(shotAngle);
         bullet.GetComponent<EnemyBulletCtrl>().SC.InitPosition = shotPos;
         bullet.GetComponent<EnemyBulletCtrl>().SC.Speed = new Vector2(0, 0.1f);
         bullet.GetComponent<EnemyBulletCtrl>().SC.IsTrace = true;
