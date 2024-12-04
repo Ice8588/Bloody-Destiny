@@ -5,22 +5,27 @@ using UnityEngine;
 
 public class EnemyScript : MonoBehaviour
 {
-    public int Health = 5;
+    public int MaxHealth = 5, Health;
     public int SwordATK = 2;
     public int BloodMagicATK = 3;
     public GameObject Bullet;
+    public GameObject HealthBar;
     protected Vector3 InitialPosition = new Vector3(-13, 2, 0);  //test
     // Start is called before the first frame update
     void Start()
     {
-
+        Health = MaxHealth;
     }
 
     // Update is called once per frame
-    void Update()
+    protected virtual void Update()
     {
-
+        if (HealthBar != null)
+        {
+            HealthBar.transform.localScale = new Vector3((float)Health / MaxHealth, 0.1f, 0);
+        }
     }
+
 
     private void LateUpdate()
     {

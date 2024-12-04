@@ -81,7 +81,7 @@ public class GameCtrl : MonoBehaviour
         KillCount = 0;
         TotalDamege = 0;
         PlayerCtrl.Health = 10;
-        SceneManager.LoadScene("GameScene");
+        SceneManager.LoadScene("GameBoard");
     }
 
     public static void GameClear()
