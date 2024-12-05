@@ -23,7 +23,7 @@ public class EnemyBloodMagicCtrl : MonoBehaviour
         transform.Translate(SC.Speed);
 
         if (transform.position.y <= (GameCtrl.SCREEN_HEIGHT * -1) - 5 || transform.position.y >= GameCtrl.SCREEN_HEIGHT + 5 ||
-            transform.position.x <= (GameCtrl.CREEN_WIDTH * -1) - 5 || transform.position.x >= GameCtrl.CREEN_WIDTH + 5)
+            transform.position.x <= (GameCtrl.SCREEN_WIDTH * -1) - 5 || transform.position.x >= GameCtrl.SCREEN_WIDTH + 5)
         {
             Destroy(this.gameObject);
         }

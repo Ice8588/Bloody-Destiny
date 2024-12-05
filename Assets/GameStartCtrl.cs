@@ -20,7 +20,7 @@ public class GameStartCtrl : MonoBehaviour
 
     public void GameStartButtonClick()
     {
-        SceneManager.LoadScene("GameBoard");
+        SceneManager.LoadScene(1);
     }
 
     public void ExitButtonClick()

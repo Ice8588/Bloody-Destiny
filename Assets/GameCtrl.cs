@@ -11,7 +11,7 @@ public class GameCtrl : MonoBehaviour
     public static Vector3 PlayerPos;
     public static int KillCount = 0, BestKillCount = 0;
     public static int TotalDamege = 0, BestTotalDamege = 0;
-    public const int CREEN_WIDTH = 9, SCREEN_HEIGHT = 5;
+    public const int SCREEN_WIDTH = 20, SCREEN_HEIGHT = 20;
     public static bool IsGameClear = false;
     private bool firstStart = true;
     private static GameCtrl instance;

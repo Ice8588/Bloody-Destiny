@@ -19,19 +19,19 @@ public class PlayerCtrl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (transform.position.y <= 4.8 && (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow)))
+        if (transform.position.y + 0.3 <= GameCtrl.SCREEN_HEIGHT && (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow)))
         {
             transform.Translate(new Vector2(0, PlayerSpeed));
         }
-        else if (transform.position.y >= -4.8 && (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow)))
+        else if (transform.position.y - 0.3 >= -GameCtrl.SCREEN_HEIGHT && (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow)))
         {
             transform.Translate(new Vector2(0, -PlayerSpeed));
         }
-        else if (transform.position.x >= -8.8 && (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow)))
+        else if (transform.position.x - 0.3 >= -GameCtrl.SCREEN_WIDTH && (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow)))
         {
             transform.Translate(new Vector2(-PlayerSpeed, 0));
         }
-        else if (transform.position.x <= 8.8 && (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow)))
+        else if (transform.position.x + 0.3 <= GameCtrl.SCREEN_WIDTH && (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow)))
         {
             transform.Translate(new Vector2(PlayerSpeed, 0));
         }
