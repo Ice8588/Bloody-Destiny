@@ -86,7 +86,7 @@ public class GameCtrl : MonoBehaviour
 
     public static void GameClear()
     {
-        IsGameClear = true;
-        SceneManager.LoadScene("GameOverMenu");
+        //IsGameClear = true;
+        //SceneManager.LoadScene("GameOverMenu");
     }
 }

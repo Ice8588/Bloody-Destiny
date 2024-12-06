@@ -13,7 +13,7 @@ public class EnemyBloodMagicCtrl : MonoBehaviour
     void Start()
     {
         float AngleZ = Mathf.Atan2(GameCtrl.PlayerPos.y - transform.position.y, GameCtrl.PlayerPos.x - transform.position.x);
-        transform.rotation = Quaternion.Euler(0, 0, AngleZ * Mathf.Rad2Deg - 90);
+        transform.rotation = Quaternion.Euler(0, 0,  );
         transform.position = SC.InitPosition;
     }
 
@@ -47,6 +47,10 @@ public class EnemyBloodMagicCtrl : MonoBehaviour
         if (collision.gameObject.tag == "Player")
         {
             PlayerCtrl.Health -= ATK;
+            Destroy(this.gameObject);
+        }
+        else if (collision.gameObject.tag == "Obstacle" || collision.gameObject.tag == "Circle")
+        {
             Destroy(this.gameObject);
         }
     }
