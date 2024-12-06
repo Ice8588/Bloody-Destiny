@@ -8,6 +8,8 @@ TagManager:
   - Bullet
   - Enemy
   - BloodMagic
+  - Obstacle
+  - Circle
   layers:
   - Default
   - TransparentFX

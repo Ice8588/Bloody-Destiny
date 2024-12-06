@@ -9,6 +9,7 @@ public class PlayerCtrl : MonoBehaviour
     public GameObject BloodMagic;
     public float PlayerSpeed = 0.1f;
     public static int Health = 10;
+    public bool CanUp = false, CanRight = false, CanLeft = false, CanDown = false;
 
     // Start is called before the first frame update
     void Start()
@@ -19,19 +20,19 @@ public class PlayerCtrl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (transform.position.y + 0.3 <= GameCtrl.SCREEN_HEIGHT && (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow)))
+        if (transform.position.y + 0.3 <= GameCtrl.SCREEN_HEIGHT && (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow)) && !CanUp)
         {
             transform.Translate(new Vector2(0, PlayerSpeed));
         }
-        else if (transform.position.y - 0.3 >= -GameCtrl.SCREEN_HEIGHT && (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow)))
+        else if (transform.position.y - 0.3 >= -GameCtrl.SCREEN_HEIGHT && (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow)) && !CanDown)
         {
             transform.Translate(new Vector2(0, -PlayerSpeed));
         }
-        else if (transform.position.x - 0.3 >= -GameCtrl.SCREEN_WIDTH && (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow)))
+        else if (transform.position.x - 0.3 >= -GameCtrl.SCREEN_WIDTH && (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow)) && !CanLeft)
         {
             transform.Translate(new Vector2(-PlayerSpeed, 0));
         }
-        else if (transform.position.x + 0.3 <= GameCtrl.SCREEN_WIDTH && (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow)))
+        else if (transform.position.x + 0.3 <= GameCtrl.SCREEN_WIDTH && (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow)) && !CanRight)
         {
             transform.Translate(new Vector2(PlayerSpeed, 0));
         }
@@ -45,5 +46,33 @@ public class PlayerCtrl : MonoBehaviour
     private void LateUpdate()
     {
 
+    }
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        Vector2 direction = other.transform.position - transform.position;
+
+        if (other.CompareTag("Obstacle"))
+        {
+            if (direction.y > 0 && (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))) CanUp = true;
+            if (direction.y < 0 && (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))) CanDown = true;
+            if (direction.x > 0 && (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))) CanRight = true;
+            if (direction.x < 0 && (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))) CanLeft = true;
+        }
+        else if (other.CompareTag("Circle"))
+        {
+            if (direction.y > 0) CanUp = true;
+            if (direction.y < 0) CanDown = true;
+            if (direction.x > 0) CanRight = true;
+            if (direction.x < 0) CanLeft = true;
+        }
+    }
+
+    void OnTriggerExit2D(Collider2D other)
+    {
+        CanUp = false;
+        CanDown = false;
+        CanRight = false;
+        CanLeft = false;
     }
 }
