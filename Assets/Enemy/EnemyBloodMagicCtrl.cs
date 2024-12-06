@@ -12,7 +12,7 @@ public class EnemyBloodMagicCtrl : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        float AngleZ = Mathf.Atan2(GameCtrl.PlayerPos.y - transform.position.y, GameCtrl.PlayerPos.x - transform.position.x);
+        float AngleZ = Mathf.Atan2(PlayerCtrl.PlayerPos.y - transform.position.y, PlayerCtrl.PlayerPos.x - transform.position.x);
         transform.rotation = Quaternion.Euler(0, 0, AngleZ * Mathf.Rad2Deg - 90);
         transform.position = SC.InitPosition;
     }
@@ -23,7 +23,7 @@ public class EnemyBloodMagicCtrl : MonoBehaviour
         transform.Translate(SC.Speed);
 
         if (transform.position.y <= (GameCtrl.SCREEN_HEIGHT * -1) - 5 || transform.position.y >= GameCtrl.SCREEN_HEIGHT + 5 ||
-            transform.position.x <= (GameCtrl.CREEN_WIDTH * -1) - 5 || transform.position.x >= GameCtrl.CREEN_WIDTH + 5)
+            transform.position.x <= (GameCtrl.SCREEN_WIDTH * -1) - 5 || transform.position.x >= GameCtrl.SCREEN_WIDTH + 5)
         {
             Destroy(this.gameObject);
         }
@@ -34,7 +34,7 @@ public class EnemyBloodMagicCtrl : MonoBehaviour
 
             if (traceCounter >= SC.TraceTime && SC.TraceNum > 0)
             {
-                float AngleZ = Mathf.Atan2(GameCtrl.PlayerPos.y - transform.position.y, GameCtrl.PlayerPos.x - transform.position.x);
+                float AngleZ = Mathf.Atan2(PlayerCtrl.PlayerPos.y - transform.position.y, PlayerCtrl.PlayerPos.x - transform.position.x);
                 transform.rotation = Quaternion.Euler(0, 0, AngleZ * Mathf.Rad2Deg - 90);
                 traceCounter = 0;
                 SC.TraceNum--;

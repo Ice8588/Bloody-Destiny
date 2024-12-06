@@ -7,11 +7,9 @@ using UnityEngine.SceneManagement;
 public class GameCtrl : MonoBehaviour
 {
     public static double TimeCounter = 0f;
-    public static GameObject PlayerGameObject;
-    public static Vector3 PlayerPos;
     public static int KillCount = 0, BestKillCount = 0;
     public static int TotalDamege = 0, BestTotalDamege = 0;
-    public const int CREEN_WIDTH = 9, SCREEN_HEIGHT = 5;
+    public const int SCREEN_WIDTH = 9, SCREEN_HEIGHT = 5;
     public static bool IsGameClear = false;
     private bool firstStart = true;
     private static GameCtrl instance;
@@ -60,11 +58,6 @@ public class GameCtrl : MonoBehaviour
     void Update()
     {
         TimeCounter++;
-
-        if (PlayerGameObject != null)
-        {
-            PlayerPos = PlayerGameObject.transform.position;
-        }
     }
 
     void LateUpdate()
