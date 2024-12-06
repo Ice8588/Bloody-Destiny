@@ -13,7 +13,7 @@ public class EnemyBloodMagicCtrl : MonoBehaviour
     void Start()
     {
         float AngleZ = Mathf.Atan2(GameCtrl.PlayerPos.y - transform.position.y, GameCtrl.PlayerPos.x - transform.position.x);
-        transform.rotation = Quaternion.Euler(0, 0,  );
+        transform.rotation = Quaternion.Euler(0, 0, AngleZ * Mathf.Rad2Deg - 90);
         transform.position = SC.InitPosition;
     }
 

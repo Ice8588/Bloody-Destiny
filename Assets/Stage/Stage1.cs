@@ -11,7 +11,7 @@ public class Stage1 : MonoBehaviour
     void Start()
     {
         var gameCtrl = GameCtrl.Instance;
-        InvokeRepeating("SpawnCorpse", 0f, 10f);
+       // InvokeRepeating("SpawnCorpse", 0f, 10f);
     }
 
     // Update is called once per frame
@@ -36,13 +36,5 @@ public class Stage1 : MonoBehaviour
         }
     }
 
-    void SpawnCorpse()
-    {
-        // 隨機生成位置
-        float x = Random.Range(5, GameCtrl.SCREEN_WIDTH - 5);
-        float y = Random.Range(5, GameCtrl.SCREEN_HEIGHT - 5);
-        Vector2 spawnPosition = new Vector2(x, y);
-        Debug.Log(spawnPosition);
-        Instantiate(Corpse, spawnPosition, new Quaternion(0, 0, 0, 0));
-    }
+   
 }
