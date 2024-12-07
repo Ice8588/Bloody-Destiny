@@ -22,18 +22,17 @@ public class ESACtrl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     void SpawnCorpse()
     {
-        // 隨機生成位置
-        if (EnemyNum> 0)
+        if (EnemyNum > 0)
         {
             float x = Random.Range(Area[0].x, Area[1].x);
             float y = Random.Range(Area[0].y, Area[1].y);
             Vector2 spawnPosition = new Vector2(x, y);
-            Debug.Log(spawnPosition);
+            //Debug.Log(spawnPosition);
             GameObject Enemy = Instantiate(Corpse, spawnPosition, new Quaternion(0, 0, 0, 0));
             Enemy.GetComponent<CorpseCtrl>().ESA = this.gameObject;
             EnemyNum--;

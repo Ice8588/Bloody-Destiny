@@ -12,7 +12,7 @@ public class GameCtrl : MonoBehaviour
     public static int KillCount = 0, BestKillCount = 0;
     public static int TotalDamege = 0, BestTotalDamege = 0;
     public const int SCREEN_WIDTH = 20, SCREEN_HEIGHT = 20;
-    public static bool IsGameClear = false;
+    public static bool IsGameClear = false, check = false;
     private bool firstStart = true;
     private static GameCtrl instance;
     public GameObject CirclePrefab;
@@ -100,6 +100,10 @@ public class GameCtrl : MonoBehaviour
     {
         Vector2 SpawnPoint = new Vector2(-17.5f, -17.5f);
 
-        Instantiate(CirclePrefab, SpawnPoint, Quaternion.identity);
+        if (!check)
+        {
+            Instantiate(CirclePrefab, SpawnPoint, Quaternion.identity);
+            check = true;
+        }
     }
 }
