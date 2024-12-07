@@ -15,6 +15,7 @@ public class WhiteRobeCtrl : EnemyScript
     Vector2 directionToPlayer;
     void Start()
     {
+        tag = "WhiteRobe";
         player = GameObject.Find("Player");
         //transform.position = InitialPosition;
         if (player == null)
