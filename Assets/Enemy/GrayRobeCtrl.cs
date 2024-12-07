@@ -7,7 +7,7 @@ public class GrayRobeCtrl : EnemyScript
     // Start is called before the first frame update
     void Start()
     {
-        transform.position = InitialPosition;
+        //transform.position = InitialPosition;
     }
 
     // Update is called once per frame

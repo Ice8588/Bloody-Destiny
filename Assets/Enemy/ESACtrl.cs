@@ -12,7 +12,9 @@ public class ESACtrl : MonoBehaviour
     public int EnemyNum;
     void Start()
     {
-        InvokeRepeating("SpawnCorpse", 0f, 1f);
+        InvokeRepeating("SpawnCorpse", 0f, 10f);
+        InvokeRepeating("SpawnWhiteRobe", 0f, 10f);
+        InvokeRepeating("SpawnGrayRobe", 0f, 10f);
         //EnemyNum = 1;
         boxCollider = GetComponent<BoxCollider2D>();
         Area[0] = new Vector2(boxCollider.bounds.min.x, boxCollider.bounds.max.y);
@@ -35,6 +37,34 @@ public class ESACtrl : MonoBehaviour
             Vector2 spawnPosition = new Vector2(x, y);
             Debug.Log(spawnPosition);
             GameObject Enemy = Instantiate(Corpse, spawnPosition, new Quaternion(0, 0, 0, 0));
+            Enemy.GetComponent<CorpseCtrl>().ESA = this.gameObject;
+            EnemyNum--;
+        }
+    }
+    void SpawnWhiteRobe()
+    {
+        // 隨機生成位置
+        if (EnemyNum > 0)
+        {
+            float x = Random.Range(Area[0].x, Area[1].x);
+            float y = Random.Range(Area[0].y, Area[1].y);
+            Vector2 spawnPosition = new Vector2(x, y);
+            Debug.Log(spawnPosition);
+            GameObject Enemy = Instantiate(WhiteRobe, spawnPosition, new Quaternion(0, 0, 0, 0));
+            Enemy.GetComponent<CorpseCtrl>().ESA = this.gameObject;
+            EnemyNum--;
+        }
+    }
+    void SpawnGrayRobe()
+    {
+        // 隨機生成位置
+        if (EnemyNum > 0)
+        {
+            float x = Random.Range(Area[0].x, Area[1].x);
+            float y = Random.Range(Area[0].y, Area[1].y);
+            Vector2 spawnPosition = new Vector2(x, y);
+            Debug.Log(spawnPosition);
+            GameObject Enemy = Instantiate(GrayRobe, spawnPosition, new Quaternion(0, 0, 0, 0));
             Enemy.GetComponent<CorpseCtrl>().ESA = this.gameObject;
             EnemyNum--;
         }

@@ -50,6 +50,7 @@ public class PlayerCtrl : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
+        
         Vector2 direction = other.transform.position - transform.position;
 
         if (other.CompareTag("Obstacle"))

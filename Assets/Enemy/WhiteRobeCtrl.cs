@@ -11,19 +11,21 @@ public class WhiteRobeCtrl : EnemyScript
     public float speed = 1.8f;
     public float obstacleAvoidanceDistance = 1f; // 與障礙物保持的最小距離
     public float obstacleCheckRadius = 1.5f;    // 檢測障礙物的範圍半徑
+    public bool OB = false;
+    Vector2 directionToPlayer;
     void Start()
     {
         player = GameObject.Find("Player");
-        transform.position = InitialPosition;
-        if (player == null) 
+        //transform.position = InitialPosition;
+        if (player == null)
         {
-            Debug.LogError("Player object not found in the scene!");
+            Debug.Log("Player object not found in the scene!");
         }
         else
         {
-            Debug.LogError("find");
+            Debug.Log("find");
         }
-        
+
     }
 
     // Update is called once per frame
@@ -41,14 +43,11 @@ public class WhiteRobeCtrl : EnemyScript
     {
         distanceToPlayer = Vector2.Distance(transform.position, player.transform.position);
         // 計算前往玩家的方向
-        Vector2 directionToPlayer = (player.transform.position - transform.position).normalized;
-
-        // 檢查是否有障礙物
-        Vector2 avoidanceDirection = AvoidObstacle();
-
-        // 如果檢測到障礙物，優先避開障礙物方向
-        Vector2 finalDirection = avoidanceDirection != Vector2.zero ? avoidanceDirection : directionToPlayer;
-        MoveTowardsPlayer();
+        directionToPlayer = (player.transform.position - transform.position).normalized;
+        if (!OB)
+        {
+            MoveTowardsPlayer();
+        }
     }
     void MoveTowardsPlayer()
     {
@@ -73,35 +72,23 @@ public class WhiteRobeCtrl : EnemyScript
             transform.localScale = new Vector3(-1, 1, 1); // 朝左
         }
     }
-    private Vector2 AvoidObstacle()
+    private void OnTriggerStay2D(Collider2D collision)
     {
-        // 使用 OverlapCircle 檢測周圍的障礙物
-        Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, obstacleCheckRadius);
-
-        foreach (var hit in hits)
+        if (collision.CompareTag("Obstacle") || collision.CompareTag("Circle"))
         {
-            // 如果檢測到帶有 "Obstacle" 標籤的物件
-            if (hit.CompareTag("Obstacle"))
-            {
-                // 計算遠離障礙物的方向
-                Vector2 directionAwayFromObstacle = (transform.position - hit.transform.position).normalized;
-
-                // 如果障礙物過近，返回避開方向
-                if (Vector2.Distance(transform.position, hit.transform.position) < obstacleAvoidanceDistance)
-                {
-                    return directionAwayFromObstacle;
-                }
-            }
+            OB = true;
+            //計算反射方向，避免障礙物
+            Debug.Log("OB");
+            // 簡單地計算方向，讓敵人遠離障礙物
+            Vector2 awayFromObstacle = (transform.position - collision.transform.position).normalized;
+            directionToPlayer = Vector2.Lerp(directionToPlayer, awayFromObstacle, 0.5f).normalized;
+            rb.velocity = directionToPlayer * speed;
+            Debug.Log("Avoiding obstacle: " + collision.gameObject.name);
         }
-
-        // 沒有障礙物需要避開
-        return Vector2.zero;
     }
 
-    // 可視化檢測範圍（在 Scene 視圖中查看）
-    private void OnDrawGizmosSelected()
+    private void OnTriggerExit2D(Collider2D collision)
     {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, obstacleCheckRadius);
+        OB = false;
     }
 }
