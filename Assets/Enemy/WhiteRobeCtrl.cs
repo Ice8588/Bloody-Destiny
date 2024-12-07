@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Rendering;
 using UnityEngine;
+using UnityEngine.Rendering.UI;
 
 public class WhiteRobeCtrl : EnemyScript
 {
@@ -9,12 +11,14 @@ public class WhiteRobeCtrl : EnemyScript
     public Rigidbody2D rb;
     public float distanceToPlayer;
     public float speed = 1.8f;
-    public float obstacleAvoidanceDistance = 1f; // 與障礙物保持的最小距離
-    public float obstacleCheckRadius = 1.5f;    // 檢測障礙物的範圍半徑
-    public bool OB = false;
+    private float speedbuf, delay = 0;
+    public bool OB = false, CanUp = false, CanRight = false, CanLeft = false, CanDown = false, d_flag = true;
     Vector2 directionToPlayer;
+
     void Start()
     {
+        delay = Time.time + 0.5f;
+        speedbuf = speed;
         tag = "WhiteRobe";
         player = GameObject.Find("Player");
         //transform.position = InitialPosition;
@@ -73,20 +77,59 @@ public class WhiteRobeCtrl : EnemyScript
             transform.localScale = new Vector3(-1, 1, 1); // 朝左
         }
     }
+    
     private void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.CompareTag("Obstacle") || collision.CompareTag("Circle"))
         {
-
             OB = true;
+
             //計算反射方向，避免障礙物
             Debug.Log("OB");
             // 簡單地計算方向，讓敵人遠離障礙物
-            Vector2 awayFromObstacle = (transform.position - collision.transform.position).normalized;
+            Vector2 awayFromObstacle = transform.position - collision.transform.position;
+            //if (awayFromObstacle.y > 0)
+            //{
+            //    Debug.Log("W");
+            //    CanUp = true;
+            //    speed = 0;
+            //    transform.Translate(new Vector2(0, -1f));
+            //    if (d_flag && delay < Time.time)
+            //    {
+            //        Delay();    
+            //    }
+            //}
+            //else if (awayFromObstacle.y < 0)
+            //{
+            //    Debug.Log("S");
+            //    CanDown = true;
+            //    speed = 0;
+            //    transform.Translate(new Vector2(0, 1f));
+            //}
+            //if (awayFromObstacle.x > 0)
+            //{
+            //    Debug.Log("D");
+            //    CanRight = true;
+            //    speed = 0;
+            //    transform.Translate(new Vector2(-1f, 0));
+            //}
+            //else if (awayFromObstacle.x < 0)
+            //{
+            //    Debug.Log("A");
+            //    CanLeft = true;
+            //    speed = 0;
+            //    transform.Translate(new Vector2(1f, 0));
+            //}
+
             directionToPlayer = Vector2.Lerp(directionToPlayer, awayFromObstacle, 0.5f).normalized;
             rb.velocity = directionToPlayer * speed;
             Debug.Log("Avoiding obstacle: " + collision.gameObject.name);
         }
+    }
+    void Delay()
+    {
+        Debug.Log("delay");
+        d_flag = false;
     }
 
 
@@ -94,5 +137,6 @@ public class WhiteRobeCtrl : EnemyScript
     private void OnTriggerExit2D(Collider2D collision)
     {
         OB = false;
+        speed = speedbuf;
     }
 }

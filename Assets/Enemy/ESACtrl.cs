@@ -13,7 +13,7 @@ public class ESACtrl : MonoBehaviour
     void Start()
     {
         InvokeRepeating("SpawnCorpse", 3f, 15f);
-        InvokeRepeating("SpawnWhiteRobe", 5f, 20f);
+        InvokeRepeating("SpawnWhiteRobe", 5f, 1f);
         InvokeRepeating("SpawnGrayRobe", 7f, 25f);
         EnemyNum = CorpseNum+GrayRobeNum+WhiteRobeNum;
         boxCollider = GetComponent<BoxCollider2D>();
