@@ -7,6 +7,7 @@ public class GrayRobeCtrl : EnemyScript
     // Start is called before the first frame update
     void Start()
     {
+        tag = "GrayRobe";
         //transform.position = InitialPosition;
     }
 

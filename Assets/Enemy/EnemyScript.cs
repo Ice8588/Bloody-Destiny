@@ -11,6 +11,7 @@ public class EnemyScript : MonoBehaviour
     public GameObject ESA;
     public GameObject BloodMagic;
     public GameObject HealthBar;
+    public new string tag = "origin";
     protected Vector3 InitialPosition = new Vector3(-13, 2, 0);  //test
     // Start is called before the first frame update
     void Start()
@@ -34,7 +35,25 @@ public class EnemyScript : MonoBehaviour
         {
             GameCtrl.KillCount++;
             Stage1.EnemyNum--;
-            ESA.GetComponent<ESACtrl>().EnemyNum++;
+
+            ESACtrl component = ESA.GetComponent<ESACtrl>();
+            component.EnemyNum++;
+
+            switch (tag)
+            {
+                case "Corpse":
+                    component.CorpseNum++;
+                    break;
+                case "WhiteRobe":
+                    component.WhiteRobeNum++;
+                    break;
+                case "GrayRobe":
+                    component.GrayRobeNum++;
+                    break;
+                default:
+                    break;
+            }
+
             Destroy(this.gameObject);
         }
 
@@ -42,7 +61,24 @@ public class EnemyScript : MonoBehaviour
             transform.position.x <= (GameCtrl.SCREEN_WIDTH * -1) - 5 || transform.position.x >= GameCtrl.SCREEN_WIDTH + 5)
         {
             Stage1.EnemyNum--;
-            ESA.GetComponent<ESACtrl>().EnemyNum++;
+            ESACtrl component = ESA.GetComponent<ESACtrl>();
+            component.EnemyNum++;
+
+            switch (tag)
+            {
+                case "Corpse":
+                    component.CorpseNum++;
+                    break;
+                case "WhiteRobe":
+                    component.WhiteRobeNum++;
+                    break;
+                case "GrayRobe":
+                    component.GrayRobeNum++;
+                    break;
+                default:
+                    break;
+            }
+
             Destroy(this.gameObject);
         }
     }

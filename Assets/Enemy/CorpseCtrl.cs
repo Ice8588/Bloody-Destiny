@@ -7,6 +7,7 @@ public class CorpseCtrl : EnemyScript
     // Start is called before the first frame update
     void Start()
     {
+        tag = "Corpse";
        // transform.position = InitialPosition;
     }
 
