@@ -13,7 +13,7 @@ public class ESACtrl : MonoBehaviour
     void Start()
     {
         InvokeRepeating("SpawnCorpse", 0f, 1f);
-        EnemyNum = 1;
+        //EnemyNum = 1;
         boxCollider = GetComponent<BoxCollider2D>();
         Area[0] = new Vector2(boxCollider.bounds.min.x, boxCollider.bounds.max.y);
         Area[1] = new Vector2(boxCollider.bounds.max.x, boxCollider.bounds.min.y);

@@ -33,7 +33,7 @@ public class EnemyScript : MonoBehaviour
         if (Health <= 0)
         {
             GameCtrl.KillCount++;
-            //Stage1.EnemyNum--;
+            Stage1.EnemyNum--;
             ESA.GetComponent<ESACtrl>().EnemyNum++;
             Destroy(this.gameObject);
         }
@@ -41,7 +41,7 @@ public class EnemyScript : MonoBehaviour
         if (transform.position.y <= (GameCtrl.SCREEN_HEIGHT * -1) - 5 || transform.position.y >= GameCtrl.SCREEN_HEIGHT + 5 ||
             transform.position.x <= (GameCtrl.SCREEN_WIDTH * -1) - 5 || transform.position.x >= GameCtrl.SCREEN_WIDTH + 5)
         {
-            // Stage1.EnemyNum--;
+            Stage1.EnemyNum--;
             ESA.GetComponent<ESACtrl>().EnemyNum++;
             Destroy(this.gameObject);
         }
