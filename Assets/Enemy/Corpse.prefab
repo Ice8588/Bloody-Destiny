@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6339893453684637932}
   - component: {fileID: 7277194239715465858}
   - component: {fileID: 6533874926922347257}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Corpse
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -188,7 +188,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4328507441781674388}
   - component: {fileID: 7778831554675105377}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: HealthBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}

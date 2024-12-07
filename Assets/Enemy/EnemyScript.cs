@@ -57,4 +57,9 @@ public class EnemyScript : MonoBehaviour
         newBloodMagic.GetComponent<EnemyBloodMagicCtrl>().SC.TraceTime = 5;
         newBloodMagic.GetComponent<EnemyBloodMagicCtrl>().SC.TraceNum = 10;
     }
+
+    public void TakeDamage(int damage)
+    {
+        Health -= damage;
+    }
 }

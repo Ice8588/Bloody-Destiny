@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1420760861651135322}
   - component: {fileID: 5089762211640726843}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: HealthBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -97,7 +97,7 @@ GameObject:
   - component: {fileID: 1354807073615448459}
   - component: {fileID: 689488135521072411}
   - component: {fileID: 1823033701705691277}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: GrayRobe
   m_TagString: Enemy
   m_Icon: {fileID: 0}

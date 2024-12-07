@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5116398404724056334}
   - component: {fileID: 4811855720380669857}
   - component: {fileID: 790953294997540523}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: EnemyBloodMagic
   m_TagString: BloodMagic
   m_Icon: {fileID: 0}

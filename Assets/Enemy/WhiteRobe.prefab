@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2868567187903301834}
   - component: {fileID: 5492903537433154207}
   - component: {fileID: 8697786253624520263}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: WhiteRobe
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -188,7 +188,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3287032797217260427}
   - component: {fileID: 513687994801471552}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: HealthBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
