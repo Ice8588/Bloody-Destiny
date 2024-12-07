@@ -33,5 +33,9 @@ public class PlayerBloodMagicCtrl : MonoBehaviour
             GameCtrl.TotalDamege += ATK;
             Destroy(this.gameObject);
         }
+        else if(collision.gameObject.tag == "Obstacle" || collision.gameObject.tag == "Circle")
+        {
+            Destroy(this.gameObject);
+        }
     }
 }
