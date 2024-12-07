@@ -76,6 +76,7 @@ public class WhiteRobeCtrl : EnemyScript
     {
         if (collision.CompareTag("Obstacle") || collision.CompareTag("Circle"))
         {
+
             OB = true;
             //計算反射方向，避免障礙物
             Debug.Log("OB");
@@ -86,6 +87,8 @@ public class WhiteRobeCtrl : EnemyScript
             Debug.Log("Avoiding obstacle: " + collision.gameObject.name);
         }
     }
+
+
 
     private void OnTriggerExit2D(Collider2D collision)
     {
