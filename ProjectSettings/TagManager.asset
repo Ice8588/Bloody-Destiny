@@ -10,6 +10,9 @@ TagManager:
   - BloodMagic
   - Obstacle
   - Circle
+  - Trap
+  - Fire
+  - TelePort
   layers:
   - Default
   - TransparentFX
