@@ -107,6 +107,10 @@ MonoBehaviour:
   BloodMagic: {fileID: 230279984119097172, guid: f71556a98527cf04b99b6857c4d59c51, type: 3}
   HealthBar: {fileID: 5946684973296655068}
   rb: {fileID: 8697786253624520263}
+  distanceToPlayer: 0
+  speed: 1.8
+  obstacleAvoidanceDistance: 1
+  obstacleCheckRadius: 1.5
 --- !u!61 &5492903537433154207
 BoxCollider2D:
   m_ObjectHideFlags: 0

@@ -2396,6 +2396,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4157891675015980258, guid: 3b8da01bd039e304b83c16e12c68fa9f, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8621131465931855817, guid: 3b8da01bd039e304b83c16e12c68fa9f, type: 3}
       propertyPath: m_Name
       value: Player
@@ -2482,7 +2486,7 @@ Rigidbody2D:
     m_Bits: 0
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 0
 --- !u!61 &4999905974383519712
 BoxCollider2D:
