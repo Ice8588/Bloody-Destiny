@@ -8,6 +8,7 @@ TagManager:
   - Bullet
   - Enemy
   - BloodMagic
+  - UI
   layers:
   - Default
   - TransparentFX
