@@ -5,17 +5,17 @@ using UnityEngine;
 
 public class PlayerAttack : MonoBehaviour
 {
-    public float AttackRange = 0.5f;
-    public int AttackDamage = 2;
-    public float AttackCooldown = 1f;
-    public float AttackOffset = 0.5f;
-    public int CircleSegments = 100; // 圓形的段數
+    public float AttackRange = 1f; // 攻擊範圍
+    public int AttackDamage = 2; // 攻擊傷害
+    public float AttackCooldown = 0.5f; // 攻擊冷卻時間
+    public float AttackAngle = 120f; // 扇形範圍角度
+    public float EffectDuration = 0.2f; // 攻擊效果持續時間
+    public int Segments = 120; // 圓形的段數
+    public LayerMask EnemyLayer; // 敵人圖層
+    private Vector2 AttackPointPosition; // 攻擊點位置
+    private LineRenderer lineRenderer; // LineRenderer 組件
+    private float lastAttackTime = 0f; // 上次攻擊時間
 
-    public LayerMask EnemyLayer;
-    private Vector3 AttackPointPosition;
-    private LineRenderer lineRenderer;
-
-    private float lastAttackTime = 0f;
 
     void Awake()
     {
@@ -23,67 +23,69 @@ public class PlayerAttack : MonoBehaviour
         AttackPointPosition = transform.position;
 
         lineRenderer = GetComponent<LineRenderer>();
-        lineRenderer.positionCount = CircleSegments + 1; // +1 表示閉合圓形
+        lineRenderer.positionCount = Segments + 2;
         lineRenderer.useWorldSpace = true; // 使用世界座標
     }
 
     void Start()
     {
-
+        lineRenderer.enabled = false;
     }
 
     void Update()
     {
+
         if (Input.GetMouseButtonDown(0) && Time.time >= lastAttackTime + AttackCooldown)
         {
-            UpdateAttackPointPosition();
             Attack();
-            DrawCircle();
             lastAttackTime = Time.time;
+            Invoke(nameof(ClearAttackCone), EffectDuration); // 在指定時間後清除
         }
     }
 
     void Attack()
     {
+        AttackPointPosition = transform.position;
+        DrawAttackCone(AttackPointPosition);
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(AttackPointPosition, AttackRange, EnemyLayer);
 
         foreach (Collider2D enemy in hitEnemies)
         {
             Debug.Log("擊中敵人：" + enemy.name);
             EnemyScript enemyScript = enemy.GetComponent<EnemyScript>();
-            if (enemyScript != null)
+
+            if (enemyScript)
             {
                 enemyScript.TakeDamage(AttackDamage);
             }
         }
     }
 
-    void UpdateAttackPointPosition()
+
+    private void DrawAttackCone(Vector2 AttackPointPosition)
     {
-        // 獲取玩家當前的面對方向（假設面向右是正方向）
-        Vector3 direction = transform.right; // 面向右側為正方向
+        Vector3 direction = transform.up; // 玩家面向方向
 
-        // 動態計算 AttackPoint 的位置
-        AttackPointPosition = transform.position + direction * AttackOffset;
-    }
+        // 設置扇形範圍的起點
+        lineRenderer.enabled = true;
+        lineRenderer.SetPosition(0, AttackPointPosition); // 扇形的圓心
 
-    private void OnDrawGizmosSelected()
-    {
-        if (AttackPointPosition == null) return;
-
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(AttackPointPosition, AttackRange);
-    }
-
-    void DrawCircle()
-    {
-        float angleStep = 360f / CircleSegments;
-
-        for (int i = 0; i <= CircleSegments; i++) // 繪製完整的圓形
+        float angleStep = AttackAngle / Segments;
+        for (int i = 0; i <= Segments; i++)
         {
-            float angle = Mathf.Deg2Rad * i * angleStep;
-            Vector3 point = new Vector3(Mathf.Cos(angle), Mathf.Sin(angle), 0) * AttackRange + AttackPointPosition;
-            lineRenderer.SetPosition(i, point);
+            float currentAngle = -AttackAngle / 2 + angleStep * i;
+            Vector2 rotatedDirection = Quaternion.Euler(0, 0, currentAngle) * direction;
+            Vector2 point = AttackPointPosition + rotatedDirection.normalized * AttackRange;
+            lineRenderer.SetPosition(i + 1, point);
         }
+
+        // 關閉範圍（最後一條線連回圓心）
+        lineRenderer.SetPosition(Segments + 1, AttackPointPosition);
+    }
+
+
+    void ClearAttackCone()
+    {
+        lineRenderer.enabled = false;
     }
 }

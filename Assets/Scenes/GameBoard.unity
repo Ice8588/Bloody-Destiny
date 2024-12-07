@@ -790,7 +790,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BloodMagic: {fileID: 230279984119097172, guid: 2773c6b3c3b988549abd56f0f802ca00, type: 3}
-  PlayerSpeed: 0.1
+  WalkSpeed: 5
+  RunSpeed: 8
+  dodgeSpeed: 10
+  dodgeDuration: 0.2
+  dodgeCooldown: 3
   BloodPowerCost: 2
 --- !u!212 &860605471
 SpriteRenderer:
@@ -944,13 +948,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AttackRange: 1
-  AttackDamage: 10
-  AttackCooldown: 1
-  AttackOffset: 1
-  CircleSegments: 100
+  AttackDamage: 2
+  AttackCooldown: 0.5
+  AttackAngle: 120
+  EffectDuration: 0.2
+  Segments: 120
   EnemyLayer:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 0
 --- !u!120 &860605476
 LineRenderer:
   serializedVersion: 2
@@ -972,7 +977,7 @@ LineRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 0}
+  - {fileID: 10302, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1016,7 +1021,7 @@ LineRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 1, g: 1, b: 1, a: 1}
+      key0: {r: 1, g: 0.0141509175, b: 0.0141509175, a: 1}
       key1: {r: 1, g: 1, b: 1, a: 1}
       key2: {r: 0, g: 0, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}

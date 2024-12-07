@@ -7,11 +7,18 @@ using UnityEngine.SceneManagement;
 public class PlayerCtrl : MonoBehaviour
 {
     public GameObject BloodMagic;
-    public float PlayerSpeed = 0.1f;
+    public float WalkSpeed = 5f, RunSpeed = 8f;
+    public float dodgeSpeed = 15f;
+    public float dodgeDuration = 0.2f;
+    public float dodgeCooldown = 2f;
     public static int MaxHealth = 10, Health = 0;
     public static int MaxBloodPower = 0, BloodPower = 0;
     public int BloodPowerCost = 2;
     public static Vector3 PlayerPos;
+    private Vector2 movement;           // 玩家移動向量
+    private Rigidbody2D rb;             // 玩家剛體
+    private bool isDodging = false, isRunning = false;     // 是否處於閃避狀態
+    private float lastDodgeTime = -Mathf.Infinity; // 上次閃避的時間
 
     // Start is called before the first frame update
     void Start()
@@ -19,67 +26,25 @@ public class PlayerCtrl : MonoBehaviour
         Health = MaxHealth;
         MaxBloodPower = Health;
         BloodPower = MaxBloodPower;
+        rb = GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
     void Update()
     {
         PlayerPos = transform.position;
+        movement.x = Input.GetAxisRaw("Horizontal");
+        movement.y = Input.GetAxisRaw("Vertical");
+        FaceMouse();
 
-        if (GameCtrl.TimeCounter % 300 == 0 && BloodPower < Health)
+        // 嘗試進行閃避
+        if (Input.GetKeyDown(KeyCode.Space) && CanDodge())
         {
-            BloodPower++;
-        }
-        else
-        {
-            BloodPower = Mathf.Max(0, Mathf.Min(Health, BloodPower));
-        }
-
-        if (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift))
-        {
-            PlayerSpeed = 0.2f;
-        }
-        else
-        {
-            PlayerSpeed = 0.1f;
+            StartCoroutine(Dodge());
         }
 
-        if ((Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow)) && transform.position.y <= GameCtrl.SCREEN_HEIGHT)
-        {
-            transform.Translate(new Vector2(0, PlayerSpeed));
-        }
-        else if ((Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow)) && transform.position.y >= -GameCtrl.SCREEN_HEIGHT)
-        {
-            transform.Translate(new Vector2(0, -PlayerSpeed));
-        }
-        else if ((Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow)) && transform.position.x >= -GameCtrl.SCREEN_WIDTH)
-        {
-            transform.Translate(new Vector2(-PlayerSpeed, 0));
-        }
-        else if ((Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow)) && transform.position.x <= GameCtrl.SCREEN_WIDTH)
-        {
-            transform.Translate(new Vector2(PlayerSpeed, 0));
-        }
+        isRunning = Input.GetKey(KeyCode.LeftShift);
 
-        if (Input.GetKeyDown(KeyCode.Space)) // update
-        {
-            if ((Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow)) && transform.position.y + 2 <= GameCtrl.SCREEN_HEIGHT)
-            {
-                transform.position = new Vector2(transform.position.x, transform.position.y + 2);
-            }
-            else if ((Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow)) && transform.position.y - 2 >= -GameCtrl.SCREEN_HEIGHT)
-            {
-                transform.position = new Vector2(transform.position.x, transform.position.y - 2);
-            }
-            else if ((Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow)) && transform.position.x - 2 >= -GameCtrl.SCREEN_WIDTH)
-            {
-                transform.position = new Vector2(transform.position.x - 2, transform.position.y);
-            }
-            else if ((Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow)) && transform.position.x + 2 <= GameCtrl.SCREEN_WIDTH)
-            {
-                transform.position = new Vector2(transform.position.x + 2, transform.position.y);
-            }
-        }
 
         if (Input.GetKeyDown(KeyCode.F) && BloodPower >= BloodPowerCost)
         {
@@ -88,8 +53,81 @@ public class PlayerCtrl : MonoBehaviour
         }
     }
 
-    private void LateUpdate()
+    void LateUpdate()
     {
+        if (GameCtrl.TimeCounter % 300 == 0 && BloodPower < Health)
+        {
+            BloodPower++;
+        }
+        else
+        {
+            BloodPower = Mathf.Max(0, Mathf.Min(Health, BloodPower));
+        }
+    }
 
+    void FixedUpdate()
+    {
+        // 如果正在閃避，不執行普通移動邏輯
+        if (!isDodging)
+        {
+            Move();
+        }
+    }
+
+    void Move()
+    {
+        float PlayerSpeed = isRunning ? RunSpeed : WalkSpeed;
+
+        Vector2 newPosition = rb.position + movement.normalized * PlayerSpeed * Time.fixedDeltaTime;
+
+        newPosition.x = Mathf.Clamp(newPosition.x, -GameCtrl.SCREEN_WIDTH, GameCtrl.SCREEN_WIDTH);
+        newPosition.y = Mathf.Clamp(newPosition.y, -GameCtrl.SCREEN_HEIGHT, GameCtrl.SCREEN_HEIGHT);
+        rb.MovePosition(newPosition);
+    }
+
+    bool CanDodge()
+    {
+        return Time.time >= lastDodgeTime + dodgeCooldown && movement.magnitude > 0;
+    }
+
+    IEnumerator Dodge()
+    {
+        isDodging = true;
+        lastDodgeTime = Time.time;
+
+        // 獲取閃避方向
+        Vector2 dodgeDirection = movement.normalized;
+
+        float dodgeEndTime = Time.time + dodgeDuration;
+        while (Time.time < dodgeEndTime)
+        {
+            // 閃避時的移動
+            Vector2 newPosition = rb.position + dodgeDirection * dodgeSpeed * Time.fixedDeltaTime;
+
+            // 限制在邊界內
+            newPosition.x = Mathf.Clamp(newPosition.x, -GameCtrl.SCREEN_WIDTH, GameCtrl.SCREEN_WIDTH);
+            newPosition.y = Mathf.Clamp(newPosition.y, -GameCtrl.SCREEN_HEIGHT, GameCtrl.SCREEN_HEIGHT);
+
+            rb.MovePosition(newPosition);
+            yield return null; // 等待下一幀
+        }
+
+        isDodging = false;
+    }
+
+    void FaceMouse()
+    {
+        // 獲取滑鼠位置的世界座標
+        Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        mousePosition.z = 0; // 確保 Z 軸為 0
+
+        // 計算玩家到滑鼠的方向向量
+        Vector2 direction = (mousePosition - transform.position).normalized;
+
+        // 使用 Mathf.Atan2 計算旋轉角度
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+
+        // 設置玩家的旋轉角度，讓 +Y 軸指向滑鼠
+        transform.rotation = Quaternion.Euler(0, 0, angle - 90); // 減去 90 度讓正面對齊 +Y
     }
 }
