@@ -8,9 +8,9 @@ public class PlayerCtrl : MonoBehaviour
 {
     public GameObject BloodMagic;
     public float WalkSpeed = 5f, RunSpeed = 8f;
-    public float dodgeSpeed = 15f;
-    public float dodgeDuration = 0.2f;
-    public float dodgeCooldown = 2f;
+    public float dodgeSpeed = 30f;
+    public float dodgeDuration = 0.05f;
+    public float dodgeCooldown = 0.5f;
     public static int MaxHealth = 10, Health = 0;
     public static int MaxBloodPower = 0, BloodPower = 0;
     public int BloodPowerCost = 2;
@@ -128,6 +128,9 @@ public class PlayerCtrl : MonoBehaviour
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
 
         // 設置玩家的旋轉角度，讓 +Y 軸指向滑鼠
-        transform.rotation = Quaternion.Euler(0, 0, angle - 90); // 減去 90 度讓正面對齊 +Y
+        //transform.rotation = Quaternion.Euler(0, 0, angle - 90); // 減去 90 度讓正面對齊 +Y
+
+        Quaternion targetRotation = Quaternion.Euler(0, 0, angle - 90);
+        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 10f);
     }
 }
