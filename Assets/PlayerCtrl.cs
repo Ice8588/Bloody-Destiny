@@ -83,10 +83,26 @@ public class PlayerCtrl : MonoBehaviour
 
         if (other.CompareTag("Obstacle"))
         {
-            if (direction.y > 0 && (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))) CanUp = true;
-            if (direction.y < 0 && (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))) CanDown = true;
-            if (direction.x > 0 && (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))) CanRight = true;
-            if (direction.x < 0 && (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))) CanLeft = true;
+            if (direction.y > 0 && (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow)))
+            {
+                CanUp = true;
+                transform.Translate(new Vector2(0,-0.01f));
+            }
+            else if (direction.y < 0 && (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow)))
+            {
+                CanDown = true;
+                transform.Translate(new Vector2(0, 0.01f));
+            }
+            if (direction.x > 0 && (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow)))
+            {
+                CanRight = true;
+                transform.Translate(new Vector2(-0.01f,0));
+            }
+            else if(direction.x < 0 && (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow)))
+            {
+                CanLeft = true;
+                transform.Translate(new Vector2(0.01f, 0));
+            }
         }
         else if (other.CompareTag("Circle"))
         {
