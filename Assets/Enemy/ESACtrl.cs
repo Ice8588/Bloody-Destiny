@@ -24,18 +24,18 @@ public class ESACtrl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     public void SpawnCorpse()
     {
-        // ÀH¾÷¥Í¦¨¦ì¸m
+        // ï¿½Hï¿½ï¿½ï¿½Í¦ï¿½ï¿½ï¿½m
         if (CorpseNum > 0)
         {
             float x = Random.Range(Area[0].x, Area[1].x);
             float y = Random.Range(Area[0].y, Area[1].y);
             Vector2 spawnPosition = new Vector2(x, y);
-            Debug.Log(spawnPosition);
+            //Debug.Log(spawnPosition);
             GameObject Enemy = Instantiate(Corpse, spawnPosition, new Quaternion(0, 0, 0, 0));
             Enemy.GetComponent<CorpseCtrl>().ESA = this.gameObject;
             CorpseNum--;
@@ -44,7 +44,7 @@ public class ESACtrl : MonoBehaviour
     }
     public void SpawnWhiteRobe()
     {
-        // ÀH¾÷¥Í¦¨¦ì¸m
+        // ï¿½Hï¿½ï¿½ï¿½Í¦ï¿½ï¿½ï¿½m
         if (GrayRobeNum > 0)
         {
             float x = Random.Range(Area[0].x, Area[1].x);
@@ -59,7 +59,7 @@ public class ESACtrl : MonoBehaviour
     }
     public void SpawnGrayRobe()
     {
-        // ÀH¾÷¥Í¦¨¦ì¸m
+        // ï¿½Hï¿½ï¿½ï¿½Í¦ï¿½ï¿½ï¿½m
         if (WhiteRobeNum > 0)
         {
             float x = Random.Range(Area[0].x, Area[1].x);

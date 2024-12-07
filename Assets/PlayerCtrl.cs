@@ -77,13 +77,36 @@ public class PlayerCtrl : MonoBehaviour
         }
     }
 
+    void OnTriggerStay2D(Collider2D other)
+    {
+        Vector2 direction = other.transform.position - transform.position;
+
+        if (other.CompareTag("Obstacle"))
+        {
+            if (direction.y > 0 && (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))) CanUp = true;
+            if (direction.y < 0 && (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))) CanDown = true;
+            if (direction.x > 0 && (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))) CanRight = true;
+            if (direction.x < 0 && (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))) CanLeft = true;
+        }
+        else if (other.CompareTag("Circle"))
+        {
+            if (direction.y > 0) CanUp = true;
+            if (direction.y < 0) CanDown = true;
+            if (direction.x > 0) CanRight = true;
+            if (direction.x < 0) CanLeft = true;
+        }
+    }
     void OnTriggerExit2D(Collider2D other)
     {
+        //Debug.Log("hi");
         if (other.CompareTag("Trap"))
             PlayerSpeed *= 2f;
-        CanUp = false;
-        CanDown = false;
-        CanRight = false;
-        CanLeft = false;
+        if (other.CompareTag("Obstacle") || other.CompareTag("Circle"))
+        {
+            CanUp = false;
+            CanDown = false;
+            CanRight = false;
+            CanLeft = false;
+        }
     }
 }
