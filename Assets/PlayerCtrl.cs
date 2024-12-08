@@ -73,7 +73,47 @@ public class PlayerCtrl : MonoBehaviour
         }
         else if (other.CompareTag("Fire"))
         {
-            // damage   
+            // TakeDamage();   
+        }
+        else if (other.CompareTag("Blue") || other.CompareTag("FakeTeleport"))
+        {
+            transform.position = new Vector2(18.5f, -19.5f);
+        }
+        else if (other.CompareTag("Stab"))
+        {
+            //stabbed
+        }
+        else if (other.gameObject.name == "SmallPortal")
+        {
+            transform.position = new Vector2(-18.5f, -17f);
+        }
+        else if (other.gameObject.name == "SmallPortal (1)")
+        {
+            transform.position = new Vector2(12.29f, -1.26f);
+        }
+        else if (other.gameObject.name == "SmallPortal (2)")
+        {
+            transform.position = new Vector2(18.5f, 13.5f);
+        }
+        else if (other.gameObject.name == "SmallPortal (3)")
+        {
+            transform.position = new Vector2(-19f, -1f);
+        }
+        else if (other.gameObject.name == "SmallPortal (4)")
+        {
+            transform.position = new Vector2(6f, 16f);
+        }
+        else if (other.gameObject.name == "SmallPortal (5)")
+        {
+            transform.position = new Vector2(12f, 3f);
+        }
+        else if (other.gameObject.name == "SmallPortal (7)")
+        {
+            SceneManager.LoadScene("GameOverMenu");
+        }
+        else if (other.gameObject.name == "SmallPortal (9)")
+        {
+            transform.position = new Vector2(-15.5f, 18.5f);
         }
     }
 
