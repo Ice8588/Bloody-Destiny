@@ -82,6 +82,8 @@ public class EnemyScript : MonoBehaviour
                 default:
                     break;
             }
+            Debug.Log("destroy");
+            Debug.Log(this.transform.position);
 
             Destroy(this.gameObject);
         }

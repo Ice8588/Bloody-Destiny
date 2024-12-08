@@ -1,6 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Rendering;
 using UnityEngine;
+using UnityEngine.Rendering.UI;
+using static UnityEngine.RuleTile.TilingRuleOutput;
 
 public class WhiteRobeCtrl : EnemyScript
 {
@@ -9,12 +12,14 @@ public class WhiteRobeCtrl : EnemyScript
     public Rigidbody2D rb;
     public float distanceToPlayer;
     public float speed = 1.8f;
-    public float obstacleAvoidanceDistance = 1f; // �P��ê���O�����̤p�Z��
-    public float obstacleCheckRadius = 1.5f;    // �˴���ê�����d��b�|
-    public bool OB = false;
+    private float speedbuf, delay = 0;
+    public bool OB = false, CanUp = false, CanRight = false, CanLeft = false, CanDown = false, d_flag = true;
     Vector2 directionToPlayer;
+
     void Start()
     {
+        delay = Time.time + 0.5f;
+        speedbuf = speed;
         tag = "WhiteRobe";
         player = GameObject.Find("Player");
         //transform.position = InitialPosition;
@@ -42,6 +47,34 @@ public class WhiteRobeCtrl : EnemyScript
     }
     private void FixedUpdate()
     {
+        float x = transform.position.x, y = transform.position.y;
+        bool tflag = false;
+
+        if (transform.position.x >= 19.3)
+        {
+            tflag = true;
+            x = 19;
+        }
+        else if (transform.position.x <= -19.3)
+        {
+            tflag = true;
+            x = -19;
+        }
+        if (transform.position.y >= 19.3)
+        {
+            tflag = true;
+            y = 19;
+        }
+        else if (transform.position.y <= -19.3)
+        {
+            tflag = true;
+            y = -19;
+        }
+        if (tflag)
+        {
+            transform.Translate(new Vector2(x, y) - (Vector2)transform.position);
+        }
+
         distanceToPlayer = Vector2.Distance(transform.position, player.transform.position);
         // �p��e�����a����V
         directionToPlayer = (player.transform.position - transform.position).normalized;
@@ -73,6 +106,7 @@ public class WhiteRobeCtrl : EnemyScript
             transform.localScale = new Vector3(-1, 1, 1); // �¥�
         }
     }
+
     private void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.CompareTag("Obstacle") || collision.CompareTag("Circle"))
@@ -81,15 +115,44 @@ public class WhiteRobeCtrl : EnemyScript
             //�p��Ϯg��V�A�קK��ê��
             Debug.Log("OB");
             // ²��a�p���V�A���ĤH������ê��
-            Vector2 awayFromObstacle = (transform.position - collision.transform.position).normalized;
+            Vector2 awayFromObstacle = transform.position - collision.transform.position;
+            if (awayFromObstacle.y < 0)
+            {
+                CanUp = true;
+                transform.Translate(new Vector2(0, -0.1f));
+            }
+            else if (awayFromObstacle.y > 0)
+            {
+                CanDown = true;
+                transform.Translate(new Vector2(0, 0.1f));
+            }
+            if (awayFromObstacle.x < 0)
+            {
+                CanRight = true;
+                transform.Translate(new Vector2(-0.1f, 0));
+            }
+            else if (awayFromObstacle.x > 0)
+            {
+                CanLeft = true;
+                transform.Translate(new Vector2(0.1f, 0));
+            }
+
             directionToPlayer = Vector2.Lerp(directionToPlayer, awayFromObstacle, 0.5f).normalized;
             rb.velocity = directionToPlayer * speed;
             Debug.Log("Avoiding obstacle: " + collision.gameObject.name);
         }
     }
+    void Delay()
+    {
+        Debug.Log("delay");
+        d_flag = false;
+    }
+
+
 
     private void OnTriggerExit2D(Collider2D collision)
     {
         OB = false;
+        speed = speedbuf;
     }
 }
