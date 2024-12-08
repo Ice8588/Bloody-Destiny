@@ -16,7 +16,7 @@ public class WhiteRobeCtrl : EnemyScript
         base.Update();
         transform.Translate(new Vector3(0.1f, 0, 0));  //test
 
-        if(GameCtrl.TimeCounter % 60 == 0)
+        if (GameCtrl.TimeCounter % 120 == 0)
         {
             UseBloodMagic();
         }

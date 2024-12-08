@@ -61,5 +61,6 @@ public class EnemyScript : MonoBehaviour
     public void TakeDamage(int damage)
     {
         Health -= damage;
+        GameCtrl.TotalDamege += damage;
     }
 }

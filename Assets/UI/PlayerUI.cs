@@ -6,8 +6,8 @@ using UnityEngine.UI;
 
 public class PlayerUI : MonoBehaviour
 {
-    public Slider HealthBar, BloodPowerBar;
-    public TextMeshProUGUI HealthText, BloodPowerText;
+    public Slider HealthBar, BloodPowerBar, BloodGroove;
+    public TextMeshProUGUI HealthText, BloodPowerText, BloodGrooveText;
 
     // Start is called before the first frame update
     void Start()
@@ -16,6 +16,8 @@ public class PlayerUI : MonoBehaviour
         HealthBar.value = PlayerCtrl.Health;
         BloodPowerBar.maxValue = PlayerCtrl.MaxBloodPower;
         BloodPowerBar.value = PlayerCtrl.BloodPower;
+        BloodGroove.maxValue = PlayerCtrl.BloodGrooveMax;
+        BloodGroove.value = PlayerCtrl.BloodGroove;
     }
 
     // Update is called once per frame
@@ -27,6 +29,9 @@ public class PlayerUI : MonoBehaviour
         BloodPowerBar.value = PlayerCtrl.BloodPower;
         HealthText.text = PlayerCtrl.Health + " / " + PlayerCtrl.MaxHealth;
         BloodPowerText.text = PlayerCtrl.BloodPower + " / " + Mathf.Min(PlayerCtrl.Health, PlayerCtrl.MaxBloodPower);
+        BloodGroove.maxValue = PlayerCtrl.BloodGrooveMax;
+        BloodGroove.value = PlayerCtrl.BloodGroove;
+        BloodGrooveText.text = PlayerCtrl.BloodGroove + "\n / \n" + PlayerCtrl.BloodGrooveMax;
 
         RectTransform sliderRect = BloodPowerBar.GetComponent<RectTransform>();
 

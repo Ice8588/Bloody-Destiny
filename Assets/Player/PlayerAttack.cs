@@ -57,6 +57,7 @@ public class PlayerAttack : MonoBehaviour
             if (enemyScript)
             {
                 enemyScript.TakeDamage(AttackDamage);
+                PlayerCtrl.BloodGroove += AttackDamage / 2;
             }
         }
     }

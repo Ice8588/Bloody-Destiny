@@ -29,8 +29,13 @@ public class PlayerBloodMagicCtrl : MonoBehaviour
     {
         if (collision.gameObject.tag == "Enemy")
         {
-            collision.gameObject.GetComponent<EnemyScript>().Health -= ATK;
-            GameCtrl.TotalDamege += ATK;
+            EnemyScript enemyScript = collision.gameObject.GetComponent<EnemyScript>();
+
+            if (enemyScript)
+            {
+                enemyScript.TakeDamage(ATK);
+            }
+
             Destroy(this.gameObject);
         }
     }

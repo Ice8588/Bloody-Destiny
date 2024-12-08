@@ -7,12 +7,9 @@ using UnityEngine.SceneManagement;
 public class PlayerCtrl : MonoBehaviour
 {
     public GameObject BloodMagic;
-    public float WalkSpeed = 5f, RunSpeed = 8f;
-    public float dodgeSpeed = 30f;
-    public float dodgeDuration = 0.05f;
-    public float dodgeCooldown = 0.5f;
-    public static int MaxHealth = 10, Health = 0;
-    public static int MaxBloodPower = 0, BloodPower = 0;
+    public float WalkSpeed = 5f, RunSpeed = 8f, dodgeSpeed = 30f;
+    public float dodgeDuration = 0.05f, dodgeCooldown = 0.5f;
+    public static int MaxHealth = 10, Health = 0, MaxBloodPower = 0, BloodPower = 0, BloodGroove = 0, BloodGrooveMax = 10;
     public int BloodPowerCost = 2;
     public static Vector3 PlayerPos;
     private Vector2 movement;           // 玩家移動向量
@@ -133,4 +130,16 @@ public class PlayerCtrl : MonoBehaviour
         Quaternion targetRotation = Quaternion.Euler(0, 0, angle - 90);
         transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 10f);
     }
+
+    public void TakeDamage(int damage)
+    {
+        Health -= damage;
+        PlayerHeal playerHeal = GetComponent<PlayerHeal>();
+
+        if (playerHeal != null)
+        {
+            playerHeal.InterruptHealing();
+        }
+    }
+
 }

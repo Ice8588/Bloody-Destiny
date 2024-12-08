@@ -16,7 +16,7 @@ public class GrayRobeCtrl : EnemyScript
         base.Update();
         transform.Translate(new Vector3(0.1f, 0, 0));  //test
 
-        if(GameCtrl.TimeCounter % 140 == 0)
+        if(GameCtrl.TimeCounter % 280 == 0)
         {
             UseBloodMagic();
         }

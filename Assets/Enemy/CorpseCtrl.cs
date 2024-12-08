@@ -16,7 +16,7 @@ public class CorpseCtrl : EnemyScript
         base.Update();
         transform.Translate(new Vector3(0.1f, 0, 0));  //test
 
-        if (GameCtrl.TimeCounter % 180 == 0)
+        if (GameCtrl.TimeCounter % 360 == 0)
         {
             UseBloodMagic();
         }
