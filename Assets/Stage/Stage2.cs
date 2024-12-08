@@ -7,6 +7,7 @@ public class Stage2 : MonoBehaviour
     public GameObject Corpse, GrayRobe, WhiteRobe;
     public static int EnemyNum = 0;
     public static int MAXEnemyNum = 10;
+
     // Start is called before the first frame update
     void Start()
     {

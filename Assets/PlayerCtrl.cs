@@ -7,16 +7,55 @@ using UnityEngine.SceneManagement;
 public class PlayerCtrl : MonoBehaviour
 {
     public GameObject BloodMagic;
+    private GameObject[] traps;
     public float PlayerSpeed = 0.1f;
     public static int Health = 10;
     public bool CanUp = false, CanRight = false, CanLeft = false, CanDown = false;
+    private bool isTrapActive = true;
+    public float visibleTime = 5f;
+    public float hiddenTime = 20f;
 
     // Start is called before the first frame update
     void Start()
     {
+        traps = GameObject.FindGameObjectsWithTag("Stab");
         GameCtrl.PlayerGameObject = this.gameObject;
+        StartCoroutine(ToggleTrap());
     }
 
+    IEnumerator ToggleTrap()
+    {
+        while (true)
+        {
+            foreach (GameObject trap in traps)
+            {
+                SetTrapState(trap, true);
+                isTrapActive = true;
+            }
+            yield return new WaitForSeconds(visibleTime);
+
+            foreach (GameObject trap in traps)
+            {
+                SetTrapState(trap, false);
+                isTrapActive = false;
+            }
+
+            yield return new WaitForSeconds(hiddenTime);
+        }
+    }
+
+    void SetTrapState(GameObject trap, bool isVisible)
+    {
+        SpriteRenderer renderer = trap.GetComponent<SpriteRenderer>();
+        if (renderer != null)
+        {
+            Color color = renderer.color;
+            color.a = isVisible ? Mathf.Clamp01(0.3f) : Mathf.Clamp01(1f);
+            renderer.color = color;
+        }
+
+        trap.GetComponent<Collider2D>().enabled = true;
+    }
     // Update is called once per frame
     void Update()
     {
@@ -78,9 +117,9 @@ public class PlayerCtrl : MonoBehaviour
         {
             transform.position = new Vector2(18.5f, -19.5f);
         }
-        else if (other.CompareTag("Stab"))
+        else if (other.CompareTag("Stab") && isTrapActive)
         {
-            //stabbed
+            // stabbed
         }
         else if (other.gameObject.name == "SmallPortal")
         {
