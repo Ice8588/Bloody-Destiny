@@ -53,7 +53,7 @@ public class ESACtrl : MonoBehaviour
             Debug.Log(spawnPosition);
             GameObject Enemy2 = Instantiate(WhiteRobe, spawnPosition, new Quaternion(0, 0, 0, 0));
             Enemy2.GetComponent<WhiteRobeCtrl>().ESA = this.gameObject;
-            GrayRobeNum--;
+            WhiteRobeNum--;
             EnemyNum--;
         }
     }
@@ -68,7 +68,7 @@ public class ESACtrl : MonoBehaviour
             Debug.Log(spawnPosition);
             GameObject Enemy3 = Instantiate(GrayRobe, spawnPosition, new Quaternion(0, 0, 0, 0));
             Enemy3.GetComponent<GrayRobeCtrl>().ESA = this.gameObject;
-            WhiteRobeNum--;
+            GrayRobeNum--;
             EnemyNum--;
         }
     }
