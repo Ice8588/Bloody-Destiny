@@ -236,7 +236,7 @@ Transform:
   m_GameObject: {fileID: 942646}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 12.36, y: 0.08, z: 0}
+  m_LocalPosition: {x: 12.34, y: 0.26, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -952,7 +952,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.2901961}
+  m_Color: {r: 1, g: 0.9764151, b: 0.9764151, a: 0}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -4992,7 +4992,7 @@ GameObject:
   - component: {fileID: 1078920620}
   m_Layer: 0
   m_Name: Trap (3)
-  m_TagString: Untagged
+  m_TagString: Stab
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5058,8 +5058,8 @@ Transform:
   m_GameObject: {fileID: 1078920617}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7, y: 2, z: 0}
-  m_LocalScale: {x: 4, y: 4, z: 1}
+  m_LocalPosition: {x: -6, y: 2, z: 0}
+  m_LocalScale: {x: 6, y: 4, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -5169,7 +5169,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.2901961}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -5252,7 +5252,7 @@ GameObject:
   - component: {fileID: 1101606015}
   m_Layer: 0
   m_Name: Back
-  m_TagString: Untagged
+  m_TagString: Blue
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5902,7 +5902,7 @@ GameObject:
   - component: {fileID: 1233233839}
   m_Layer: 0
   m_Name: Trap (4)
-  m_TagString: Untagged
+  m_TagString: Stab
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6672,7 +6672,7 @@ GameObject:
   - component: {fileID: 1338250086}
   m_Layer: 0
   m_Name: Back (3)
-  m_TagString: Untagged
+  m_TagString: Blue
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6802,7 +6802,7 @@ GameObject:
   - component: {fileID: 1349045751}
   m_Layer: 0
   m_Name: Back (1)
-  m_TagString: Untagged
+  m_TagString: Blue
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7923,7 +7923,7 @@ Transform:
   m_GameObject: {fileID: 1459038430}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 10.71, y: 6.95, z: 0}
+  m_LocalPosition: {x: 10.99, y: 6.98, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -8202,7 +8202,7 @@ GameObject:
   - component: {fileID: 1526275525}
   m_Layer: 0
   m_Name: Back (2)
-  m_TagString: Untagged
+  m_TagString: Blue
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -8462,7 +8462,7 @@ GameObject:
   - component: {fileID: 1581234658}
   m_Layer: 0
   m_Name: Trap (1)
-  m_TagString: Untagged
+  m_TagString: Stab
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -8842,7 +8842,7 @@ GameObject:
   - component: {fileID: 1673624988}
   m_Layer: 0
   m_Name: SmallPortal (7)
-  m_TagString: Untagged
+  m_TagString: TelePort
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -8962,7 +8962,7 @@ GameObject:
   - component: {fileID: 1696443063}
   m_Layer: 0
   m_Name: Trap
-  m_TagString: Untagged
+  m_TagString: Stab
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -9686,7 +9686,7 @@ GameObject:
   - component: {fileID: 1803773780}
   m_Layer: 0
   m_Name: SmallPortal (6)
-  m_TagString: Untagged
+  m_TagString: FakeTeleport
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -10446,7 +10446,7 @@ GameObject:
   - component: {fileID: 1968183725}
   m_Layer: 0
   m_Name: SmallPortal (8)
-  m_TagString: Untagged
+  m_TagString: FakeTeleport
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -10613,7 +10613,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.2901961}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -10696,7 +10696,7 @@ GameObject:
   - component: {fileID: 2061067717}
   m_Layer: 0
   m_Name: Trap (2)
-  m_TagString: Untagged
+  m_TagString: Stab
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
