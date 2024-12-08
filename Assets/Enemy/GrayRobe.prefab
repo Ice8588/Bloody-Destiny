@@ -190,6 +190,7 @@ MonoBehaviour:
   BloodMagicATK: 3
   BloodMagic: {fileID: 230279984119097172, guid: f71556a98527cf04b99b6857c4d59c51, type: 3}
   HealthBar: {fileID: 3333147277169271735}
+  lockOnIndicator: {fileID: 7696520752805767634, guid: 2822e50942855414081e50654d6a6a29, type: 3}
 --- !u!61 &689488135521072411
 BoxCollider2D:
   m_ObjectHideFlags: 0

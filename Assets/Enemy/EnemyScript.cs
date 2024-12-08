@@ -1,7 +1,10 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Microsoft.Unity.VisualStudio.Editor;
 using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class EnemyScript : MonoBehaviour
 {
@@ -10,6 +13,7 @@ public class EnemyScript : MonoBehaviour
     public int BloodMagicATK = 3;
     public GameObject BloodMagic;
     public GameObject HealthBar;
+    public UnityEngine.UI.Image lockOnIndicator; // 鎖定圖示
     protected Vector3 InitialPosition = new Vector3(-13, 2, 0);  //test
     // Start is called before the first frame update
     void Start()
@@ -37,7 +41,7 @@ public class EnemyScript : MonoBehaviour
         }
 
         if (transform.position.y <= -GameCtrl.SCREEN_HEIGHT - 5 || transform.position.y >= GameCtrl.SCREEN_HEIGHT + 5 ||
-            transform.position.x <= -GameCtrl.SCREEN_WIDTH  - 5 || transform.position.x >= GameCtrl.SCREEN_WIDTH + 5)
+            transform.position.x <= -GameCtrl.SCREEN_WIDTH - 5 || transform.position.x >= GameCtrl.SCREEN_WIDTH + 5)
         {
             Stage1.EnemyNum--;
             Destroy(this.gameObject);
@@ -62,5 +66,21 @@ public class EnemyScript : MonoBehaviour
     {
         Health -= damage;
         GameCtrl.TotalDamege += damage;
+    }
+
+    public void ShowLockOnIndicator()
+    {
+        if (lockOnIndicator != null)
+        {
+            lockOnIndicator.gameObject.SetActive(true);
+        }
+    }
+
+    public void HideLockOnIndicator()
+    {
+        if (lockOnIndicator != null)
+        {
+            lockOnIndicator.gameObject.SetActive(false);
+        }
     }
 }

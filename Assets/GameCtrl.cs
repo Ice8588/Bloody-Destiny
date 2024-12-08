@@ -10,7 +10,7 @@ public class GameCtrl : MonoBehaviour
     public static int KillCount = 0, BestKillCount = 0;
     public static int TotalDamege = 0, BestTotalDamege = 0;
     public const int SCREEN_WIDTH = 9, SCREEN_HEIGHT = 5;
-    public static bool IsGameClear = false;
+    public static bool IsGameClear = false, IsGameOver = false;
     private bool firstStart = true;
     private static GameCtrl instance;
 
@@ -62,19 +62,25 @@ public class GameCtrl : MonoBehaviour
 
     void LateUpdate()
     {
-        if (PlayerCtrl.Health <= 0)
+        if (PlayerCtrl.Health <= 0 && !IsGameOver)
         {
+            IsGameOver = true;
             SceneManager.LoadScene("GameOverMenu");
         }
     }
 
     public static void ResetGame()
     {
-        TimeCounter = 0;
-        KillCount = 0;
-        TotalDamege = 0;
-        PlayerCtrl.Health = 10;
-        SceneManager.LoadScene("GameBoard");
+        if (!IsGameOver)
+        {
+            IsGameOver = true;
+            TimeCounter = 0;
+            KillCount = 0;
+            TotalDamege = 0;
+            PlayerCtrl.Health = 10;
+            SceneManager.LoadScene("GameBoard");
+        }
+
     }
 
     public static void GameClear()

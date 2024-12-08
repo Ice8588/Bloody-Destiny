@@ -19,6 +19,7 @@ public class PlayerHeal : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         HealProgressRing.gameObject.SetActive(false); // 隱藏進度條
         HealProgressRing.fillAmount = 0; // 初始化進度為 0
+        HealAmount = PlayerCtrl.BloodGroove;
     }
 
     // Update is called once per frame
@@ -26,7 +27,6 @@ public class PlayerHeal : MonoBehaviour
     {
         movement.x = Input.GetAxisRaw("Horizontal");
         movement.y = Input.GetAxisRaw("Vertical");
-        HealAmount = PlayerCtrl.BloodGroove;
 
         // 開始回血
         if (Input.GetKeyDown(KeyCode.Q) && !isHealing)
@@ -68,9 +68,10 @@ public class PlayerHeal : MonoBehaviour
             yield return null;
         }
 
-        // 完成回血
+        HealAmount = PlayerCtrl.BloodGroove;
         PlayerCtrl.Health = Mathf.Min(PlayerCtrl.Health + HealAmount, PlayerCtrl.MaxHealth);
-
+        PlayerCtrl.BloodGroove = 0;
+        
         HealProgressRing.gameObject.SetActive(false);
         isHealing = false;
     }

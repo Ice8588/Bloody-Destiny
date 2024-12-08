@@ -966,10 +966,11 @@ GameObject:
   m_Component:
   - component: {fileID: 860605472}
   - component: {fileID: 860605471}
+  - component: {fileID: 860605477}
   - component: {fileID: 860605470}
   - component: {fileID: 860605475}
   - component: {fileID: 860605478}
-  - component: {fileID: 860605477}
+  - component: {fileID: 860605479}
   - component: {fileID: 860605473}
   - component: {fileID: 860605474}
   - component: {fileID: 860605476}
@@ -1289,7 +1290,28 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   HealAmount: 0
   HealDuration: 2
-  HealProgressRing: {fileID: 905696477}
+  HealProgressRing: {fileID: 7774253163104678113, guid: 27332be655eddfa4d8ec559d9a9055c6, type: 3}
+--- !u!114 &860605479
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 860605469}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6cd6ab35d609f7d4abdff60711319ea3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gunPosition: {x: 0, y: 0}
+  bulletPrefab: {fileID: 5968318651086656473, guid: 35764b4e7fe8b0f4ba5a87448e5a85e2, type: 3}
+  enemyLayer:
+    serializedVersion: 2
+    m_Bits: 128
+  aimDuration: 3
+  cooldownTime: 1
+  bulletSpeed: 200
+  greyFilter: {fileID: 7473191407918160532, guid: 4b8f656919e7a6445a54db3b709e4a28, type: 3}
 --- !u!1 &884063465
 GameObject:
   m_ObjectHideFlags: 0
@@ -1394,81 +1416,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &905696475
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 905696476}
-  - component: {fileID: 905696478}
-  - component: {fileID: 905696477}
-  m_Layer: 5
-  m_Name: HealProgressRing
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &905696476
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 905696475}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 955973654}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -1066.742, y: 479.6233}
-  m_SizeDelta: {x: 100, y: 100}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &905696477
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 905696475}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0.9150943, b: 0.03866397, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: afb2ac212290a184db5260fceddcdc03, type: 3}
-  m_Type: 3
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 2
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
---- !u!222 &905696478
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 905696475}
-  m_CullTransparentMesh: 1
 --- !u!1 &955973650
 GameObject:
   m_ObjectHideFlags: 0
@@ -1567,7 +1514,6 @@ RectTransform:
   - {fileID: 16366197}
   - {fileID: 287700441}
   - {fileID: 537324410}
-  - {fileID: 905696476}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -2534,6 +2480,7 @@ MonoBehaviour:
   BloodMagicATK: 3
   BloodMagic: {fileID: 230279984119097172, guid: f71556a98527cf04b99b6857c4d59c51, type: 3}
   HealthBar: {fileID: 693086856}
+  lockOnIndicator: {fileID: 0}
 --- !u!4 &7472579630477842479
 Transform:
   m_ObjectHideFlags: 0
