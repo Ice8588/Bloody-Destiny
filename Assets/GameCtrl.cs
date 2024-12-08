@@ -11,6 +11,7 @@ public class GameCtrl : MonoBehaviour
     public static int TotalDamege = 0, BestTotalDamege = 0;
     public const int SCREEN_WIDTH = 20, SCREEN_HEIGHT = 20;
     public static bool IsGameClear = false, check = false;
+    public static bool IsGameOver = false;
     private bool firstStart = true;
     private static GameCtrl instance;
     public GameObject CirclePrefab;
@@ -78,12 +79,12 @@ public class GameCtrl : MonoBehaviour
     {
         if (!IsGameOver)
         {
-            IsGameOver = true;
+            //IsGameOver = true;
             TimeCounter = 0;
             KillCount = 0;
             TotalDamege = 0;
             PlayerCtrl.Health = 10;
-            SceneManager.LoadScene("GameBoard");
+            SceneManager.LoadScene("Stage1");
         }
 
     }
@@ -92,7 +93,7 @@ public class GameCtrl : MonoBehaviour
     {
         Instance.SpawnTeleport();
         IsGameClear = true;
-        //SceneManager.LoadScene("GameOverMenu");
+        SceneManager.LoadScene("GameOverMenu");
     }
 
     void SpawnTeleport()

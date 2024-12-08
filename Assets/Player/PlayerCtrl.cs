@@ -9,13 +9,14 @@ public class PlayerCtrl : MonoBehaviour
     public GameObject BloodMagic;
     public float WalkSpeed = 5f, RunSpeed = 8f, dodgeSpeed = 30f;
     public float dodgeDuration = 0.05f, dodgeCooldown = 0.5f;
-    public static int MaxHealth = 10, Health = 0, MaxBloodPower = 0, BloodPower = 0, BloodGroove = 0, BloodGrooveMax = 10;
+    public static int MaxHealth = 10, Health = 10, MaxBloodPower = 0, BloodPower = 0, BloodGroove = 0, BloodGrooveMax = 10;
     public int BloodPowerCost = 2;
     public static Vector3 PlayerPos;
     private Vector2 movement;           // 玩家移動向量
     private Rigidbody2D rb;             // 玩家剛體
     private bool isDodging = false, isRunning = false;     // 是否處於閃避狀態
     private float lastDodgeTime = -Mathf.Infinity; // 上次閃避的時間
+    public bool CanUp = false, CanRight = false, CanLeft = false, CanDown = false;
 
     // Start is called before the first frame update
     void Start()
@@ -30,8 +31,25 @@ public class PlayerCtrl : MonoBehaviour
     void Update()
     {
         PlayerPos = transform.position;
-        movement.x = Input.GetAxisRaw("Horizontal");
-        movement.y = Input.GetAxisRaw("Vertical");
+        movement = Vector2.zero;
+        // movement.x = Input.GetAxisRaw("Horizontal");
+        // movement.y = Input.GetAxisRaw("Vertical");
+        if (!CanUp && transform.position.y + 0.3 <= GameCtrl.SCREEN_HEIGHT && (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow)))
+        {
+            movement+=new Vector2(0, 1);
+        }
+        else if (!CanDown && transform.position.y - 0.3 >= -GameCtrl.SCREEN_HEIGHT && (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow)))
+        {
+            movement+=new Vector2(0, -1);
+        }
+        if (!CanLeft && transform.position.x - 0.3 >= -GameCtrl.SCREEN_WIDTH && (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow)))
+        {
+            movement+=new Vector2(-1, 0);
+        }
+        else if (!CanRight && transform.position.x + 0.3 <= GameCtrl.SCREEN_WIDTH && (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow)))
+        {
+            movement+=new Vector2(1, 0);
+        }
         FaceMouse();
 
         // 嘗試進行閃避
@@ -141,5 +159,83 @@ public class PlayerCtrl : MonoBehaviour
             playerHeal.InterruptHealing();
         }
     }
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        
+        Vector2 direction = other.transform.position - transform.position;
 
+        if (other.CompareTag("Obstacle"))
+        {
+            if (direction.y > 0 && (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))) CanUp = true;
+            if (direction.y < 0 && (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))) CanDown = true;
+            if (direction.x > 0 && (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))) CanRight = true;
+            if (direction.x < 0 && (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))) CanLeft = true;
+        }
+        else if (other.CompareTag("Circle"))
+        {
+            if (direction.y > 0) CanUp = true;
+            if (direction.y < 0) CanDown = true;
+            if (direction.x > 0) CanRight = true;
+            if (direction.x < 0) CanLeft = true;
+        }
+        else if (other.CompareTag("Trap"))
+        {
+            WalkSpeed *= 0.5f;
+            RunSpeed *= 0.5f;
+        }
+        else if (other.CompareTag("Fire"))
+        {
+            // damage   
+        }
+    }
+
+    void OnTriggerStay2D(Collider2D other)
+    {
+        Vector2 direction = other.transform.position - transform.position;
+
+        if (other.CompareTag("Obstacle"))
+        {
+            if (direction.y > 0 && (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow)))
+            {
+                CanUp = true;
+                transform.Translate(new Vector2(0,-0.01f));
+            }
+            else if (direction.y < 0 && (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow)))
+            {
+                CanDown = true;
+                transform.Translate(new Vector2(0, 0.01f));
+            }
+            if (direction.x > 0 && (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow)))
+            {
+                CanRight = true;
+                transform.Translate(new Vector2(-0.01f,0));
+            }
+            else if(direction.x < 0 && (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow)))
+            {
+                CanLeft = true;
+                transform.Translate(new Vector2(0.01f, 0));
+            }
+        }
+        else if (other.CompareTag("Circle"))
+        {
+            if (direction.y > 0) CanUp = true;
+            if (direction.y < 0) CanDown = true;
+            if (direction.x > 0) CanRight = true;
+            if (direction.x < 0) CanLeft = true;
+        }
+    }
+    void OnTriggerExit2D(Collider2D other)
+    {
+        //Debug.Log("hi");
+        if (other.CompareTag("Trap"))
+            WalkSpeed *= 2f;
+        RunSpeed *= 2f;
+        if (other.CompareTag("Obstacle") || other.CompareTag("Circle"))
+        {
+            CanUp = false;
+            CanDown = false;
+            CanRight = false;
+            CanLeft = false;
+        }
+    }
 }
