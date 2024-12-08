@@ -10,10 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 8589568020419477788}
   - component: {fileID: 7876457376295049093}
+  - component: {fileID: -2263804053656089705}
   - component: {fileID: 8631102348867177054}
   - component: {fileID: 5761054292294051934}
   - component: {fileID: 3912875414408346008}
-  - component: {fileID: 1337130072883529056}
   - component: {fileID: 6358300340315831582}
   - component: {fileID: 2787700241754712873}
   - component: {fileID: 3152659275214719811}
@@ -92,6 +92,21 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &-2263804053656089705
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 756637192477531513}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1015955c6c8e7674e94b4672de3dc062, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HealAmount: 0
+  HealDuration: 2
+  HealProgressRing: {fileID: 0}
 --- !u!114 &8631102348867177054
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -147,22 +162,7 @@ MonoBehaviour:
   Segments: 120
   EnemyLayer:
     serializedVersion: 2
-    m_Bits: 128
---- !u!114 &1337130072883529056
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 756637192477531513}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1015955c6c8e7674e94b4672de3dc062, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  HealAmount: 0
-  HealDuration: 2
-  HealProgressRing: {fileID: 0}
+    m_Bits: 256
 --- !u!114 &6358300340315831582
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2868567187903301834}
   - component: {fileID: 5492903537433154207}
   - component: {fileID: 8697786253624520263}
-  m_Layer: 7
+  m_Layer: 8
   m_Name: WhiteRobe
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -107,11 +107,14 @@ MonoBehaviour:
   ESA: {fileID: 0}
   BloodMagic: {fileID: 230279984119097172, guid: f71556a98527cf04b99b6857c4d59c51, type: 3}
   HealthBar: {fileID: 5946684973296655068}
+  lockOnIndicator: {fileID: 0}
+  tag: origin
   rb: {fileID: 8697786253624520263}
   distanceToPlayer: 0
   speed: 2
   obstacleAvoidanceDistance: 1
   obstacleCheckRadius: 1.5
+  OB: 0
 --- !u!61 &5492903537433154207
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -194,7 +197,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3287032797217260427}
   - component: {fileID: 513687994801471552}
-  m_Layer: 7
+  m_Layer: 8
   m_Name: HealthBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}

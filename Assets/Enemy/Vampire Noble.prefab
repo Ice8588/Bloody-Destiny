@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4623579665551217109}
   - component: {fileID: 3330602698896789230}
   - component: {fileID: 3531526087372375880}
-  m_Layer: 7
+  m_Layer: 8
   m_Name: Vampire Noble
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -104,9 +104,11 @@ MonoBehaviour:
   Health: 5
   SwordATK: 2
   BloodMagicATK: 3
+  ESA: {fileID: 0}
   BloodMagic: {fileID: 230279984119097172, guid: f71556a98527cf04b99b6857c4d59c51, type: 3}
   HealthBar: {fileID: 7774601007905446336}
   lockOnIndicator: {fileID: 7696520752805767634, guid: 2822e50942855414081e50654d6a6a29, type: 3}
+  tag: origin
 --- !u!61 &3330602698896789230
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -189,7 +191,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8591921923548842911}
   - component: {fileID: 7196197629663073599}
-  m_Layer: 7
+  m_Layer: 8
   m_Name: HealthBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
