@@ -7,7 +7,7 @@ public class PlayerHeal : MonoBehaviour
 {
     public int HealAmount;
     public float HealDuration = 2f;
-    public Image HealProgressRing;
+    public UnityEngine.UI.Image HealProgressRing;
     private bool isHealing = false, isInterrupted = false;
     private Rigidbody2D rb;
     private Vector2 movement;
