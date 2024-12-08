@@ -46,7 +46,8 @@ public class EnemyBloodMagicCtrl : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
-            PlayerCtrl.Health -= ATK;
+            PlayerCtrl playerHeal = collision.GetComponent<PlayerCtrl>();
+            playerHeal.TakeDamage(ATK);
             Destroy(this.gameObject);
         }
         else if (collision.gameObject.tag == "Obstacle" || collision.gameObject.tag == "Circle")
