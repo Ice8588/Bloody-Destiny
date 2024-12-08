@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEditor.Rendering;
 using UnityEngine;
 using UnityEngine.Rendering.UI;
+using static UnityEngine.RuleTile.TilingRuleOutput;
 
 public class WhiteRobeCtrl : EnemyScript
 {
@@ -46,6 +47,34 @@ public class WhiteRobeCtrl : EnemyScript
     }
     private void FixedUpdate()
     {
+        float x = transform.position.x, y = transform.position.y;
+        bool tflag = false;
+
+        if (transform.position.x >= 19.3)
+        {
+            tflag = true;
+            x = 19;
+        }
+        else if (transform.position.x <= -19.3)
+        {
+            tflag = true;
+            x = -19;
+        }
+        if (transform.position.y >= 19.3)
+        {
+            tflag = true;
+            y = 19;
+        }
+        else if (transform.position.y <= -19.3)
+        {
+            tflag = true;
+            y = -19;
+        }
+        if (tflag)
+        {
+            transform.Translate(new Vector2(x, y) - (Vector2)transform.position);
+        }
+
         distanceToPlayer = Vector2.Distance(transform.position, player.transform.position);
         // 計算前往玩家的方向
         directionToPlayer = (player.transform.position - transform.position).normalized;
@@ -77,17 +106,37 @@ public class WhiteRobeCtrl : EnemyScript
             transform.localScale = new Vector3(-1, 1, 1); // 朝左
         }
     }
-    
+
     private void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.CompareTag("Obstacle") || collision.CompareTag("Circle"))
         {
             OB = true;
-
             //計算反射方向，避免障礙物
             Debug.Log("OB");
             // 簡單地計算方向，讓敵人遠離障礙物
             Vector2 awayFromObstacle = transform.position - collision.transform.position;
+            if (awayFromObstacle.y < 0)
+            {
+                CanUp = true;
+                transform.Translate(new Vector2(0, -0.1f));
+            }
+            else if (awayFromObstacle.y > 0)
+            {
+                CanDown = true;
+                transform.Translate(new Vector2(0, 0.1f));
+            }
+            if (awayFromObstacle.x < 0)
+            {
+                CanRight = true;
+                transform.Translate(new Vector2(-0.1f, 0));
+            }
+            else if (awayFromObstacle.x > 0)
+            {
+                CanLeft = true;
+                transform.Translate(new Vector2(0.1f, 0));
+            }
+
             directionToPlayer = Vector2.Lerp(directionToPlayer, awayFromObstacle, 0.5f).normalized;
             rb.velocity = directionToPlayer * speed;
             Debug.Log("Avoiding obstacle: " + collision.gameObject.name);

@@ -459,7 +459,7 @@ GameObject:
   - component: {fileID: 60934414}
   m_Layer: 0
   m_Name: WallTop
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -637,12 +637,20 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4259390887053546498, guid: 3ea6e4e1e312431419a5312b78cb19a0, type: 3}
+      propertyPath: EnemyNum
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4259390887053546498, guid: 3ea6e4e1e312431419a5312b78cb19a0, type: 3}
       propertyPath: CorpseNum
-      value: 0
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 4259390887053546498, guid: 3ea6e4e1e312431419a5312b78cb19a0, type: 3}
       propertyPath: GrayRobeNum
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4259390887053546498, guid: 3ea6e4e1e312431419a5312b78cb19a0, type: 3}
+      propertyPath: WhiteRobeNum
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5929326904458713875, guid: 3ea6e4e1e312431419a5312b78cb19a0, type: 3}
       propertyPath: m_Name
@@ -1000,7 +1008,7 @@ GameObject:
   - component: {fileID: 298191709}
   m_Layer: 0
   m_Name: WallRight
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1456,8 +1464,8 @@ Transform:
   m_GameObject: {fileID: 460420984}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2, y: 12.5, z: 0}
-  m_LocalScale: {x: 10, y: 1, z: 1}
+  m_LocalPosition: {x: 1.7813, y: 12.5, z: 0}
+  m_LocalScale: {x: 7.43767, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -2981,7 +2989,7 @@ GameObject:
   - component: {fileID: 1056906720}
   m_Layer: 0
   m_Name: WallBotton
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3379,8 +3387,8 @@ Transform:
   m_GameObject: {fileID: 1750701136}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: -0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: -2.5, y: 9.5, z: 0}
-  m_LocalScale: {x: 5, y: 1, z: 1}
+  m_LocalPosition: {x: -2.5, y: 8.9242, z: 0}
+  m_LocalScale: {x: 3.8115, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -3417,7 +3425,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.099455446, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -3428,7 +3436,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 1.198911, y: 1}
   m_EdgeRadius: 0
 --- !u!1 &1774587354
 GameObject:
@@ -3981,7 +3989,7 @@ GameObject:
   - component: {fileID: 2078252186}
   m_Layer: 0
   m_Name: WallLeft
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

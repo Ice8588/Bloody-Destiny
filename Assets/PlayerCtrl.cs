@@ -123,25 +123,25 @@ public class PlayerCtrl : MonoBehaviour
 
         if (other.CompareTag("Obstacle"))
         {
-            if (direction.y > 0 && (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow)))
+            if (direction.y > 0 || (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow)))
             {
                 CanUp = true;
-                transform.Translate(new Vector2(0,-0.01f));
+                transform.Translate(new Vector2(0, -0.1f));
             }
-            else if (direction.y < 0 && (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow)))
+            else if (direction.y < 0 || (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow)))
             {
                 CanDown = true;
-                transform.Translate(new Vector2(0, 0.01f));
+                transform.Translate(new Vector2(0, 0.1f));
             }
-            if (direction.x > 0 && (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow)))
+            if (direction.x > 0 || (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow)))
             {
                 CanRight = true;
-                transform.Translate(new Vector2(-0.01f,0));
+                transform.Translate(new Vector2(-0.1f,0));
             }
-            else if(direction.x < 0 && (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow)))
+            else if(direction.x < 0 || (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow)))
             {
                 CanLeft = true;
-                transform.Translate(new Vector2(0.01f, 0));
+                transform.Translate(new Vector2(0.1f, 0));
             }
         }
         else if (other.CompareTag("Circle"))
