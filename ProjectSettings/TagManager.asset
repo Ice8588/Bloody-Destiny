@@ -8,6 +8,12 @@ TagManager:
   - Bullet
   - Enemy
   - BloodMagic
+  - Obstacle
+  - Circle
+  - Trap
+  - Fire
+  - TelePort
+  - Blue
   - UI
   layers:
   - Default
@@ -16,6 +22,7 @@ TagManager:
   - 
   - Water
   - UI
+  - MapRange
   - Player
   - Enemy
   - Bullet

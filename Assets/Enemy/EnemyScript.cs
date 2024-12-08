@@ -11,9 +11,11 @@ public class EnemyScript : MonoBehaviour
     public int MaxHealth = 5, Health;
     public int SwordATK = 2;
     public int BloodMagicATK = 3;
+    public GameObject ESA;
     public GameObject BloodMagic;
     public GameObject HealthBar;
     public UnityEngine.UI.Image lockOnIndicator; // 鎖定圖示
+    public new string tag = "origin";
     protected Vector3 InitialPosition = new Vector3(-13, 2, 0);  //test
     // Start is called before the first frame update
     void Start()
@@ -37,6 +39,25 @@ public class EnemyScript : MonoBehaviour
         {
             GameCtrl.KillCount++;
             Stage1.EnemyNum--;
+
+            ESACtrl component = ESA.GetComponent<ESACtrl>();
+            component.EnemyNum++;
+
+            switch (tag)
+            {
+                case "Corpse":
+                    component.CorpseNum++;
+                    break;
+                case "WhiteRobe":
+                    component.WhiteRobeNum++;
+                    break;
+                case "GrayRobe":
+                    component.GrayRobeNum++;
+                    break;
+                default:
+                    break;
+            }
+
             Destroy(this.gameObject);
         }
 
@@ -44,6 +65,24 @@ public class EnemyScript : MonoBehaviour
             transform.position.x <= -GameCtrl.SCREEN_WIDTH - 5 || transform.position.x >= GameCtrl.SCREEN_WIDTH + 5)
         {
             Stage1.EnemyNum--;
+            ESACtrl component = ESA.GetComponent<ESACtrl>();
+            component.EnemyNum++;
+
+            switch (tag)
+            {
+                case "Corpse":
+                    component.CorpseNum++;
+                    break;
+                case "WhiteRobe":
+                    component.WhiteRobeNum++;
+                    break;
+                case "GrayRobe":
+                    component.GrayRobeNum++;
+                    break;
+                default:
+                    break;
+            }
+
             Destroy(this.gameObject);
         }
     }

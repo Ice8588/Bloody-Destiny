@@ -9,10 +9,12 @@ public class GameCtrl : MonoBehaviour
     public static double TimeCounter = 0f;
     public static int KillCount = 0, BestKillCount = 0;
     public static int TotalDamege = 0, BestTotalDamege = 0;
-    public const int SCREEN_WIDTH = 9, SCREEN_HEIGHT = 5;
-    public static bool IsGameClear = false, IsGameOver = false;
+    public const int SCREEN_WIDTH = 20, SCREEN_HEIGHT = 20;
+    public static bool IsGameClear = false, check = false;
     private bool firstStart = true;
     private static GameCtrl instance;
+    public GameObject CirclePrefab;
+    //public static AsyncOperation PreloadOperation;
 
     public static GameCtrl Instance
     {
@@ -52,6 +54,9 @@ public class GameCtrl : MonoBehaviour
             Application.targetFrameRate = 60;
             firstStart = false;
         }
+
+        //PreloadOperation = SceneManager.LoadSceneAsync("Stage3");
+        //PreloadOperation.allowSceneActivation = false;
     }
 
     // Update is called once per frame
@@ -85,7 +90,19 @@ public class GameCtrl : MonoBehaviour
 
     public static void GameClear()
     {
+        Instance.SpawnTeleport();
         IsGameClear = true;
-        SceneManager.LoadScene("GameOverMenu");
+        //SceneManager.LoadScene("GameOverMenu");
+    }
+
+    void SpawnTeleport()
+    {
+        Vector2 SpawnPoint = new Vector2(-17.5f, -17.5f);
+
+        if (!check)
+        {
+            Instantiate(CirclePrefab, SpawnPoint, Quaternion.identity);
+            check = true;
+        }
     }
 }

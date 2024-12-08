@@ -38,5 +38,9 @@ public class PlayerBloodMagicCtrl : MonoBehaviour
 
             Destroy(this.gameObject);
         }
+        else if(collision.gameObject.tag == "Obstacle" || collision.gameObject.tag == "Circle")
+        {
+            Destroy(this.gameObject);
+        }
     }
 }
