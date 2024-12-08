@@ -88,39 +88,6 @@ public class WhiteRobeCtrl : EnemyScript
             Debug.Log("OB");
             // 簡單地計算方向，讓敵人遠離障礙物
             Vector2 awayFromObstacle = transform.position - collision.transform.position;
-            //if (awayFromObstacle.y > 0)
-            //{
-            //    Debug.Log("W");
-            //    CanUp = true;
-            //    speed = 0;
-            //    transform.Translate(new Vector2(0, -1f));
-            //    if (d_flag && delay < Time.time)
-            //    {
-            //        Delay();    
-            //    }
-            //}
-            //else if (awayFromObstacle.y < 0)
-            //{
-            //    Debug.Log("S");
-            //    CanDown = true;
-            //    speed = 0;
-            //    transform.Translate(new Vector2(0, 1f));
-            //}
-            //if (awayFromObstacle.x > 0)
-            //{
-            //    Debug.Log("D");
-            //    CanRight = true;
-            //    speed = 0;
-            //    transform.Translate(new Vector2(-1f, 0));
-            //}
-            //else if (awayFromObstacle.x < 0)
-            //{
-            //    Debug.Log("A");
-            //    CanLeft = true;
-            //    speed = 0;
-            //    transform.Translate(new Vector2(1f, 0));
-            //}
-
             directionToPlayer = Vector2.Lerp(directionToPlayer, awayFromObstacle, 0.5f).normalized;
             rb.velocity = directionToPlayer * speed;
             Debug.Log("Avoiding obstacle: " + collision.gameObject.name);
