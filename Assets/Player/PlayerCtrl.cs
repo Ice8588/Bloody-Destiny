@@ -228,8 +228,10 @@ public class PlayerCtrl : MonoBehaviour
     {
         //Debug.Log("hi");
         if (other.CompareTag("Trap"))
+        {
             WalkSpeed *= 2f;
-        RunSpeed *= 2f;
+            RunSpeed *= 2f;
+        }
         if (other.CompareTag("Obstacle") || other.CompareTag("Circle"))
         {
             CanUp = false;
