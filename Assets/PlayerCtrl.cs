@@ -11,51 +11,13 @@ public class PlayerCtrl : MonoBehaviour
     public float PlayerSpeed = 0.1f;
     public static int Health = 10;
     public bool CanUp = false, CanRight = false, CanLeft = false, CanDown = false;
-    private bool isTrapActive = true;
-    public float visibleTime = 5f;
-    public float hiddenTime = 20f;
 
     // Start is called before the first frame update
     void Start()
     {
-        traps = GameObject.FindGameObjectsWithTag("Stab");
         GameCtrl.PlayerGameObject = this.gameObject;
-        StartCoroutine(ToggleTrap());
     }
 
-    IEnumerator ToggleTrap()
-    {
-        while (true)
-        {
-            foreach (GameObject trap in traps)
-            {
-                SetTrapState(trap, true);
-                isTrapActive = true;
-            }
-            yield return new WaitForSeconds(visibleTime);
-
-            foreach (GameObject trap in traps)
-            {
-                SetTrapState(trap, false);
-                isTrapActive = false;
-            }
-
-            yield return new WaitForSeconds(hiddenTime);
-        }
-    }
-
-    void SetTrapState(GameObject trap, bool isVisible)
-    {
-        SpriteRenderer renderer = trap.GetComponent<SpriteRenderer>();
-        if (renderer != null)
-        {
-            Color color = renderer.color;
-            color.a = isVisible ? Mathf.Clamp01(0.3f) : Mathf.Clamp01(1f);
-            renderer.color = color;
-        }
-
-        trap.GetComponent<Collider2D>().enabled = true;
-    }
     // Update is called once per frame
     void Update()
     {
@@ -113,45 +75,25 @@ public class PlayerCtrl : MonoBehaviour
         {
             // TakeDamage();   
         }
-        else if (other.CompareTag("Blue") || other.CompareTag("FakeTeleport"))
-        {
-            transform.position = new Vector2(18.5f, -19.5f);
-        }
-        else if (other.CompareTag("Stab") && isTrapActive)
+        else if (other.CompareTag("Stab"))
         {
             // stabbed
         }
         else if (other.gameObject.name == "SmallPortal")
         {
-            transform.position = new Vector2(-18.5f, -17f);
+            transform.position = new Vector2(11f, 13f);
         }
         else if (other.gameObject.name == "SmallPortal (1)")
         {
-            transform.position = new Vector2(12.29f, -1.26f);
+            transform.position = new Vector2(-13f, -11f);
         }
         else if (other.gameObject.name == "SmallPortal (2)")
         {
-            transform.position = new Vector2(18.5f, 13.5f);
+            transform.position = new Vector2(-10f, 12f);
         }
         else if (other.gameObject.name == "SmallPortal (3)")
         {
-            transform.position = new Vector2(-19f, -1f);
-        }
-        else if (other.gameObject.name == "SmallPortal (4)")
-        {
-            transform.position = new Vector2(6f, 16f);
-        }
-        else if (other.gameObject.name == "SmallPortal (5)")
-        {
-            transform.position = new Vector2(12f, 3f);
-        }
-        else if (other.gameObject.name == "SmallPortal (7)")
-        {
-            SceneManager.LoadScene("GameOverMenu");
-        }
-        else if (other.gameObject.name == "SmallPortal (9)")
-        {
-            transform.position = new Vector2(-15.5f, 18.5f);
+            transform.position = new Vector2(8.5f, -10.5f);
         }
     }
 
