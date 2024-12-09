@@ -9,7 +9,7 @@ public class GameCtrl : MonoBehaviour
     public static double TimeCounter = 0f;
     public static int KillCount = 0, BestKillCount = 0;
     public static int TotalDamege = 0, BestTotalDamege = 0;
-    public const int SCREEN_WIDTH = 20, SCREEN_HEIGHT = 20;
+    public static int SCREEN_WIDTH = 20, SCREEN_HEIGHT = 20;
     public static bool IsGameClear = false, check = false;
     public static bool IsGameOver = false;
     private bool firstStart = true;
@@ -93,7 +93,7 @@ public class GameCtrl : MonoBehaviour
     {
         Instance.SpawnTeleport();
         IsGameClear = true;
-        SceneManager.LoadScene("GameOverMenu");
+       // SceneManager.LoadScene("GameOverMenu");
     }
 
     void SpawnTeleport()

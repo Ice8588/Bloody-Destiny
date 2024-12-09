@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4623579665551217109}
   - component: {fileID: 3330602698896789230}
   - component: {fileID: 3531526087372375880}
-  m_Layer: 7
+  m_Layer: 8
   m_Name: Vampire Noble
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -162,7 +162,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6505657631024702060}
-  m_BodyType: 0
+  m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -191,7 +191,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8591921923548842911}
   - component: {fileID: 7196197629663073599}
-  m_Layer: 7
+  m_Layer: 8
   m_Name: HealthBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}

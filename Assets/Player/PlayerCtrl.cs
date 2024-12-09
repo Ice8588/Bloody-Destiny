@@ -9,8 +9,9 @@ public class PlayerCtrl : MonoBehaviour
     public GameObject BloodMagic;
     public float WalkSpeed = 5f, RunSpeed = 8f, dodgeSpeed = 30f;
     public float dodgeDuration = 0.05f, dodgeCooldown = 0.5f;
-    public static int MaxHealth = 10, Health = 10, MaxBloodPower = 0, BloodPower = 0, BloodGroove = 0, BloodGrooveMax = 10;
+    public static int MaxHealth = 100, Health = 100, MaxBloodPower = 0, BloodPower = 0, BloodGroove = 0, BloodGrooveMax = 10;
     public int BloodPowerCost = 2;
+    private Vector2 lastPosition; // 記錄角色的上一次位置
     public static Vector3 PlayerPos;
     private Vector2 movement;           // 玩家移動向量
     private Rigidbody2D rb;             // 玩家剛體
@@ -31,6 +32,7 @@ public class PlayerCtrl : MonoBehaviour
     void Update()
     {
         PlayerPos = transform.position;
+        lastPosition = transform.position;
         movement = Vector2.zero;
         // movement.x = Input.GetAxisRaw("Horizontal");
         // movement.y = Input.GetAxisRaw("Vertical");
@@ -50,7 +52,7 @@ public class PlayerCtrl : MonoBehaviour
         {
             movement+=new Vector2(1, 0);
         }
-        FaceMouse();
+        this.FaceMouse();
 
         // 嘗試進行閃避
         if (Input.GetKeyDown(KeyCode.Space) && CanDodge())
@@ -135,6 +137,7 @@ public class PlayerCtrl : MonoBehaviour
         // 獲取滑鼠位置的世界座標
         Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         mousePosition.z = 0; // 確保 Z 軸為 0
+        //Debug.Log(mousePosition);
 
         // 計算玩家到滑鼠的方向向量
         Vector2 direction = (mousePosition - transform.position).normalized;
@@ -166,17 +169,20 @@ public class PlayerCtrl : MonoBehaviour
 
         if (other.CompareTag("Obstacle"))
         {
-            if (direction.y > 0 && (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))) CanUp = true;
-            if (direction.y < 0 && (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))) CanDown = true;
-            if (direction.x > 0 && (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))) CanRight = true;
-            if (direction.x < 0 && (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))) CanLeft = true;
+            Debug.Log("Touch");
+            //    if (direction.y > 0 || (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))) CanUp = true;
+            //    if (direction.y < 0 || (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))) CanDown = true;
+            //    if (direction.x > 0 || (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))) CanRight = true;
+            //    if (direction.x < 0 || (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))) CanLeft = true;
+            transform.position = lastPosition;
         }
         else if (other.CompareTag("Circle"))
         {
-            if (direction.y > 0) CanUp = true;
-            if (direction.y < 0) CanDown = true;
-            if (direction.x > 0) CanRight = true;
-            if (direction.x < 0) CanLeft = true;
+            //if (direction.y > 0) CanUp = true;
+            //if (direction.y < 0) CanDown = true;
+            //if (direction.x > 0) CanRight = true;
+            //if (direction.x < 0) CanLeft = true;
+            transform.position = PlayerPos;
         }
         else if (other.CompareTag("Trap"))
         {
@@ -185,7 +191,7 @@ public class PlayerCtrl : MonoBehaviour
         }
         else if (other.CompareTag("Fire"))
         {
-            // damage   
+            TakeDamage(10);  
         }
     }
 
@@ -195,34 +201,35 @@ public class PlayerCtrl : MonoBehaviour
 
         if (other.CompareTag("Obstacle"))
         {
-            if (direction.y > 0 && (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow)))
-            {
-                CanUp = true;
-                transform.Translate(new Vector2(0,-0.01f));
-            }
-            else if (direction.y < 0 && (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow)))
-            {
-                CanDown = true;
-                transform.Translate(new Vector2(0, 0.01f));
-            }
-            if (direction.x > 0 && (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow)))
-            {
-                CanRight = true;
-                transform.Translate(new Vector2(-0.01f,0));
-            }
-            else if(direction.x < 0 && (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow)))
-            {
-                CanLeft = true;
-                transform.Translate(new Vector2(0.01f, 0));
-            }
+            transform.position = lastPosition;
+            //    if (direction.y > 0 || (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow)))
+            //    {
+            //        CanUp = true;
+            //        transform.Translate(new Vector2(0,-0.2f));
+            //    }
+            //    else if (direction.y < 0 || (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow)))
+            //    {
+            //        CanDown = true;
+            //        transform.Translate(new Vector2(0, 0.2f));
+            //    }
+            //    if (direction.x > 0 || (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow)))
+            //    {
+            //        CanRight = true;
+            //        transform.Translate(new Vector2(-0.2f,0));
+            //    }
+            //    else if(direction.x < 0 || (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow)))
+            //    {
+            //        CanLeft = true;
+            //        transform.Translate(new Vector2(0.2f, 0));
+            //    }
         }
-        else if (other.CompareTag("Circle"))
-        {
-            if (direction.y > 0) CanUp = true;
-            if (direction.y < 0) CanDown = true;
-            if (direction.x > 0) CanRight = true;
-            if (direction.x < 0) CanLeft = true;
-        }
+        //else if (other.CompareTag("Circle"))
+        //{
+        //    if (direction.y > 0) CanUp = true;
+        //    if (direction.y < 0) CanDown = true;
+        //    if (direction.x > 0) CanRight = true;
+        //    if (direction.x < 0) CanLeft = true;
+        //}
     }
     void OnTriggerExit2D(Collider2D other)
     {

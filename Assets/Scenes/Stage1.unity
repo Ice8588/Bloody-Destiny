@@ -638,7 +638,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4259390887053546498, guid: 3ea6e4e1e312431419a5312b78cb19a0, type: 3}
       propertyPath: EnemyNum
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 4259390887053546498, guid: 3ea6e4e1e312431419a5312b78cb19a0, type: 3}
       propertyPath: CorpseNum
@@ -3165,6 +3165,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2787700241754712873, guid: 6e5d561e84920b548997321e153d4d0d, type: 3}
       propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3152659275214719811, guid: 6e5d561e84920b548997321e153d4d0d, type: 3}
+      propertyPath: m_CollisionDetection
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8589568020419477788, guid: 6e5d561e84920b548997321e153d4d0d, type: 3}

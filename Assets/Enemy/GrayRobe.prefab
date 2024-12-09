@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1420760861651135322}
   - component: {fileID: 5089762211640726843}
-  m_Layer: 7
+  m_Layer: 8
   m_Name: HealthBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -97,7 +97,7 @@ GameObject:
   - component: {fileID: 1354807073615448459}
   - component: {fileID: 689488135521072411}
   - component: {fileID: 1823033701705691277}
-  m_Layer: 7
+  m_Layer: 8
   m_Name: GrayRobe
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -189,11 +189,19 @@ MonoBehaviour:
   SwordATK: 2
   BloodMagicATK: 3
   ESA: {fileID: 0}
-  ESA: {fileID: 0}
   BloodMagic: {fileID: 230279984119097172, guid: f71556a98527cf04b99b6857c4d59c51, type: 3}
   HealthBar: {fileID: 3333147277169271735}
   lockOnIndicator: {fileID: 7696520752805767634, guid: 2822e50942855414081e50654d6a6a29, type: 3}
   tag: origin
+  rb: {fileID: 0}
+  distanceToPlayer: 0
+  speed: 0.9
+  OB: 0
+  CanUp: 0
+  CanRight: 0
+  CanLeft: 0
+  CanDown: 0
+  d_flag: 1
 --- !u!61 &689488135521072411
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -247,7 +255,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9006265424410510855}
-  m_BodyType: 0
+  m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0

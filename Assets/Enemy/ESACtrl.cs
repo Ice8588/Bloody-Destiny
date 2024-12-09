@@ -45,7 +45,7 @@ public class ESACtrl : MonoBehaviour
     public void SpawnWhiteRobe()
     {
         // �H���ͦ���m
-        if (GrayRobeNum > 0)
+        if (WhiteRobeNum > 0)
         {
             float x = Random.Range(Area[0].x, Area[1].x);
             float y = Random.Range(Area[0].y, Area[1].y);
@@ -60,7 +60,7 @@ public class ESACtrl : MonoBehaviour
     public void SpawnGrayRobe()
     {
         // �H���ͦ���m
-        if (WhiteRobeNum > 0)
+        if (GrayRobeNum > 0)
         {
             float x = Random.Range(Area[0].x, Area[1].x);
             float y = Random.Range(Area[0].y, Area[1].y);
