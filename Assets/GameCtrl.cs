@@ -7,11 +7,12 @@ using UnityEngine.SceneManagement;
 public class GameCtrl : MonoBehaviour
 {
     public static double TimeCounter = 0f;
+    public static int Stage = 0;
     public static GameObject PlayerGameObject;
     public static Vector3 PlayerPos;
     public static int KillCount = 0, BestKillCount = 0;
     public static int TotalDamege = 0, BestTotalDamege = 0;
-    public const int SCREEN_WIDTH = 20, SCREEN_HEIGHT = 20;
+    public static readonly int[] SCREEN_WIDTH = new int[3] { 20, 20, 16 }, SCREEN_HEIGHT = new int[3] { 20, 20, 16 };
     public static bool IsGameClear = false, check = false;
     private bool firstStart = true;
     private static GameCtrl instance;
@@ -93,7 +94,6 @@ public class GameCtrl : MonoBehaviour
     {
         Instance.SpawnTeleport();
         IsGameClear = true;
-        //SceneManager.LoadScene("GameOverMenu");
     }
 
     void SpawnTeleport()

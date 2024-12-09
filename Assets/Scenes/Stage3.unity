@@ -1579,6 +1579,8 @@ MonoBehaviour:
   CanRight: 0
   CanLeft: 0
   CanDown: 0
+  visibleTime: 5
+  hiddenTime: 20
 --- !u!212 &860605471
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2268,7 +2270,7 @@ GameObject:
   - component: {fileID: 1078920620}
   m_Layer: 0
   m_Name: thorns (3)
-  m_TagString: Stab
+  m_TagString: Thorns
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2518,7 +2520,7 @@ GameObject:
   - component: {fileID: 1233233839}
   m_Layer: 0
   m_Name: thorns (4)
-  m_TagString: Stab
+  m_TagString: Thorns
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3690,7 +3692,7 @@ GameObject:
   - component: {fileID: 1581234658}
   m_Layer: 0
   m_Name: thorns (1)
-  m_TagString: Stab
+  m_TagString: Thorns
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3940,7 +3942,7 @@ GameObject:
   - component: {fileID: 1696443063}
   m_Layer: 0
   m_Name: thorns
-  m_TagString: Stab
+  m_TagString: Thorns
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4634,7 +4636,7 @@ GameObject:
   - component: {fileID: 2061067717}
   m_Layer: 0
   m_Name: thorns (2)
-  m_TagString: Stab
+  m_TagString: Thorns
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

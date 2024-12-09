@@ -11,29 +11,69 @@ public class PlayerCtrl : MonoBehaviour
     public float PlayerSpeed = 0.1f;
     public static int Health = 10;
     public bool CanUp = false, CanRight = false, CanLeft = false, CanDown = false;
+    private bool isTrapActive = true;
+    public float visibleTime = 5f;
+    public float hiddenTime = 20f;
 
     // Start is called before the first frame update
     void Start()
     {
+        traps = GameObject.FindGameObjectsWithTag("Stab");
         GameCtrl.PlayerGameObject = this.gameObject;
+        StartCoroutine(ToggleTrap());
+    }
+
+    IEnumerator ToggleTrap()
+    {
+        while (true)
+        {
+            foreach (GameObject trap in traps)
+            {
+                SetTrapState(trap, true);
+                isTrapActive = true;
+            }
+            yield return new WaitForSeconds(visibleTime);
+
+            foreach (GameObject trap in traps)
+            {
+                SetTrapState(trap, false);
+                isTrapActive = false;
+            }
+
+            yield return new WaitForSeconds(hiddenTime);
+        }
+    }
+
+    void SetTrapState(GameObject trap, bool isVisible)
+    {
+        SpriteRenderer renderer = trap.GetComponent<SpriteRenderer>();
+
+        if (renderer != null)
+        {
+            Color color = renderer.color;
+            color.a = isVisible ? Mathf.Clamp01(0.3f) : Mathf.Clamp01(1f);
+            renderer.color = color;
+        }
+
+        trap.GetComponent<Collider2D>().enabled = true;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (!CanUp && transform.position.y + 0.3 <= GameCtrl.SCREEN_HEIGHT && (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow)))
+        if (!CanUp && transform.position.y + 0.3 <= GameCtrl.SCREEN_HEIGHT[GameCtrl.Stage] && (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow)))
         {
             transform.Translate(new Vector2(0, PlayerSpeed));
         }
-        else if (!CanDown && transform.position.y - 0.3 >= -GameCtrl.SCREEN_HEIGHT && (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow)))
+        else if (!CanDown && transform.position.y - 0.3 >= -GameCtrl.SCREEN_HEIGHT[GameCtrl.Stage] && (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow)))
         {
             transform.Translate(new Vector2(0, -PlayerSpeed));
         }
-        if (!CanLeft && transform.position.x - 0.3 >= -GameCtrl.SCREEN_WIDTH && (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow)))
+        if (!CanLeft && transform.position.x - 0.3 >= -GameCtrl.SCREEN_WIDTH[GameCtrl.Stage] && (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow)))
         {
             transform.Translate(new Vector2(-PlayerSpeed, 0));
         }
-        else if (!CanRight && transform.position.x + 0.3 <= GameCtrl.SCREEN_WIDTH && (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow)))
+        else if (!CanRight && transform.position.x + 0.3 <= GameCtrl.SCREEN_WIDTH[GameCtrl.Stage] && (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow)))
         {
             transform.Translate(new Vector2(PlayerSpeed, 0));
         }
@@ -71,27 +111,63 @@ public class PlayerCtrl : MonoBehaviour
         {
             PlayerSpeed *= 0.5f;
         }
-        else if (other.CompareTag("Fire"))
+        else if (other.CompareTag("Fire") || other.CompareTag("Thorns"))
         {
-            // TakeDamage();   
+            // TakeDamage(10);   
         }
-        else if (other.CompareTag("Stab"))
+        else if (other.CompareTag("Stab") && isTrapActive)
         {
-            // stabbed
+            // TakeDamage(10);
+        }
+        else if (other.CompareTag("Blue") || other.CompareTag("FakeTeleport"))
+        {
+            transform.position = new Vector2(18.5f, -19.5f);
         }
         else if (other.gameObject.name == "SmallPortal")
         {
-            transform.position = new Vector2(11f, 13f);
+            transform.position = new Vector2(-18.5f, -17f);
         }
         else if (other.gameObject.name == "SmallPortal (1)")
         {
-            transform.position = new Vector2(-13f, -11f);
+            transform.position = new Vector2(12.29f, -1.26f);
         }
         else if (other.gameObject.name == "SmallPortal (2)")
         {
-            transform.position = new Vector2(-10f, 12f);
+            transform.position = new Vector2(18.5f, 13.5f);
         }
         else if (other.gameObject.name == "SmallPortal (3)")
+        {
+            transform.position = new Vector2(-19f, -1f);
+        }
+        else if (other.gameObject.name == "SmallPortal (4)")
+        {
+            transform.position = new Vector2(6f, 16f);
+        }
+        else if (other.gameObject.name == "SmallPortal (5)")
+        {
+            transform.position = new Vector2(12f, 3f);
+        }
+        else if (other.gameObject.name == "SmallPortal (7)")
+        {
+            //SceneManager.LoadScene("GameOverMenu");
+        }
+        else if (other.gameObject.name == "SmallPortal (9)")
+        {
+            transform.position = new Vector2(-15.5f, 18.5f);
+        }
+        else if (other.gameObject.name == "SmallPortal (10)")
+        {
+            transform.position = new Vector2(11f, 13f);
+        }
+        else if (other.gameObject.name == "SmallPortal (11)")
+        {
+            transform.position = new Vector2(-13f, -11f);
+        }
+        else if (other.gameObject.name == "SmallPortal (12)")
+        {
+            transform.position = new Vector2(-10f, 12f);
+        }
+        else if (other.gameObject.name == "SmallPortal (13)")
         {
             transform.position = new Vector2(8.5f, -10.5f);
         }

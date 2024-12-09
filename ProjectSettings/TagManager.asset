@@ -16,6 +16,7 @@ TagManager:
   - Blue
   - FakeTeleport
   - Stab
+  - Thorns
   layers:
   - Default
   - TransparentFX

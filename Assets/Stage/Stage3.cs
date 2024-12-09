@@ -11,6 +11,7 @@ public class Stage3 : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        GameCtrl.Stage = 2;
         var gameCtrl = GameCtrl.Instance;
         // InvokeRepeating("SpawnCorpse", 0f, 10f);
     }
