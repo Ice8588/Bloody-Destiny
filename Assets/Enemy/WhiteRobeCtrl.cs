@@ -14,7 +14,7 @@ public class WhiteRobeCtrl : EnemyScript
     public float speed = 1.8f;
     private float speedbuf, delay = 0;
     public bool OB = false, CanUp = false, CanRight = false, CanLeft = false, CanDown = false, d_flag = true;
-    Vector2 directionToPlayer;
+    Vector2 directionToPlayer, lastPosition, awayFromObstacle;
 
     void Start()
     {
@@ -37,10 +37,11 @@ public class WhiteRobeCtrl : EnemyScript
     // Update is called once per frame
     protected override void Update()
     {
+        lastPosition = transform.position;
         base.Update();
         //transform.Translate(new Vector3(0.1f, 0, 0));  //test
 
-        if (GameCtrl.TimeCounter % 60 == 0)
+        if (GameCtrl.TimeCounter % 180 == 0 && distanceToPlayer > 1)
         {
             UseBloodMagic();
         }
@@ -109,36 +110,38 @@ public class WhiteRobeCtrl : EnemyScript
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.CompareTag("Obstacle") || collision.CompareTag("Circle"))
+        if (collision.CompareTag("Obstacle") || collision.CompareTag("Circle")|| collision.CompareTag("Enemy"))
         {
+            
             OB = true;
             //�p��Ϯg��V�A�קK��ê��
             Debug.Log("OB");
             // ²��a�p���V�A���ĤH������ê��
-            Vector2 awayFromObstacle = transform.position - collision.transform.position;
-            if (awayFromObstacle.y < 0)
-            {
-                CanUp = true;
-                transform.Translate(new Vector2(0, -0.1f));
-            }
-            else if (awayFromObstacle.y > 0)
-            {
-                CanDown = true;
-                transform.Translate(new Vector2(0, 0.1f));
-            }
-            if (awayFromObstacle.x < 0)
-            {
-                CanRight = true;
-                transform.Translate(new Vector2(-0.1f, 0));
-            }
-            else if (awayFromObstacle.x > 0)
-            {
-                CanLeft = true;
-                transform.Translate(new Vector2(0.1f, 0));
-            }
+            awayFromObstacle = transform.position - collision.transform.position;
+            //if (awayFromObstacle.y < 0)
+            //{
+            //    CanUp = true;
+            //    transform.Translate(new Vector2(0, -0.1f));
+            //}
+            //else if (awayFromObstacle.y > 0)
+            //{
+            //    CanDown = true;
+            //    transform.Translate(new Vector2(0, 0.1f));
+            //}
+            //if (awayFromObstacle.x < 0)
+            //{
+            //    CanRight = true;
+            //    transform.Translate(new Vector2(-0.1f, 0));
+            //}
+            //else if (awayFromObstacle.x > 0)
+            //{
+            //    CanLeft = true;
+            //    transform.Translate(new Vector2(0.1f, 0));
+            //}
 
             directionToPlayer = Vector2.Lerp(directionToPlayer, awayFromObstacle, 0.5f).normalized;
             rb.velocity = directionToPlayer * speed;
+            transform.position = lastPosition;
             Debug.Log("Avoiding obstacle: " + collision.gameObject.name);
         }
     }
@@ -152,6 +155,8 @@ public class WhiteRobeCtrl : EnemyScript
 
     private void OnTriggerExit2D(Collider2D collision)
     {
+        directionToPlayer = Vector2.Lerp(directionToPlayer, awayFromObstacle, 0.5f).normalized;
+        rb.velocity = directionToPlayer * speed;
         OB = false;
         speed = speedbuf;
     }
