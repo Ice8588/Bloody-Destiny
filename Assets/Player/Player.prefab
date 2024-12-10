@@ -142,6 +142,8 @@ MonoBehaviour:
   CanRight: 0
   CanLeft: 0
   CanDown: 0
+  visibleTime: 1
+  hiddenTime: 1
 --- !u!114 &3912875414408346008
 MonoBehaviour:
   m_ObjectHideFlags: 0
