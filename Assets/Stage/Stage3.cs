@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Stage2 : MonoBehaviour
+public class Stage3 : MonoBehaviour
 {
     public GameObject Corpse, GrayRobe, WhiteRobe;
     public static int EnemyNum = 0;
@@ -11,7 +11,7 @@ public class Stage2 : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        GameCtrl.Stage = 1;
+        GameCtrl.Stage = 2;
         var gameCtrl = GameCtrl.Instance;
         // InvokeRepeating("SpawnCorpse", 0f, 10f);
     }
@@ -32,10 +32,10 @@ public class Stage2 : MonoBehaviour
 
     void LateUpdate()
     {
-        // if (EnemyNum <= 0)
-        // {
-        //     GameCtrl.GameClear();
-        // }
+        if (EnemyNum <= 0)
+        {
+            GameCtrl.GameClear();
+        }
     }
 
 
