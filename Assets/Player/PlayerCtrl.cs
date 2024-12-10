@@ -33,25 +33,25 @@ public class PlayerCtrl : MonoBehaviour
     {
         PlayerPos = transform.position;
         lastPosition = transform.position;
-        movement = Vector2.zero;
-        // movement.x = Input.GetAxisRaw("Horizontal");
-        // movement.y = Input.GetAxisRaw("Vertical");
-        if (!CanUp && transform.position.y + 0.3 <= GameCtrl.SCREEN_HEIGHT && (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow)))
-        {
-            movement+=new Vector2(0, 1);
-        }
-        else if (!CanDown && transform.position.y - 0.3 >= -GameCtrl.SCREEN_HEIGHT && (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow)))
-        {
-            movement+=new Vector2(0, -1);
-        }
-        if (!CanLeft && transform.position.x - 0.3 >= -GameCtrl.SCREEN_WIDTH && (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow)))
-        {
-            movement+=new Vector2(-1, 0);
-        }
-        else if (!CanRight && transform.position.x + 0.3 <= GameCtrl.SCREEN_WIDTH && (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow)))
-        {
-            movement+=new Vector2(1, 0);
-        }
+        //movement = Vector2.zero;
+        movement.x = Input.GetAxisRaw("Horizontal");
+        movement.y = Input.GetAxisRaw("Vertical");
+        //if (!CanUp && transform.position.y + 0.3 <= GameCtrl.SCREEN_HEIGHT && (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow)))
+        //{
+        //    movement+=new Vector2(0, 1);
+        //}
+        //else if (!CanDown && transform.position.y - 0.3 >= -GameCtrl.SCREEN_HEIGHT && (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow)))
+        //{
+        //    movement+=new Vector2(0, -1);
+        //}
+        //if (!CanLeft && transform.position.x - 0.3 >= -GameCtrl.SCREEN_WIDTH && (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow)))
+        //{
+        //    movement+=new Vector2(-1, 0);
+        //}
+        //else if (!CanRight && transform.position.x + 0.3 <= GameCtrl.SCREEN_WIDTH && (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow)))
+        //{
+        //    movement+=new Vector2(1, 0);
+        //}
         this.FaceMouse();
 
         // 嘗試進行閃避
@@ -97,8 +97,8 @@ public class PlayerCtrl : MonoBehaviour
 
         Vector2 newPosition = rb.position + movement.normalized * PlayerSpeed * Time.fixedDeltaTime;
 
-        newPosition.x = Mathf.Clamp(newPosition.x, -GameCtrl.SCREEN_WIDTH, GameCtrl.SCREEN_WIDTH);
-        newPosition.y = Mathf.Clamp(newPosition.y, -GameCtrl.SCREEN_HEIGHT, GameCtrl.SCREEN_HEIGHT);
+        newPosition.x = Mathf.Clamp(newPosition.x, -GameCtrl.SCREEN_WIDTH[GameCtrl.Stage], GameCtrl.SCREEN_WIDTH[GameCtrl.Stage]);
+        newPosition.y = Mathf.Clamp(newPosition.y, -GameCtrl.SCREEN_HEIGHT[GameCtrl.Stage], GameCtrl.SCREEN_HEIGHT[GameCtrl.Stage]);
         rb.MovePosition(newPosition);
     }
 
@@ -122,8 +122,8 @@ public class PlayerCtrl : MonoBehaviour
             Vector2 newPosition = rb.position + dodgeDirection * dodgeSpeed * Time.fixedDeltaTime;
 
             // 限制在邊界內
-            newPosition.x = Mathf.Clamp(newPosition.x, -GameCtrl.SCREEN_WIDTH, GameCtrl.SCREEN_WIDTH);
-            newPosition.y = Mathf.Clamp(newPosition.y, -GameCtrl.SCREEN_HEIGHT, GameCtrl.SCREEN_HEIGHT);
+            newPosition.x = Mathf.Clamp(newPosition.x, -GameCtrl.SCREEN_WIDTH[GameCtrl.Stage], GameCtrl.SCREEN_WIDTH[GameCtrl.Stage]);
+            newPosition.y = Mathf.Clamp(newPosition.y, -GameCtrl.SCREEN_HEIGHT[GameCtrl.Stage], GameCtrl.SCREEN_HEIGHT[GameCtrl.Stage]);
 
             rb.MovePosition(newPosition);
             yield return null; // 等待下一幀

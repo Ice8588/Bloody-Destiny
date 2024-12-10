@@ -14,6 +14,7 @@ public class GameCtrl : MonoBehaviour
     public static bool IsGameOver = false;
     private bool firstStart = true;
     private static GameCtrl instance;
+    public static int Stage;
     public GameObject CirclePrefab;
     //public static AsyncOperation PreloadOperation;
 

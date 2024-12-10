@@ -18,8 +18,8 @@ public class PlayerBullet : MonoBehaviour
     {
         //transform.Translate(new Vector2(0, Speed));
 
-        if (transform.position.y <= -GameCtrl.SCREEN_HEIGHT - 5 || transform.position.y >= GameCtrl.SCREEN_HEIGHT + 5 ||
-            transform.position.x <= -GameCtrl.SCREEN_WIDTH - 5 || transform.position.x >= GameCtrl.SCREEN_WIDTH + 5)
+        if (transform.position.y <= -GameCtrl.SCREEN_HEIGHT[GameCtrl.Stage] - 5 || transform.position.y >= GameCtrl.SCREEN_HEIGHT[GameCtrl.Stage] + 5 ||
+            transform.position.x <= -GameCtrl.SCREEN_WIDTH[GameCtrl.Stage] - 5 || transform.position.x >= GameCtrl.SCREEN_WIDTH[GameCtrl.Stage] + 5)
         {
             Destroy(this.gameObject);
         }
