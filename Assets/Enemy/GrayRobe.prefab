@@ -219,9 +219,9 @@ MonoBehaviour:
   AttackRange: 1
   AttackDamage: 2
   AttackCooldown: 1
-  AttackAngle: 360
+  AttackAngle: 120
   EffectDuration: 0.05
-  Segments: 360
+  Segments: 120
   PlayerLayer:
     serializedVersion: 2
     m_Bits: 128
