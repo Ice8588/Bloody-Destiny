@@ -7,15 +7,16 @@ public class PlayerAttack : MonoBehaviour
 {
     public float AttackRange = 1f; // 攻擊範圍
     public int AttackDamage = 2; // 攻擊傷害
-    public float AttackCooldown = 0.3f; // 攻擊冷卻時間
+    public float AttackCooldown = 3000f; // 攻擊冷卻時間
     public float AttackAngle = 120f; // 扇形範圍角度
-    public float EffectDuration = 0.05f; // 攻擊效果持續時間
+    public float EffectDuration = 1000f; // 攻擊效果持續時間
     public int Segments = 120; // 圓形的段數
     public LayerMask EnemyLayer; // 敵人圖層
     private Vector2 AttackPointPosition; // 攻擊點位置
     private LineRenderer lineRenderer; // LineRenderer 組件
     private float lastAttackTime = 0f; // 上次攻擊時間
-
+    public Animator animator;
+    public int counter = 0;
 
     void Awake()
     {
@@ -34,13 +35,17 @@ public class PlayerAttack : MonoBehaviour
 
     void Update()
     {
-
         if (Input.GetMouseButtonDown(0) && Time.time >= lastAttackTime + AttackCooldown)
         {
             Attack();
             lastAttackTime = Time.time;
             Invoke(nameof(ClearAttackCone), EffectDuration); // 在指定時間後清除
         }
+    }
+
+    void FixedUpdate()
+    {
+        if(counter>0)counter--;
     }
 
     void Attack()
@@ -78,6 +83,7 @@ public class PlayerAttack : MonoBehaviour
 
     private void DrawAttackCone(Vector2 AttackPointPosition)
     {
+        animator.SetFloat("slash", 1);
         Vector3 direction = transform.up; // 玩家面向方向
         lineRenderer.enabled = true;
 
@@ -97,5 +103,6 @@ public class PlayerAttack : MonoBehaviour
     void ClearAttackCone()
     {
         lineRenderer.enabled = false;
+        animator.SetFloat("slash", 0);
     }
 }

@@ -47287,6 +47287,11 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!95 &1294715088 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: -2162893255984678657, guid: 6e5d561e84920b548997321e153d4d0d, type: 3}
+  m_PrefabInstance: {fileID: 1467080173}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1316849620
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -47620,9 +47625,21 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3152659275214719811, guid: 6e5d561e84920b548997321e153d4d0d, type: 3}
+      propertyPath: m_Constraints
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3152659275214719811, guid: 6e5d561e84920b548997321e153d4d0d, type: 3}
       propertyPath: m_CollisionDetection
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3912875414408346008, guid: 6e5d561e84920b548997321e153d4d0d, type: 3}
+      propertyPath: animator
+      value: 
+      objectReference: {fileID: 1294715088}
+    - target: {fileID: 5761054292294051934, guid: 6e5d561e84920b548997321e153d4d0d, type: 3}
+      propertyPath: animator
+      value: 
+      objectReference: {fileID: 1294715088}
     - target: {fileID: 8589568020419477788, guid: 6e5d561e84920b548997321e153d4d0d, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.2854252

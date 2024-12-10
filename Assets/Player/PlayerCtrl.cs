@@ -22,6 +22,7 @@ public class PlayerCtrl : MonoBehaviour
     private bool isTrapActive = true;
     public float visibleTime = 1f;
     public float hiddenTime = 1f;
+    public Animator animator;
     // Start is called before the first frame update
     void Start()
     {
@@ -72,7 +73,7 @@ public class PlayerCtrl : MonoBehaviour
     {
         PlayerPos = transform.position;
         lastPosition = transform.position;
-        //movement = Vector2.zero;
+        movement = Vector2.zero;
         movement.x = Input.GetAxisRaw("Horizontal");
         movement.y = Input.GetAxisRaw("Vertical");
         //if (!CanUp && transform.position.y + 0.3 <= GameCtrl.SCREEN_HEIGHT && (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow)))
@@ -135,7 +136,10 @@ public class PlayerCtrl : MonoBehaviour
     void Move()
     {
         float PlayerSpeed = isRunning ? RunSpeed : WalkSpeed;
-
+        if(movement != Vector2.zero)
+        animator.SetFloat("run",Mathf.Abs(PlayerSpeed));
+        else
+            animator.SetFloat("run", Mathf.Abs(0));
         Vector2 newPosition = rb.position + movement.normalized * PlayerSpeed * Time.fixedDeltaTime;
 
         newPosition.x = Mathf.Clamp(newPosition.x, -GameCtrl.SCREEN_WIDTH[GameCtrl.Stage], GameCtrl.SCREEN_WIDTH[GameCtrl.Stage]);
