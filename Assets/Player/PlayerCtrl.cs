@@ -7,9 +7,10 @@ using UnityEngine.SceneManagement;
 public class PlayerCtrl : MonoBehaviour
 {
     public GameObject BloodMagic;
+    private GameObject[] traps;
     public float WalkSpeed = 5f, RunSpeed = 8f, dodgeSpeed = 30f;
     public float dodgeDuration = 0.05f, dodgeCooldown = 0.5f;
-    public static int MaxHealth = 100, Health = 100, MaxBloodPower = 0, BloodPower = 0, BloodGroove = 0, BloodGrooveMax = 10;
+    public static int MaxHealth = 100, Health = 100, MaxBloodPower = 0, BloodPower = 0, BloodGroove = 0, BloodGrooveMax = 20;
     public int BloodPowerCost = 2;
     private Vector2 lastPosition; // 記錄角色的上一次位置
     public static Vector3 PlayerPos;
@@ -18,16 +19,54 @@ public class PlayerCtrl : MonoBehaviour
     private bool isDodging = false, isRunning = false;     // 是否處於閃避狀態
     private float lastDodgeTime = -Mathf.Infinity; // 上次閃避的時間
     public bool CanUp = false, CanRight = false, CanLeft = false, CanDown = false;
-
+    private bool isTrapActive = true;
+    public float visibleTime = 1f;
+    public float hiddenTime = 1f;
     // Start is called before the first frame update
     void Start()
     {
+        traps = GameObject.FindGameObjectsWithTag("Stab");
         Health = MaxHealth;
         MaxBloodPower = Health;
         BloodPower = MaxBloodPower;
         rb = GetComponent<Rigidbody2D>();
+        StartCoroutine(ToggleTrap());
     }
 
+    IEnumerator ToggleTrap()
+    {
+        while (true)
+        {
+            foreach (GameObject trap in traps)
+            {
+                SetTrapState(trap, true);
+                isTrapActive = true;
+            }
+            yield return new WaitForSeconds(visibleTime);
+
+            foreach (GameObject trap in traps)
+            {
+                SetTrapState(trap, false);
+                isTrapActive = false;
+            }
+
+            yield return new WaitForSeconds(hiddenTime);
+        }
+    }
+
+    void SetTrapState(GameObject trap, bool isVisible)
+    {
+        SpriteRenderer renderer = trap.GetComponent<SpriteRenderer>();
+
+        if (renderer != null)
+        {
+            Color color = renderer.color;
+            color.a = isVisible ? Mathf.Clamp01(0.3f) : Mathf.Clamp01(1f);
+            renderer.color = color;
+        }
+
+        trap.GetComponent<Collider2D>().enabled = true;
+    }
     // Update is called once per frame
     void Update()
     {
@@ -80,6 +119,8 @@ public class PlayerCtrl : MonoBehaviour
         {
             BloodPower = Mathf.Max(0, Mathf.Min(Health, BloodPower));
         }
+
+        BloodGroove = Mathf.Max(0, Mathf.Min(BloodGrooveMax, BloodGroove));
     }
 
     void FixedUpdate()
@@ -189,9 +230,65 @@ public class PlayerCtrl : MonoBehaviour
             WalkSpeed *= 0.5f;
             RunSpeed *= 0.5f;
         }
-        else if (other.CompareTag("Fire"))
+        else if (other.CompareTag("Fire") || other.CompareTag("Thorns"))
         {
-            TakeDamage(10);  
+            TakeDamage(10);   
+        }
+        else if (other.CompareTag("Stab") && isTrapActive)
+        {
+            TakeDamage(10);
+        }
+        else if (other.CompareTag("Blue") || other.CompareTag("FakeTeleport"))
+        {
+            transform.position = new Vector2(18.5f, -19.5f);
+        }
+        else if (other.gameObject.name == "SmallPortal")
+        {
+            transform.position = new Vector2(-18.5f, -17f);
+        }
+        else if (other.gameObject.name == "SmallPortal (1)")
+        {
+            transform.position = new Vector2(12.29f, -1.26f);
+        }
+        else if (other.gameObject.name == "SmallPortal (2)")
+        {
+            transform.position = new Vector2(18.5f, 13.5f);
+        }
+        else if (other.gameObject.name == "SmallPortal (3)")
+        {
+            transform.position = new Vector2(-19f, -1f);
+        }
+        else if (other.gameObject.name == "SmallPortal (4)")
+        {
+            transform.position = new Vector2(6f, 16f);
+        }
+        else if (other.gameObject.name == "SmallPortal (5)")
+        {
+            transform.position = new Vector2(12f, 3f);
+        }
+        else if (other.gameObject.name == "SmallPortal (7)")
+        {
+            //SceneManager.LoadScene("GameOverMenu");
+        }
+        else if (other.gameObject.name == "SmallPortal (9)")
+        {
+            transform.position = new Vector2(-15.5f, 18.5f);
+        }
+        else if (other.gameObject.name == "SmallPortal (10)")
+        {
+            transform.position = new Vector2(11f, 13f);
+        }
+        else if (other.gameObject.name == "SmallPortal (11)")
+        {
+            transform.position = new Vector2(-13f, -11f);
+        }
+        else if (other.gameObject.name == "SmallPortal (12)")
+        {
+            transform.position = new Vector2(-10f, 12f);
+        }
+        else if (other.gameObject.name == "SmallPortal (13)")
+        {
+            transform.position = new Vector2(8.5f, -10.5f);
         }
     }
 
