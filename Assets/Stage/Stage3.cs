@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Stage3 : MonoBehaviour
 {
@@ -34,7 +35,8 @@ public class Stage3 : MonoBehaviour
     {
         if (EnemyNum <= 0)
         {
-            GameCtrl.GameClear();
+            SceneManager.LoadScene("GameOverMenu");
+            GameCtrl.IsGameClear = true;
         }
     }
 
