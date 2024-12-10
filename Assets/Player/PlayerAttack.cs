@@ -51,13 +51,26 @@ public class PlayerAttack : MonoBehaviour
 
         foreach (Collider2D enemy in hitEnemies)
         {
-            Debug.Log("擊中敵人：" + enemy.name);
-            EnemyScript enemyScript = enemy.GetComponent<EnemyScript>();
+            // 計算敵人相對於玩家的方向
+            Vector2 directionToEnemy = (enemy.transform.position - transform.position).normalized;
 
-            if (enemyScript)
+            // 計算玩家的正前方方向
+            Vector2 playerForward = transform.up; // 以 X 軸方向為玩家的正前方
+
+            // 計算角度（用餘弦公式檢查角度範圍是否小於 60 度）
+            float angle = Vector2.Angle(playerForward, directionToEnemy);
+
+            if (angle <= AttackAngle / 2) // 在 120 度範圍內
             {
-                enemyScript.TakeDamage(AttackDamage);
-                PlayerCtrl.BloodGroove += AttackDamage / 2;
+                Debug.Log("擊中敵人：" + enemy.name);
+
+                EnemyScript enemyScript = enemy.GetComponent<EnemyScript>();
+                
+                if (enemyScript)
+                {
+                    enemyScript.TakeDamage(AttackDamage);
+                    PlayerCtrl.BloodGroove += AttackDamage / 2;
+                }
             }
         }
     }

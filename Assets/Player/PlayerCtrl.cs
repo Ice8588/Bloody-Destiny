@@ -10,7 +10,7 @@ public class PlayerCtrl : MonoBehaviour
     private GameObject[] traps;
     public float WalkSpeed = 5f, RunSpeed = 8f, dodgeSpeed = 30f;
     public float dodgeDuration = 0.05f, dodgeCooldown = 0.5f;
-    public static int MaxHealth = 100, Health = 100, MaxBloodPower = 0, BloodPower = 0, BloodGroove = 0, BloodGrooveMax = 10;
+    public static int MaxHealth = 100, Health = 100, MaxBloodPower = 0, BloodPower = 0, BloodGroove = 0, BloodGrooveMax = 20;
     public int BloodPowerCost = 2;
     private Vector2 lastPosition; // 記錄角色的上一次位置
     public static Vector3 PlayerPos;
@@ -119,6 +119,8 @@ public class PlayerCtrl : MonoBehaviour
         {
             BloodPower = Mathf.Max(0, Mathf.Min(Health, BloodPower));
         }
+
+        BloodGroove = Mathf.Max(0, Mathf.Min(BloodGrooveMax, BloodGroove));
     }
 
     void FixedUpdate()
