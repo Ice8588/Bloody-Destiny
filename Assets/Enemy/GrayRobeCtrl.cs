@@ -38,10 +38,10 @@ public class GrayRobeCtrl : EnemyScript
         base.Update();
         //transform.Translate(new Vector3(0.1f, 0, 0));  //test
 
-        if(GameCtrl.TimeCounter % 60 == 0)
-        {
-            UseBloodMagic();
-        }
+        //if(GameCtrl.TimeCounter % 60 == 0)
+        //{
+        //    UseBloodMagic();
+        //}
     }
     private void FixedUpdate()
     {

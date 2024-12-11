@@ -5,7 +5,7 @@ using UnityEngine;
 public class GrayRobeAttack : MonoBehaviour
 {
     public float AttackRange = 1f; // �����d��
-    public int AttackDamage = 2; // �����ˮ`
+    public int AttackDamage = 10; // �����ˮ`
     public float AttackCooldown = 1f; // �����N�o�ɶ�
     public float AttackAngle = 120f; // ���νd�򨤫�
     public float EffectDuration = 0.05f; // �����ĪG����ɶ�
@@ -37,8 +37,8 @@ public class GrayRobeAttack : MonoBehaviour
     void Update()
     {
 
-        distanceToPlayer = Vector2.Distance(transform.position, player.transform.position);
-        if (Time.time >= lastAttackTime + AttackCooldown)
+        distanceToPlayer = Vector2.Distance(transform.position, PlayerCtrl.PlayerPos);
+        if (Time.time >= lastAttackTime + AttackCooldown && distanceToPlayer < 1.5)
         {
             Debug.Log(distanceToPlayer);
             Attack();
