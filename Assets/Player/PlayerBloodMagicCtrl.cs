@@ -6,11 +6,10 @@ public class PlayerBloodMagicCtrl : MonoBehaviour
 {
     public float Speed = 0.1f;
     public int ATK = 2;
-    public Quaternion InitAngle;
     // Start is called before the first frame update
     void Start()
     {
-        transform.rotation = InitAngle;
+
     }
 
     // Update is called once per frame

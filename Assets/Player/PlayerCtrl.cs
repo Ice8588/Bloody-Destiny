@@ -105,7 +105,11 @@ public class PlayerCtrl : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.F) && BloodPower >= BloodPowerCost)
         {
-            Instantiate(BloodMagic, transform.position + new Vector3(0, 0.1f, 0), Quaternion.identity);
+            Vector3 playerForward = transform.up;
+            Vector3 spawnPosition = transform.position + playerForward * 0.5f;
+            GameObject bullet = Instantiate(BloodMagic, spawnPosition, Quaternion.identity);
+            bullet.transform.rotation = Quaternion.LookRotation(Vector3.forward, playerForward);
+
             BloodPower -= BloodPowerCost;
         }
     }
@@ -136,8 +140,8 @@ public class PlayerCtrl : MonoBehaviour
     void Move()
     {
         float PlayerSpeed = isRunning ? RunSpeed : WalkSpeed;
-        if(movement != Vector2.zero)
-        animator.SetFloat("run",Mathf.Abs(PlayerSpeed));
+        if (movement != Vector2.zero)
+            animator.SetFloat("run", Mathf.Abs(PlayerSpeed));
         else
             animator.SetFloat("run", Mathf.Abs(0));
         Vector2 newPosition = rb.position + movement.normalized * PlayerSpeed * Time.fixedDeltaTime;
@@ -209,7 +213,7 @@ public class PlayerCtrl : MonoBehaviour
     }
     void OnTriggerEnter2D(Collider2D other)
     {
-        
+
         Vector2 direction = other.transform.position - transform.position;
 
         if (other.CompareTag("Obstacle"))
@@ -236,7 +240,7 @@ public class PlayerCtrl : MonoBehaviour
         }
         else if (other.CompareTag("Fire") || other.CompareTag("Thorns"))
         {
-            TakeDamage(10);   
+            TakeDamage(10);
         }
         else if (other.CompareTag("Stab") && isTrapActive)
         {
