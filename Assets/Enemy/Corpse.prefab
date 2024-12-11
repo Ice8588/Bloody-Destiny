@@ -110,6 +110,7 @@ MonoBehaviour:
   HealthBar: {fileID: 4625763321380165621}
   lockOnIndicator: {fileID: 7696520752805767634, guid: 2822e50942855414081e50654d6a6a29, type: 3}
   tag: origin
+  animator: {fileID: 2347422587335162803}
 --- !u!61 &7277194239715465858
 BoxCollider2D:
   m_ObjectHideFlags: 0

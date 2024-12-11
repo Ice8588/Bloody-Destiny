@@ -15,6 +15,7 @@ public class GrayRobeAttack : MonoBehaviour
     private LineRenderer lineRenderer; // LineRenderer �ե�
     private float lastAttackTime = 0f; // �W�������ɶ�
     public GameObject player;
+    public Animator animator;
     float distanceToPlayer;
 
 
@@ -51,7 +52,7 @@ public class GrayRobeAttack : MonoBehaviour
         AttackPointPosition = transform.position;
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(AttackPointPosition, AttackRange, PlayerLayer);
         DrawAttackCone(AttackPointPosition);
-
+        animator.SetFloat("attack", 1);
         foreach (Collider2D player in hitEnemies)
         {
             PlayerCtrl playerCtrl = player.GetComponent<PlayerCtrl>();
@@ -81,6 +82,7 @@ public class GrayRobeAttack : MonoBehaviour
 
     void ClearAttackCone()
     {
+        animator.SetFloat("attack", 0);
         lineRenderer.enabled = false;
     }
 }

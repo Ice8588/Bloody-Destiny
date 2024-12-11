@@ -22,7 +22,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6331196428378130037
 Transform:
   m_ObjectHideFlags: 0
@@ -112,6 +112,7 @@ MonoBehaviour:
   HealthBar: {fileID: 5946684973296655068}
   lockOnIndicator: {fileID: 0}
   tag: origin
+  animator: {fileID: 0}
   rb: {fileID: 8697786253624520263}
   distanceToPlayer: 0
   speed: 2

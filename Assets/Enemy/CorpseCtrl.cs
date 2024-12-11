@@ -2,8 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class CorpseCtrl : EnemyScript
 {
+    //public Animator animator;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,6 +22,11 @@ public class CorpseCtrl : EnemyScript
         if (GameCtrl.TimeCounter % 120 == 0)
         {
             shoot();
+        }
+
+        if(Health<=0)
+        {
+            animator.SetFloat("corpse", 1);
         }
     }
     

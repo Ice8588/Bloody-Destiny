@@ -48878,6 +48878,7 @@ MonoBehaviour:
   HealthBar: {fileID: 693086856}
   lockOnIndicator: {fileID: 0}
   tag: origin
+  animator: {fileID: 0}
 --- !u!4 &7472579630477842479
 Transform:
   m_ObjectHideFlags: 0
