@@ -16,6 +16,7 @@ public class WhiteRobeAttack : MonoBehaviour
     private float lastAttackTime = 0f; // �W�������ɶ�
     public GameObject player;
     float distanceToPlayer;
+    public Animator animator;
 
 
     void Awake()
@@ -39,7 +40,6 @@ public class WhiteRobeAttack : MonoBehaviour
         distanceToPlayer = Vector2.Distance(transform.position, player.transform.position);
         if (Time.time >= lastAttackTime + AttackCooldown)
         {
-            Debug.Log(distanceToPlayer);
             Attack();
             lastAttackTime = Time.time;
             Invoke(nameof(ClearAttackCone), EffectDuration); // �b���w�ɶ���M��
@@ -51,7 +51,8 @@ public class WhiteRobeAttack : MonoBehaviour
         AttackPointPosition = transform.position;
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(AttackPointPosition, AttackRange, PlayerLayer);
         DrawAttackCone(AttackPointPosition);
-
+        animator.SetFloat("attack", 1);
+        Debug.Log("123");
         foreach (Collider2D player in hitEnemies)
         {
             PlayerCtrl playerCtrl = player.GetComponent<PlayerCtrl>();
@@ -82,6 +83,7 @@ public class WhiteRobeAttack : MonoBehaviour
 
     void ClearAttackCone()
     {
+        animator.SetFloat("attack", 0);
         lineRenderer.enabled = false;
     }
 }

@@ -35,6 +35,7 @@ public class PlayerAttack : MonoBehaviour
 
     void Update()
     {
+        
         if (Input.GetMouseButtonDown(0) && Time.time >= lastAttackTime + AttackCooldown)
         {
             Attack();
@@ -50,6 +51,7 @@ public class PlayerAttack : MonoBehaviour
 
     void Attack()
     {
+        animator.SetFloat("slash", 1);
         AttackPointPosition = transform.position;
         DrawAttackCone(AttackPointPosition);
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(AttackPointPosition, AttackRange, EnemyLayer);
@@ -63,7 +65,7 @@ public class PlayerAttack : MonoBehaviour
             Vector2 playerForward = transform.up; // 以 X 軸方向為玩家的正前方
 
             // 計算角度（用餘弦公式檢查角度範圍是否小於 60 度）
-            float angle = Vector2.Angle(playerForward, directionToEnemy);
+            float angle = Vector2.Angle(playerForward, directionToEnemy)-90;
 
             if (angle <= AttackAngle / 2) // 在 120 度範圍內
             {
@@ -83,14 +85,14 @@ public class PlayerAttack : MonoBehaviour
 
     private void DrawAttackCone(Vector2 AttackPointPosition)
     {
-        animator.SetFloat("slash", 1);
+        
         Vector3 direction = transform.up; // 玩家面向方向
         lineRenderer.enabled = true;
 
         float angleStep = AttackAngle / Segments;
         for (int i = 0; i < Segments; i++)
         {
-            float currentAngle = -AttackAngle / 2 + angleStep * i;
+            float currentAngle = -AttackAngle / 2 + angleStep * i - 90;
             Vector2 rotatedDirection = Quaternion.Euler(0, 0, currentAngle) * direction;
             Vector2 point = AttackPointPosition + rotatedDirection.normalized * AttackRange;
             lineRenderer.SetPosition(i, point);

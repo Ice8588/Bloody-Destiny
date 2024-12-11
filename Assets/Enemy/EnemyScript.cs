@@ -91,7 +91,7 @@ public class EnemyScript : MonoBehaviour
 
     protected void UseBloodMagic()
     {
-        Vector3 shotAngle = new Vector3(0, 0, 0);
+        Vector3 shotAngle = new Vector3(0, 0, 90);
         Vector3 shotPos = transform.position;
 
         GameObject newBloodMagic = Instantiate(BloodMagic, transform.position, new Quaternion(0, 0, 0, 0));

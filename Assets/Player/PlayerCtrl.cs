@@ -193,7 +193,7 @@ public class PlayerCtrl : MonoBehaviour
         // 設置玩家的旋轉角度，讓 +Y 軸指向滑鼠
         //transform.rotation = Quaternion.Euler(0, 0, angle - 90); // 減去 90 度讓正面對齊 +Y
 
-        Quaternion targetRotation = Quaternion.Euler(0, 0, angle - 90);
+        Quaternion targetRotation = Quaternion.Euler(0, 0, angle);
         transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 10f);
     }
 
