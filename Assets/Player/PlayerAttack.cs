@@ -35,7 +35,7 @@ public class PlayerAttack : MonoBehaviour
 
     void Update()
     {
-        
+
         if (Input.GetMouseButtonDown(0) && Time.time >= lastAttackTime + AttackCooldown)
         {
             Attack();
@@ -46,7 +46,7 @@ public class PlayerAttack : MonoBehaviour
 
     void FixedUpdate()
     {
-        if(counter>0)counter--;
+        if (counter > 0) counter--;
     }
 
     void Attack()
@@ -65,14 +65,14 @@ public class PlayerAttack : MonoBehaviour
             Vector2 playerForward = transform.up; // 以 X 軸方向為玩家的正前方
 
             // 計算角度（用餘弦公式檢查角度範圍是否小於 60 度）
-            float angle = Vector2.Angle(playerForward, directionToEnemy)-90;
+            float angle = Vector2.Angle(playerForward, directionToEnemy) - 90;
 
             if (angle <= AttackAngle / 2) // 在 120 度範圍內
             {
                 Debug.Log("擊中敵人：" + enemy.name);
 
                 EnemyScript enemyScript = enemy.GetComponent<EnemyScript>();
-                
+
                 if (enemyScript)
                 {
                     enemyScript.TakeDamage(AttackDamage);
@@ -85,9 +85,10 @@ public class PlayerAttack : MonoBehaviour
 
     private void DrawAttackCone(Vector2 AttackPointPosition)
     {
-        
+
         Vector3 direction = transform.up; // 玩家面向方向
         lineRenderer.enabled = true;
+        lineRenderer.widthCurve = AnimationCurve.Linear(0, 0.1f, 0.5f, 0.1f);
 
         float angleStep = AttackAngle / Segments;
         for (int i = 0; i < Segments; i++)

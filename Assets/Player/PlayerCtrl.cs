@@ -105,7 +105,7 @@ public class PlayerCtrl : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.F) && BloodPower >= BloodPowerCost)
         {
-            Vector3 playerForward = transform.up;
+            Vector3 playerForward = transform.right;
             Vector3 spawnPosition = transform.position + playerForward * 0.5f;
             GameObject bullet = Instantiate(BloodMagic, spawnPosition, Quaternion.identity);
             bullet.transform.rotation = Quaternion.LookRotation(Vector3.forward, playerForward);
@@ -116,7 +116,7 @@ public class PlayerCtrl : MonoBehaviour
 
     void LateUpdate()
     {
-        if (GameCtrl.TimeCounter % 300 == 0 && BloodPower < Health)
+        if (GameCtrl.TimeCounter % 120 == 0 && BloodPower < Health)
         {
             BloodPower++;
         }
