@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 using UnityEngine.SceneManagement;
+using UnityEngine;
 
 public class PlayerCtrl : MonoBehaviour
 {
@@ -19,7 +20,7 @@ public class PlayerCtrl : MonoBehaviour
     private bool isDodging = false, isRunning = false;     // 是否處於閃避狀態
     private float lastDodgeTime = -Mathf.Infinity; // 上次閃避的時間
     public bool CanUp = false, CanRight = false, CanLeft = false, CanDown = false;
-    private bool isTrapActive = true;
+    public bool isTrapActive = true;
     public float visibleTime = 1f;
     public float hiddenTime = 1f;
     public Animator animator;
@@ -40,15 +41,18 @@ public class PlayerCtrl : MonoBehaviour
         {
             foreach (GameObject trap in traps)
             {
-                SetTrapState(trap, true);
+                //SetTrapState(trap, true);
                 isTrapActive = true;
+
             }
             yield return new WaitForSeconds(visibleTime);
 
             foreach (GameObject trap in traps)
             {
-                SetTrapState(trap, false);
+                //SetTrapState(trap, false);
+
                 isTrapActive = false;
+
             }
 
             yield return new WaitForSeconds(hiddenTime);
