@@ -141,9 +141,9 @@ public class PlayerCtrl : MonoBehaviour
     {
         float PlayerSpeed = isRunning ? RunSpeed : WalkSpeed;
         if (movement != Vector2.zero)
-            animator.SetFloat("run", Mathf.Abs(PlayerSpeed));
+            animator.SetFloat("run", 1);
         else
-            animator.SetFloat("run", Mathf.Abs(0));
+            animator.SetFloat("run", 0);
         Vector2 newPosition = rb.position + movement.normalized * PlayerSpeed * Time.fixedDeltaTime;
 
         newPosition.x = Mathf.Clamp(newPosition.x, -GameCtrl.SCREEN_WIDTH[GameCtrl.Stage], GameCtrl.SCREEN_WIDTH[GameCtrl.Stage]);
