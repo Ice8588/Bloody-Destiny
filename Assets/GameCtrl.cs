@@ -92,9 +92,17 @@ public class GameCtrl : MonoBehaviour
 
     public static void GameClear()
     {
-        Instance.SpawnTeleport();
-        IsGameClear = true;
-       // SceneManager.LoadScene("GameOverMenu");
+        if (Stage == 0)
+        {
+            Instance.SpawnTeleport();
+        }
+
+        if (IsGameClear)
+        {
+            SceneManager.LoadScene("GameOverMenu");
+            //GameCtrl.IsGameClear = true;
+        }
+        // SceneManager.LoadScene("GameOverMenu");
     }
 
     void SpawnTeleport()

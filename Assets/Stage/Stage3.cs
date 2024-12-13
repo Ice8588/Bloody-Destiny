@@ -35,8 +35,9 @@ public class Stage3 : MonoBehaviour
     {
         if (EnemyNum <= 0)
         {
-            SceneManager.LoadScene("GameOverMenu");
+            //SceneManager.LoadScene("GameOverMenu");
             GameCtrl.IsGameClear = true;
+            GameCtrl.GameClear();
         }
     }
 
