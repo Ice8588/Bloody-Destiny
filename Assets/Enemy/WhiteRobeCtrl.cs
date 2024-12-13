@@ -41,7 +41,7 @@ public class WhiteRobeCtrl : EnemyScript
         base.Update();
         //transform.Translate(new Vector3(0.1f, 0, 0));  //test
 
-        if (GameCtrl.TimeCounter % 180 == 0 && distanceToPlayer > 1)
+        if (GameCtrl.TimeCounter % 50 == 0 && distanceToPlayer > 1)
         {
             UseBloodMagic();
         }
