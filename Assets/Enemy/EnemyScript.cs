@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Microsoft.Unity.VisualStudio.Editor;
 using Unity.Mathematics;
 using UnityEngine;
+//public Animator animator;
 using UnityEngine.UI;
 
 public class EnemyScript : MonoBehaviour
@@ -16,6 +17,7 @@ public class EnemyScript : MonoBehaviour
     public GameObject HealthBar;
     public UnityEngine.UI.Image lockOnIndicator; // 鎖定圖示
     public new string tag = "origin";
+    public Animator animator;
     protected Vector3 InitialPosition = new Vector3(-13, 2, 0);  //test
     // Start is called before the first frame update
     void Start()
@@ -46,6 +48,8 @@ public class EnemyScript : MonoBehaviour
             switch (tag)
             {
                 case "Corpse":
+                    animator.SetFloat("corpse", 1);
+                    Debug.Log("esgs");
                     component.CorpseNum++;
                     break;
                 case "WhiteRobe":
@@ -91,7 +95,7 @@ public class EnemyScript : MonoBehaviour
 
     protected void UseBloodMagic()
     {
-        Vector3 shotAngle = new Vector3(0, 0, 0);
+        Vector3 shotAngle = new Vector3(0, 0, 90);
         Vector3 shotPos = transform.position;
 
         GameObject newBloodMagic = Instantiate(BloodMagic, transform.position, new Quaternion(0, 0, 0, 0));

@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 5492903537433154207}
   - component: {fileID: 8697786253624520263}
   - component: {fileID: 8917299018634989379}
+  - component: {fileID: 5191356692202721578}
   m_Layer: 8
   m_Name: WhiteRobe
   m_TagString: Enemy
@@ -76,13 +77,13 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -734376777
+  m_SortingLayer: 4
   m_SortingOrder: 1
   m_Sprite: {fileID: -2135585597343286014, guid: 5aa8b770bc43046bc8d993d0d5b7f4a5, type: 3}
   m_Color: {r: 0.7830189, g: 0.7830189, b: 0.7830189, a: 1}
   m_FlipX: 0
-  m_FlipY: 1
+  m_FlipY: 0
   m_DrawMode: 0
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
@@ -111,6 +112,7 @@ MonoBehaviour:
   HealthBar: {fileID: 5946684973296655068}
   lockOnIndicator: {fileID: 0}
   tag: origin
+  animator: {fileID: 0}
   rb: {fileID: 8697786253624520263}
   distanceToPlayer: 0
   speed: 2
@@ -135,13 +137,14 @@ MonoBehaviour:
   AttackRange: 1
   AttackDamage: 2
   AttackCooldown: 1
-  AttackAngle: 360
+  AttackAngle: 120
   EffectDuration: 0.05
-  Segments: 360
+  Segments: 120
   PlayerLayer:
     serializedVersion: 2
     m_Bits: 128
   player: {fileID: 756637192477531513, guid: 6e5d561e84920b548997321e153d4d0d, type: 3}
+  animator: {fileID: 5191356692202721578}
 --- !u!61 &5492903537433154207
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -318,6 +321,27 @@ LineRenderer:
   m_UseWorldSpace: 1
   m_Loop: 0
   m_ApplyActiveColorSpace: 1
+--- !u!95 &5191356692202721578
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2638300751077252523}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: b296f1b56e9643b438c7dc06c8b5bc59, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &5946684973296655068
 GameObject:
   m_ObjectHideFlags: 0
@@ -388,8 +412,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -734376777
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 1, g: 0, b: 0, a: 1}

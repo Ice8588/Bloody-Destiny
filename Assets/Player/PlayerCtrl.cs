@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 using UnityEngine.SceneManagement;
+using UnityEngine;
 
 public class PlayerCtrl : MonoBehaviour
 {
@@ -10,7 +11,7 @@ public class PlayerCtrl : MonoBehaviour
     private GameObject[] traps;
     public float WalkSpeed = 5f, RunSpeed = 8f, dodgeSpeed = 30f;
     public float dodgeDuration = 0.05f, dodgeCooldown = 0.5f;
-    public static int MaxHealth = 100, Health = 100, MaxBloodPower = 0, BloodPower = 0, BloodGroove = 0, BloodGrooveMax = 10;
+    public static int MaxHealth = 100, Health = 100, MaxBloodPower = 0, BloodPower = 0, BloodGroove = 0, BloodGrooveMax = 20;
     public int BloodPowerCost = 2;
     private Vector2 lastPosition; // 記錄角色的上一次位置
     public static Vector3 PlayerPos;
@@ -19,9 +20,10 @@ public class PlayerCtrl : MonoBehaviour
     private bool isDodging = false, isRunning = false;     // 是否處於閃避狀態
     private float lastDodgeTime = -Mathf.Infinity; // 上次閃避的時間
     public bool CanUp = false, CanRight = false, CanLeft = false, CanDown = false;
-    private bool isTrapActive = true;
+    public bool isTrapActive = true;
     public float visibleTime = 1f;
     public float hiddenTime = 1f;
+    public Animator animator;
     // Start is called before the first frame update
     void Start()
     {
@@ -39,15 +41,18 @@ public class PlayerCtrl : MonoBehaviour
         {
             foreach (GameObject trap in traps)
             {
-                SetTrapState(trap, true);
+                //SetTrapState(trap, true);
                 isTrapActive = true;
+
             }
             yield return new WaitForSeconds(visibleTime);
 
             foreach (GameObject trap in traps)
             {
-                SetTrapState(trap, false);
+                //SetTrapState(trap, false);
+
                 isTrapActive = false;
+
             }
 
             yield return new WaitForSeconds(hiddenTime);
@@ -72,7 +77,7 @@ public class PlayerCtrl : MonoBehaviour
     {
         PlayerPos = transform.position;
         lastPosition = transform.position;
-        //movement = Vector2.zero;
+        movement = Vector2.zero;
         movement.x = Input.GetAxisRaw("Horizontal");
         movement.y = Input.GetAxisRaw("Vertical");
         //if (!CanUp && transform.position.y + 0.3 <= GameCtrl.SCREEN_HEIGHT && (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow)))
@@ -104,14 +109,18 @@ public class PlayerCtrl : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.F) && BloodPower >= BloodPowerCost)
         {
-            Instantiate(BloodMagic, transform.position + new Vector3(0, 0.1f, 0), Quaternion.identity);
+            Vector3 playerForward = transform.right;
+            Vector3 spawnPosition = transform.position + playerForward * 0.5f;
+            GameObject bullet = Instantiate(BloodMagic, spawnPosition, Quaternion.identity);
+            bullet.transform.rotation = Quaternion.LookRotation(Vector3.forward, playerForward);
+
             BloodPower -= BloodPowerCost;
         }
     }
 
     void LateUpdate()
     {
-        if (GameCtrl.TimeCounter % 300 == 0 && BloodPower < Health)
+        if (GameCtrl.TimeCounter % 120 == 0 && BloodPower < Health)
         {
             BloodPower++;
         }
@@ -119,6 +128,8 @@ public class PlayerCtrl : MonoBehaviour
         {
             BloodPower = Mathf.Max(0, Mathf.Min(Health, BloodPower));
         }
+
+        BloodGroove = Mathf.Max(0, Mathf.Min(BloodGrooveMax, BloodGroove));
     }
 
     void FixedUpdate()
@@ -133,7 +144,10 @@ public class PlayerCtrl : MonoBehaviour
     void Move()
     {
         float PlayerSpeed = isRunning ? RunSpeed : WalkSpeed;
-
+        if (movement != Vector2.zero)
+            animator.SetFloat("run", 1);
+        else
+            animator.SetFloat("run", 0);
         Vector2 newPosition = rb.position + movement.normalized * PlayerSpeed * Time.fixedDeltaTime;
 
         newPosition.x = Mathf.Clamp(newPosition.x, -GameCtrl.SCREEN_WIDTH[GameCtrl.Stage], GameCtrl.SCREEN_WIDTH[GameCtrl.Stage]);
@@ -187,7 +201,7 @@ public class PlayerCtrl : MonoBehaviour
         // 設置玩家的旋轉角度，讓 +Y 軸指向滑鼠
         //transform.rotation = Quaternion.Euler(0, 0, angle - 90); // 減去 90 度讓正面對齊 +Y
 
-        Quaternion targetRotation = Quaternion.Euler(0, 0, angle - 90);
+        Quaternion targetRotation = Quaternion.Euler(0, 0, angle);
         transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 10f);
     }
 
@@ -203,7 +217,7 @@ public class PlayerCtrl : MonoBehaviour
     }
     void OnTriggerEnter2D(Collider2D other)
     {
-        
+
         Vector2 direction = other.transform.position - transform.position;
 
         if (other.CompareTag("Obstacle"))
@@ -230,7 +244,7 @@ public class PlayerCtrl : MonoBehaviour
         }
         else if (other.CompareTag("Fire") || other.CompareTag("Thorns"))
         {
-            TakeDamage(10);   
+            TakeDamage(10);
         }
         else if (other.CompareTag("Stab") && isTrapActive)
         {

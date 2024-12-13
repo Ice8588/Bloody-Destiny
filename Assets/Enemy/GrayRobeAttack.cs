@@ -4,17 +4,18 @@ using UnityEngine;
 
 public class GrayRobeAttack : MonoBehaviour
 {
-    public float AttackRange = 1f; // §ðÀ»½d³ò
-    public int AttackDamage = 2; // §ðÀ»¶Ë®`
-    public float AttackCooldown = 1f; // §ðÀ»§N«o®É¶¡
-    public float AttackAngle = 360f; // ®°§Î½d³ò¨¤«×
-    public float EffectDuration = 0.05f; // §ðÀ»®ÄªG«ùÄò®É¶¡
-    public int Segments = 360; // ¶ê§Îªº¬q¼Æ
-    public LayerMask PlayerLayer; // ¼Ä¤H¹Ï¼h
-    private Vector2 AttackPointPosition; // §ðÀ»ÂI¦ì¸m
-    private LineRenderer lineRenderer; // LineRenderer ²Õ¥ó
-    private float lastAttackTime = 0f; // ¤W¦¸§ðÀ»®É¶¡
+    public float AttackRange = 1f; // ï¿½ï¿½ï¿½ï¿½ï¿½dï¿½ï¿½
+    public int AttackDamage = 10; // ï¿½ï¿½ï¿½ï¿½ï¿½Ë®`
+    public float AttackCooldown = 1f; // ï¿½ï¿½ï¿½ï¿½ï¿½Nï¿½oï¿½É¶ï¿½
+    public float AttackAngle = 120f; // ï¿½ï¿½ï¿½Î½dï¿½ò¨¤«ï¿½
+    public float EffectDuration = 0.05f; // ï¿½ï¿½ï¿½ï¿½ï¿½ÄªGï¿½ï¿½ï¿½ï¿½É¶ï¿½
+    public int Segments = 120; // ï¿½ï¿½Îªï¿½ï¿½qï¿½ï¿½
+    public LayerMask PlayerLayer; // ï¿½Ä¤Hï¿½Ï¼h
+    private Vector2 AttackPointPosition; // ï¿½ï¿½ï¿½ï¿½ï¿½Iï¿½ï¿½m
+    private LineRenderer lineRenderer; // LineRenderer ï¿½Õ¥ï¿½
+    private float lastAttackTime = 0f; // ï¿½Wï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½É¶ï¿½
     public GameObject player;
+    public Animator animator;
     float distanceToPlayer;
 
 
@@ -25,7 +26,7 @@ public class GrayRobeAttack : MonoBehaviour
 
         lineRenderer = GetComponent<LineRenderer>();
         lineRenderer.positionCount = Segments;
-        lineRenderer.useWorldSpace = true; // ¨Ï¥Î¥@¬É®y¼Ð
+        lineRenderer.useWorldSpace = true; // ï¿½Ï¥Î¥@ï¿½É®yï¿½ï¿½
     }
 
     void Start()
@@ -36,43 +37,40 @@ public class GrayRobeAttack : MonoBehaviour
     void Update()
     {
 
-        distanceToPlayer = Vector2.Distance(transform.position, player.transform.position);
-        if (Time.time >= lastAttackTime + AttackCooldown)
+        distanceToPlayer = Vector2.Distance(transform.position, PlayerCtrl.PlayerPos);
+        if (Time.time >= lastAttackTime + AttackCooldown && distanceToPlayer < 1.5)
         {
             Debug.Log(distanceToPlayer);
             Attack();
             lastAttackTime = Time.time;
-            Invoke(nameof(ClearAttackCone), EffectDuration); // ¦b«ü©w®É¶¡«á²M°£
+            Invoke(nameof(ClearAttackCone), EffectDuration); // ï¿½bï¿½ï¿½ï¿½wï¿½É¶ï¿½ï¿½ï¿½Mï¿½ï¿½
         }
     }
 
     void Attack()
     {
         AttackPointPosition = transform.position;
-        DrawAttackCone(AttackPointPosition);
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(AttackPointPosition, AttackRange, PlayerLayer);
-
-        foreach (Collider2D enemy in hitEnemies)
+        DrawAttackCone(AttackPointPosition);
+        animator.SetFloat("attack", 1);
+        foreach (Collider2D player in hitEnemies)
         {
-            Debug.Log("À»¤¤¼Ä¤H¡G" + enemy.name);
-            PlayerCtrl playerScript = enemy.GetComponent<PlayerCtrl>();
+            PlayerCtrl playerCtrl = player.GetComponent<PlayerCtrl>();
 
-            if (playerScript)
+            if (playerCtrl)
             {
-                playerScript.TakeDamage(AttackDamage);
-                PlayerCtrl.BloodGroove += AttackDamage / 2;
+                playerCtrl.TakeDamage(AttackDamage);
             }
         }
     }
 
-
     private void DrawAttackCone(Vector2 AttackPointPosition)
     {
-        Vector3 direction = player.transform.position - transform.position;
-        //Vector3 direction = transform.up; // ª±®a­±¦V¤è¦V
+        float AngleZ = Mathf.Atan2(PlayerCtrl.PlayerPos.y - transform.position.y, PlayerCtrl.PlayerPos.x - transform.position.x);
+        Vector2 direction = (Quaternion.Euler(0, 0, AngleZ * Mathf.Rad2Deg - 90) * Vector2.up).normalized;
         lineRenderer.enabled = true;
-
         float angleStep = AttackAngle / Segments;
+
         for (int i = 0; i < Segments; i++)
         {
             float currentAngle = -AttackAngle / 2 + angleStep * i;
@@ -84,6 +82,7 @@ public class GrayRobeAttack : MonoBehaviour
 
     void ClearAttackCone()
     {
+        animator.SetFloat("attack", 0);
         lineRenderer.enabled = false;
     }
 }

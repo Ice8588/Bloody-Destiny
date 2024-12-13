@@ -70,8 +70,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -734376777
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 1, g: 0, b: 0, a: 1}
@@ -99,6 +99,7 @@ GameObject:
   - component: {fileID: 689488135521072411}
   - component: {fileID: 1823033701705691277}
   - component: {fileID: 5329444104082753363}
+  - component: {fileID: -887220749647887875}
   m_Layer: 8
   m_Name: GrayRobe
   m_TagString: Enemy
@@ -160,13 +161,13 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -734376777
+  m_SortingLayer: 4
   m_SortingOrder: 1
-  m_Sprite: {fileID: 3625043607559282579, guid: 19fb86013d8c24d6cb8410c0aadf30fa, type: 3}
-  m_Color: {r: 0.41509432, g: 0.41509432, b: 0.41509432, a: 1}
+  m_Sprite: {fileID: -1407426489, guid: dd78ec82157d4f14c8556651e8e8b8d1, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
-  m_FlipY: 1
+  m_FlipY: 0
   m_DrawMode: 0
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
@@ -195,6 +196,7 @@ MonoBehaviour:
   HealthBar: {fileID: 3333147277169271735}
   lockOnIndicator: {fileID: 7696520752805767634, guid: 2822e50942855414081e50654d6a6a29, type: 3}
   tag: origin
+  animator: {fileID: 0}
   rb: {fileID: 1823033701705691277}
   distanceToPlayer: 0
   speed: 0.9
@@ -217,15 +219,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AttackRange: 1
-  AttackDamage: 2
+  AttackDamage: 10
   AttackCooldown: 1
-  AttackAngle: 360
+  AttackAngle: 120
   EffectDuration: 0.05
-  Segments: 360
+  Segments: 120
   PlayerLayer:
     serializedVersion: 2
     m_Bits: 128
   player: {fileID: 756637192477531513, guid: 6e5d561e84920b548997321e153d4d0d, type: 3}
+  animator: {fileID: -887220749647887875}
 --- !u!61 &689488135521072411
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -258,18 +261,18 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.21133333}
+  m_Offset: {x: -0.09645319, y: -0.16520417}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 0.5}
+    oldSize: {x: 2.875, y: 2.125}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 2.5013032, y: 1.4277453}
   m_EdgeRadius: 0
 --- !u!50 &1823033701705691277
 Rigidbody2D:
@@ -402,3 +405,24 @@ LineRenderer:
   m_UseWorldSpace: 1
   m_Loop: 0
   m_ApplyActiveColorSpace: 1
+--- !u!95 &-887220749647887875
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9006265424410510855}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: e6ed236262ae61f41ba9bb816e5320bf, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0

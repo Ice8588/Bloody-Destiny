@@ -22,7 +22,7 @@ TagManager:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - background
   - Water
   - UI
   - MapRange
@@ -51,8 +51,19 @@ TagManager:
   - 
   - 
   - 
-  - 
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: road
+    uniqueID: 3673407517
+    locked: 0
+  - name: background
+    uniqueID: 3104716075
+    locked: 0
+  - name: sence
+    uniqueID: 2748558035
+    locked: 0
+  - name: player
+    uniqueID: 3560590519
     locked: 0
