@@ -103,10 +103,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82264d3fbf0dddc46beaf11aaa07d378, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHealth: 5
-  Health: 5
+  MaxHealth: 8
+  Health: 8
   SwordATK: 2
-  BloodMagicATK: 3
+  BloodMagicATK: 5
   ESA: {fileID: 0}
   BloodMagic: {fileID: 230279984119097172, guid: f71556a98527cf04b99b6857c4d59c51, type: 3}
   HealthBar: {fileID: 5946684973296655068}
@@ -135,7 +135,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AttackRange: 1
-  AttackDamage: 2
+  AttackDamage: 5
   AttackCooldown: 1
   AttackAngle: 120
   EffectDuration: 0.05

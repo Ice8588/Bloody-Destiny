@@ -6,7 +6,7 @@ using UnityEngine;
 public class EnemyBloodMagicCtrl : MonoBehaviour
 {
 
-    public int ATK = 2;
+    public int ATK = 3;
     public ShotConfig SC = new ShotConfig();
     int traceCounter = 0;
     // Start is called before the first frame update

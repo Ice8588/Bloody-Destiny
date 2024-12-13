@@ -110,7 +110,7 @@ public class WhiteRobeCtrl : EnemyScript
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.CompareTag("Obstacle") || collision.CompareTag("Circle")|| collision.CompareTag("Enemy"))
+        if (collision.CompareTag("Obstacle") || collision.CompareTag("Circle"))
         {
             
             OB = true;

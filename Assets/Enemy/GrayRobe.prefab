@@ -187,8 +187,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5cd69d3f67f3fc847bda22b80542a1be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHealth: 5
-  Health: 5
+  MaxHealth: 10
+  Health: 10
   SwordATK: 2
   BloodMagicATK: 3
   ESA: {fileID: 0}
@@ -199,7 +199,7 @@ MonoBehaviour:
   animator: {fileID: 0}
   rb: {fileID: 1823033701705691277}
   distanceToPlayer: 0
-  speed: 0.9
+  speed: 1.2
   OB: 0
   CanUp: 0
   CanRight: 0

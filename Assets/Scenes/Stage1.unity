@@ -6857,23 +6857,39 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4259390887053546498, guid: 3ea6e4e1e312431419a5312b78cb19a0, type: 3}
       propertyPath: EnemyNum
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4259390887053546498, guid: 3ea6e4e1e312431419a5312b78cb19a0, type: 3}
       propertyPath: CorpseNum
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4259390887053546498, guid: 3ea6e4e1e312431419a5312b78cb19a0, type: 3}
       propertyPath: GrayRobeNum
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4259390887053546498, guid: 3ea6e4e1e312431419a5312b78cb19a0, type: 3}
       propertyPath: WhiteRobeNum
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5929326904458713875, guid: 3ea6e4e1e312431419a5312b78cb19a0, type: 3}
       propertyPath: m_Name
       value: EnemySqwanArea
+      objectReference: {fileID: 0}
+    - target: {fileID: 8792947289227184319, guid: 3ea6e4e1e312431419a5312b78cb19a0, type: 3}
+      propertyPath: m_Size.x
+      value: 13.869778
+      objectReference: {fileID: 0}
+    - target: {fileID: 8792947289227184319, guid: 3ea6e4e1e312431419a5312b78cb19a0, type: 3}
+      propertyPath: m_Size.y
+      value: 21.762756
+      objectReference: {fileID: 0}
+    - target: {fileID: 8792947289227184319, guid: 3ea6e4e1e312431419a5312b78cb19a0, type: 3}
+      propertyPath: m_Offset.x
+      value: -3.7262344
+      objectReference: {fileID: 0}
+    - target: {fileID: 8792947289227184319, guid: 3ea6e4e1e312431419a5312b78cb19a0, type: 3}
+      propertyPath: m_Offset.y
+      value: -7.54245
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
