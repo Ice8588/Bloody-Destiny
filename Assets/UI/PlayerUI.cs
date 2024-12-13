@@ -7,8 +7,7 @@ using UnityEngine.UI;
 public class PlayerUI : MonoBehaviour
 {
     public Slider HealthBar, BloodPowerBar, BloodGroove;
-    public TextMeshProUGUI HealthText, BloodPowerText, BloodGrooveText;
-
+    public TextMeshProUGUI HealthText, BloodPowerText, BloodGrooveText, MissionBoardText;
     // Start is called before the first frame update
     void Start()
     {
@@ -32,7 +31,21 @@ public class PlayerUI : MonoBehaviour
         BloodGroove.maxValue = PlayerCtrl.BloodGrooveMax;
         BloodGroove.value = PlayerCtrl.BloodGroove;
         BloodGrooveText.text = PlayerCtrl.BloodGroove + "\n / \n" + PlayerCtrl.BloodGrooveMax;
-
+        switch(GameCtrl.Stage)
+        {
+            case 0:
+                MissionBoardText.text = Stage1.MissionContent;
+                break;
+            case 1:
+                MissionBoardText.text = Stage2.MissionContent;
+                break;
+            case 2:
+                MissionBoardText.text = Stage3.MissionContent;
+                break;
+            default:
+                MissionBoardText.text ="沒有任務";
+                break;
+        }
         RectTransform sliderRect = BloodPowerBar.GetComponent<RectTransform>();
 
         float bloodPowerRate = (float)PlayerCtrl.Health / (float)PlayerCtrl.MaxBloodPower;

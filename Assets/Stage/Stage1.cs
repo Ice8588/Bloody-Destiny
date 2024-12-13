@@ -7,10 +7,12 @@ public class Stage1 : MonoBehaviour
     public GameObject Corpse, GrayRobe, WhiteRobe;
     public static int EnemyNum = 10;
     public static int MAXEnemyNum = 10;
+    public static string MissionContent = "清理"+ MAXEnemyNum+"隻異形(剩餘"+EnemyNum+"隻)";
     // Start is called before the first frame update
     void Start()
     {
         GameCtrl.Stage = 0;
+        EnemyNum = MAXEnemyNum;
         var gameCtrl = GameCtrl.Instance;
         // InvokeRepeating("SpawnCorpse", 0f, 10f);
     }
@@ -18,6 +20,7 @@ public class Stage1 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        MissionContent = "清理" + MAXEnemyNum + "隻異形(剩餘" + EnemyNum + "隻)";
         if (GameCtrl.TimeCounter == 240)
         {
             //Instantiate(enemy[1]);

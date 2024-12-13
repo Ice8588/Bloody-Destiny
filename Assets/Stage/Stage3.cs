@@ -8,6 +8,7 @@ public class Stage3 : MonoBehaviour
     public GameObject Corpse, GrayRobe, WhiteRobe;
     public static int EnemyNum = 0;
     public static int MAXEnemyNum = 10;
+    public static string MissionContent = "我不知道你要幹嘛";
 
     // Start is called before the first frame update
     void Start()
