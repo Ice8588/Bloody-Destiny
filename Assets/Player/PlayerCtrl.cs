@@ -107,7 +107,7 @@ public class PlayerCtrl : MonoBehaviour
         isRunning = Input.GetKey(KeyCode.LeftShift);
 
 
-        if (Input.GetKeyDown(KeyCode.F) && BloodPower >= BloodPowerCost)
+        if (Input.GetMouseButtonDown(1) && BloodPower >= BloodPowerCost)
         {
             Vector3 playerForward = transform.right;
             Vector3 spawnPosition = transform.position + playerForward * 0.5f;
