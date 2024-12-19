@@ -104,6 +104,7 @@ public class PlayerCtrl : MonoBehaviour
         // 嘗試進行閃避
         if (Input.GetKeyDown(KeyCode.Space) && CanDodge())
         {
+            animator.SetFloat("filp", 1);
             StartCoroutine(Dodge());
         }
 
@@ -152,6 +153,7 @@ public class PlayerCtrl : MonoBehaviour
 
     void Move()
     {
+        animator.SetFloat("filp", 0);
         float PlayerSpeed = isRunning ? RunSpeed : WalkSpeed;
         if (movement != Vector2.zero)
             animator.SetFloat("run", 1);
