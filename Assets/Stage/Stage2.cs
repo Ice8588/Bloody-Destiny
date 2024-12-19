@@ -34,10 +34,7 @@ public class Stage2 : MonoBehaviour
 
     void LateUpdate()
     {
-        // if (EnemyNum <= 0)
-        // {
-        //     GameCtrl.GameClear();
-        // }
+        
     }
 
 

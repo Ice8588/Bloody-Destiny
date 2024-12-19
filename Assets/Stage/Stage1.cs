@@ -20,7 +20,7 @@ public class Stage1 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        MissionContent = "清理" + MAXEnemyNum + "隻異形(剩餘" + EnemyNum + "隻)";
+        MissionContent = EnemyNum >0 ? "清理" + MAXEnemyNum + "隻異形(剩餘" + EnemyNum + "隻)" : "前往傳送門";
         if (GameCtrl.TimeCounter == 240)
         {
             //Instantiate(enemy[1]);

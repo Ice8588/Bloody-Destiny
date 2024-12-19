@@ -12,9 +12,9 @@ public class ESACtrl : MonoBehaviour
     public int EnemyNum, CorpseNum=3, GrayRobeNum=2, WhiteRobeNum=1;
     void Start()
     {
-        InvokeRepeating("SpawnCorpse", 3f, 15f);
-        InvokeRepeating("SpawnWhiteRobe", 5f, 1f);
-        InvokeRepeating("SpawnGrayRobe", 7f, 25f);
+        InvokeRepeating("SpawnCorpse", 5f, 15f);
+        InvokeRepeating("SpawnWhiteRobe", 15f, 1f);
+        InvokeRepeating("SpawnGrayRobe", 9f, 25f);
         EnemyNum = CorpseNum+GrayRobeNum+WhiteRobeNum;
         boxCollider = GetComponent<BoxCollider2D>();
         Area[0] = new Vector2(boxCollider.bounds.min.x, boxCollider.bounds.max.y);

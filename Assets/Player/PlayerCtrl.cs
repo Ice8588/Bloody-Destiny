@@ -22,7 +22,10 @@ public class PlayerCtrl : MonoBehaviour
     public bool isTrapActive = true;
     public float visibleTime = 1f;
     public float hiddenTime = 1f;
+    public int damageCounter = 0;
+    public int clearCounter = 0;
     public Animator animator;
+    public GameObject DamageMask;
     // Start is called before the first frame update
     void Start()
     {
@@ -42,6 +45,7 @@ public class PlayerCtrl : MonoBehaviour
             {
                 //SetTrapState(trap, true);
                 isTrapActive = true;
+                //damageCounter = 0;
 
             }
             yield return new WaitForSeconds(visibleTime);
@@ -134,6 +138,12 @@ public class PlayerCtrl : MonoBehaviour
     void FixedUpdate()
     {
         // 如果正在閃避，不執行普通移動邏輯
+        clearCounter++;
+        if(clearCounter>=10)
+        {
+            clearCounter = 0;
+            DamageMask.SetActive(false);
+        }
         if (!isDodging)
         {
             Move();
@@ -208,7 +218,7 @@ public class PlayerCtrl : MonoBehaviour
     {
         Health -= damage;
         PlayerHeal playerHeal = GetComponent<PlayerHeal>();
-
+        DamageMask.SetActive(true);
         if (playerHeal != null)
         {
             playerHeal.InterruptHealing();
@@ -243,11 +253,13 @@ public class PlayerCtrl : MonoBehaviour
         }
         else if (other.CompareTag("Fire") || other.CompareTag("Thorns"))
         {
-            TakeDamage(10);
+            damageCounter = 0;
+            //TakeDamage(10);
         }
         else if (other.CompareTag("Stab") && isTrapActive)
         {
-            TakeDamage(10);
+            damageCounter = 0;
+            //TakeDamage(10);
         }
         else if (other.CompareTag("Blue") || other.CompareTag("FakeTeleport"))
         {
@@ -307,6 +319,7 @@ public class PlayerCtrl : MonoBehaviour
     {
         Vector2 direction = other.transform.position - transform.position;
 
+
         if (other.CompareTag("Obstacle"))
         {
             transform.position = lastPosition;
@@ -330,6 +343,20 @@ public class PlayerCtrl : MonoBehaviour
             //        CanLeft = true;
             //        transform.Translate(new Vector2(0.2f, 0));
             //    }
+        }
+        else if (other.CompareTag("Fire") || other.CompareTag("Thorns"))
+        {
+            if(damageCounter++%20==0)
+            {
+                TakeDamage(1);
+            }
+        }
+        else if (other.CompareTag("Stab") && isTrapActive)
+        {
+            if (damageCounter++ % 5 == 0)
+            {
+                TakeDamage(1);
+            }
         }
         //else if (other.CompareTag("Circle"))
         //{

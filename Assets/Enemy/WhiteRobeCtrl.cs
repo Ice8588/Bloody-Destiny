@@ -37,7 +37,7 @@ public class WhiteRobeCtrl : EnemyScript
     // Update is called once per frame
     protected override void Update()
     {
-        lastPosition = transform.position;
+        
         base.Update();
         //transform.Translate(new Vector3(0.1f, 0, 0));  //test
 
@@ -50,7 +50,7 @@ public class WhiteRobeCtrl : EnemyScript
     {
         float x = transform.position.x, y = transform.position.y;
         bool tflag = false;
-
+        lastPosition = transform.position;
         if (transform.position.x >= 19.3)
         {
             tflag = true;
@@ -139,8 +139,8 @@ public class WhiteRobeCtrl : EnemyScript
             //    transform.Translate(new Vector2(0.1f, 0));
             //}
 
-            directionToPlayer = Vector2.Lerp(directionToPlayer, awayFromObstacle, 0.5f).normalized;
-            rb.velocity = directionToPlayer * speed;
+            //directionToPlayer = Vector2.Lerp(directionToPlayer, awayFromObstacle, 0.5f).normalized;
+            //rb.velocity = directionToPlayer * speed;
             transform.position = lastPosition;
             Debug.Log("Avoiding obstacle: " + collision.gameObject.name);
         }
@@ -152,7 +152,14 @@ public class WhiteRobeCtrl : EnemyScript
     }
 
 
-
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        //if (collision.CompareTag("Obstacle") || collision.CompareTag("Circle"))
+        //{
+        //    directionToPlayer = Vector2.Lerp(directionToPlayer, awayFromObstacle, 0.5f).normalized;
+        //    rb.velocity = directionToPlayer * speed;
+        //}
+    }
     private void OnTriggerExit2D(Collider2D collision)
     {
         directionToPlayer = Vector2.Lerp(directionToPlayer, awayFromObstacle, 0.5f).normalized;

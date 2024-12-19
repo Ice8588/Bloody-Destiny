@@ -12,6 +12,7 @@ public class PlayerAttack : MonoBehaviour
     public float EffectDuration = 1000f; // 攻擊效果持續時間
     public int Segments = 120; // 圓形的段數
     public LayerMask EnemyLayer; // 敵人圖層
+    public LayerMask BulletLayer;
     private Vector2 AttackPointPosition; // 攻擊點位置
     private LineRenderer lineRenderer; // LineRenderer 組件
     private float lastAttackTime = 0f; // 上次攻擊時間
@@ -55,6 +56,7 @@ public class PlayerAttack : MonoBehaviour
         AttackPointPosition = transform.position;
         DrawAttackCone(AttackPointPosition);
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(AttackPointPosition, AttackRange, EnemyLayer);
+        Collider2D[] hitBullets = Physics2D.OverlapCircleAll(AttackPointPosition, AttackRange, BulletLayer);
 
         foreach (Collider2D enemy in hitEnemies)
         {
@@ -78,6 +80,24 @@ public class PlayerAttack : MonoBehaviour
                     enemyScript.TakeDamage(AttackDamage);
                     PlayerCtrl.BloodGroove += AttackDamage / 2;
                 }
+            }
+        }
+        foreach (Collider2D bullet in hitBullets)
+        {
+            // 計算敵人相對於玩家的方向
+            Vector2 directionToEnemy = (bullet.transform.position - transform.position).normalized;
+
+            // 計算玩家的正前方方向
+            Vector2 playerForward = transform.up; // 以 X 軸方向為玩家的正前方
+
+            // 計算角度（用餘弦公式檢查角度範圍是否小於 60 度）
+            float angle = Vector2.Angle(playerForward, directionToEnemy) - 90;
+
+            if (angle <= AttackAngle / 2) // 在 120 度範圍內
+            {
+                //Debug.Log("擊中敵人：" + enemy.name);
+                Destroy(bullet.gameObject);
+                
             }
         }
     }
